@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mihir Maurya | Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --bg-color: #040b14;
+            --text-main: #272829;
+            --accent-color: #149ddd;
+            --light-bg: #f5f8fd;
+            --white: #fff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Open Sans", sans-serif; color: var(--text-main); background: var(--white); }
+        a { color: var(--accent-color); text-decoration: none; }
+        a:hover { color: #37b3ed; text-decoration: none; }
+        h1, h2, h3, h4, h5, h6 { font-family: "Raleway", sans-serif; }
+
+        /* Sidebar Header */
+        #header {
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            width: 300px;
+            transition: all ease-in-out 0.5s;
+            z-index: 9997;
+            transition: all 0.5s;
+            padding: 0 15px;
+            background: var(--bg-color);
+            overflow-y: auto;
+        }
+        .profile img { margin: 15px auto; display: block; width: 120px; border: 8px solid #2c2f3f; border-radius: 50%; }
+        .profile h1 { font-size: 24px; margin: 0; padding: 0; font-weight: 600; text-align: center; }
+        .profile h1 a { color: var(--white); text-decoration: none; }
+        .social-links a { font-size: 18px; display: inline-block; background: #212431; color: var(--white); line-height: 1; padding: 8px 0; margin-right: 4px; border-radius: 50%; text-align: center; width: 36px; height: 36px; transition: 0.3s; }
+        .social-links a:hover { background: var(--accent-color); }
+        .social-links { text-align: center; margin-bottom: 20px; }
+
+        /* Navigation Menu */
+        .nav-menu { padding: 30px 0 0 0; }
+        .nav-menu ul { list-style: none; padding: 0; margin: 0; }
+        .nav-menu li { margin-bottom: 15px; }
+        .nav-menu a { display: flex; align-items: center; color: #a8a9b4; padding: 12px 15px; font-size: 15px; border-radius: 50px; transition: 0.3s; }
+        .nav-menu a i { font-size: 24px; padding-right: 8px; color: #6f7180; }
+        .nav-menu a:hover, .nav-menu .active { text-decoration: none; color: var(--white); background: var(--accent-color); }
+        .nav-menu a:hover i, .nav-menu .active i { color: var(--white); }
+
+        /* Main Content Wrapper */
+        #main { margin-left: 300px; }
+        section { padding: 60px 20px; overflow: hidden; }
+        .section-title { padding-bottom: 30px; }
+        .section-title h2 { font-size: 32px; font-weight: bold; margin-bottom: 20px; padding-bottom: 20px; position: relative; color: #173b6c; }
+        .section-title h2::after { content: ''; position: absolute; display: block; width: 50px; height: 3px; background: var(--accent-color); bottom: 0; left: 0; }
+
+        /* Hero Section */
+        #hero { width: 100%; height: 100vh; background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop') top right; background-size: cover; padding: 0; }
+        #hero:before { content: ""; background: rgba(5, 13, 24, 0.8); position: absolute; bottom: 0; top: 0; left: 0; right: 0; z-index: 1; }
+        .hero-container { position: absolute; z-index: 2; min-width: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; margin-left: 150px; width: 100%; }
+        #hero h1 { margin: 0 0 10px 0; font-size: 64px; font-weight: 700; line-height: 56px; color: var(--white); }
+        #hero p { color: var(--white); margin-bottom: 50px; font-size: 26px; font-family: "Poppins", sans-serif; }
+        #hero p span { color: var(--accent-color); padding-bottom: 4px; letter-spacing: 1px; border-bottom: 3px solid var(--accent-color); }
+
+        /* About Section */
+        .about .row { display: flex; flex-wrap: wrap; gap: 20px; }
+        .about .content { flex: 1; min-width: 300px; }
+        .about .content h3 { font-weight: 700; font-size: 26px; color: #173b6c; margin-bottom: 15px; }
+        .about .content ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; }
+        .about .content ul li { margin-bottom: 20px; width: 50%; display: flex; align-items: center; }
+        .about .content ul i { font-size: 16px; color: var(--accent-color); margin-right: 10px; }
+        
+        /* Skills Container */
+        .skills-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .skill-badge { background: #e4edf9; color: #173b6c; padding: 8px 15px; border-radius: 5px; font-weight: 600; font-size: 14px; }
+
+        /* Resume Timeline */
+        .resume .resume-title { font-size: 26px; font-weight: 700; margin-top: 20px; margin-bottom: 20px; color: #050d18; }
+        .resume .resume-item { padding: 0 0 20px 20px; margin-top: -2px; border-left: 2px solid #1f5297; position: relative; }
+        .resume .resume-item::before { content: ""; position: absolute; width: 16px; height: 16px; border-radius: 50px; left: -9px; top: 0; background: var(--white); border: 2px solid #1f5297; }
+        .resume .resume-item h4 { line-height: 18px; font-size: 18px; font-weight: 600; text-transform: uppercase; font-family: "Poppins", sans-serif; color: #050d18; margin-bottom: 10px; }
+        .resume .resume-item h5 { font-size: 16px; background: #e4edf9; padding: 5px 15px; display: inline-block; font-weight: 600; margin-bottom: 10px; border-radius: 4px; }
+        .resume .resume-item ul { padding-left: 20px; }
+        .resume .resume-item ul li { padding-bottom: 10px; }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            #header { left: -300px; }
+            #main { margin-left: 0; }
+            .hero-container { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <header id="header">
+        <div class="profile">
+            <!-- You can replace the src below with a link to your actual profile picture -->
+            <img src="https://ui-avatars.com/api/?name=Mihir+Maurya&background=149ddd&color=fff&size=200" alt="Profile Image" class="img-fluid rounded-circle">
+            <h1><a href="#hero">Mihir Maurya</a></h1>
+            <div class="social-links mt-3">
+                <a href="https://github.com/MihirMaurya-dev" class="github" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com/in/mihirmauryaa1" class="linkedin" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://b18g119.online" class="website" target="_blank"><i class="fa-solid fa-globe"></i></a>
+            </div>
+        </div>
+
+        <nav id="navbar" class="nav-menu">
+            <ul>
+                <li><a href="#hero" class="active"><i class="fa-solid fa-house"></i> <span>Home</span></a></li>
+                <li><a href="#about"><i class="fa-regular fa-user"></i> <span>About</span></a></li>
+                <li><a href="#skills"><i class="fa-solid fa-server"></i> <span>Skills</span></a></li>
+                <li><a href="#resume"><i class="fa-regular fa-file-lines"></i> <span>Resume</span></a></li>
+                <li><a href="#projects"><i class="fa-solid fa-laptop-code"></i> <span>Projects</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="hero-container">
+            <h1>Mihir Maurya</h1>
+            <p>I am a <span class="typed" data-typed-items="Cloud & DevOps Engineer, Cloud Architect, Automation Specialist"></span></p>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main id="main">
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Fresher Cloud & DevOps Engineer with hands-on, project-driven experience in Azure infrastructure automation, Infrastructure-as-Code, and CI/CD security. Security-first, automation-driven, and looking to bring that rigor to a full-time DevOps role.</p>
+            </div>
+            <div class="row">
+                <div class="content">
+                    <h3>Cloud & DevOps Engineer.</h3>
+                    <p class="fst-italic mt-3 mb-4">
+                        Specialized in Terraform, GitHub Actions, and IaC security scanning.
+                    </p>
+                    <ul>
+                        <li><i class="fa-solid fa-chevron-right"></i> <strong>Age:</strong> <span>21</span></li>
+                        <li><i class="fa-solid fa-chevron-right"></i> <strong>City:</strong> <span>Prayagraj, India</span></li>
+                        <li><i class="fa-solid fa-chevron-right"></i> <strong>Phone:</strong> <span>+91-9415909254</span></li>
+                        <li><i class="fa-solid fa-chevron-right"></i> <strong>Email:</strong> <span>chhotuverma2238@gmail.com</span></li>
+                        <li><i class="fa-solid fa-chevron-right"></i> <strong>Website:</strong> <span>b18g119.online</span></li>
+                        <li><i class="fa-solid fa-chevron-right"></i> <strong>Degree:</strong> <span>M.Sc, Computer Science (In Progress)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="skills section-bg" style="background-color: var(--light-bg);">
+            <div class="section-title">
+                <h2>Technical Skills</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-badge">Microsoft Azure[</div>
+                <div class="skill-badge">Terraform (IaC)</div>
+                <div class="skill-badge">GitHub Actions (OIDC)</div>
+                <div class="skill-badge">Azure DevOps</div>
+                <div class="skill-badge">Linux (Ubuntu)</div>
+                <div class="skill-badge">Bash & PowerShell</div>
+                <div class="skill-badge">Python, C++, Java</div>
+                <div class="skill-badge">PHP 8.x & MySQL[cite: 1]</div>
+                <div class="skill-badge">Docker & Kubernetes (Basics)</div>
+                <div class="skill-badge">tfsec & Checkov[cite: 1]</div>
+                <div class="skill-badge">Microsoft Entra ID (RBAC)</div>
+                <div class="skill-badge">Cloudflare</div>
+                <div class="skill-badge">Antigravity CLI</div>
+            </div>
+        </section>
+
+        <!-- RESUME SECTION -->
+        <section id="resume" class="resume">
+            <div class="section-title">
+                <h2>Resume</h2>
+            </div>
+            <div class="row" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 class="resume-title">Professional Experience</h3>
+                    
+                    <div class="resume-item">
+                        <h4>Cloud & DevOps Engineer Intern</h4>
+                        <h5>Jan 2026 - Present</h5>
+                        <p><em>DevOps Insiders | Prayagraj, UP</em></p>
+                        <ul>
+                            <li>Architected and provisioned a secure multi-tier Azure network using Terraform, including segmented subnets for Application Gateway, Linux VMs, and Azure Bastion.</li>
+                            <li>Implemented Layer 7 traffic routing and load balancing with Azure Application Gateway across frontend and backend Linux VM pools.</li>
+                            <li>Secured cloud infrastructure using Network Security Groups (NSGs), Azure Bastion, and NAT Gateway.</li>
+                            <li>Automated Terraform validation, planning, and deployment through GitHub Actions, applying Infrastructure-as-Code and CI/CD practices.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 class="resume-title">Education</h3>
+                    <div class="resume-item">
+                        <h4>M.Sc, Computer Science</h4>
+                        <h5>2026 - 2028 (In Progress)</h5>
+                        <p><em>J.K. Institute of Applied Physics & Technology, University of Allahabad</em></p>
+                        <p>Prayagraj, Uttar Pradesh</p>
+                    </div>
+                    <div class="resume-item">
+                        <h4>B.Sc, Mathematics & Computer Applications</h4>
+                        <h5>2023 - 2026</h5>
+                        <p><em>Ewing Christian College, Allahabad</em></p>
+                        <p>Prayagraj, Uttar Pradesh</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="resume section-bg" style="background-color: var(--light-bg);">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+            </div>
+            <div class="row">
+                <div class="resume-item">
+                    <h4>Azure Hub-Spoke Network Architecture & Secure IaC Automation</h4>
+                    <h5>Dec 2025 - Jul 2026</h5>
+                    <p><em>Tech Stack: Terraform, Azure, GitHub Actions, tfsec, Checkov, Microsoft Entra ID</em></p>
+                    <ul>
+                        <li>Architected a multi-tier Azure Hub-Spoke network with modular Terraform, reducing infrastructure provisioning from days to under 15 minutes.</li>
+                        <li>Deployed Azure Application Gateway to load-balance a dynamic web application across 3 Linux VMs.</li>
+                        <li>Automated secure CI/CD for Terraform using GitHub Actions and OIDC Workload Identity Federation.</li>
+                        <li>Integrated tfsec and Checkov into pre-merge workflows, blocking 100% of detected IaC misconfigurations.</li>
+                    </ul>
+                </div>
+
+                <div class="resume-item">
+                    <h4>FlexZone - Fitness Tracking Platform on Azure</h4>
+                    <h5>Dec 2025 - April 2026[cite: 1]</h5>
+                    <p><em>Tech Stack: PHP 8, MySQL, JavaScript, Chart.js, Terraform, Azure VM, Cloudflare</em></p>
+                    <ul>
+                        <li>Built and deployed a PHP 8 REST API with MySQL, supporting fitness tracking, analytics, and leaderboards with sub-200ms response times.</li>
+                        <li>Provisioned and secured the Azure VM environment with Terraform and configured Cloudflare CDN for the custom domain, improving speed by ~30%.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts for dynamic typing and smooth scrolling -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        // Typing Effect Initialization
+        const typed = document.querySelector('.typed');
+        if (typed) {
+            let typed_strings = typed.getAttribute('data-typed-items');
+            typed_strings = typed_strings.split(',');
+            new Typed('.typed', {
+                strings: typed_strings,
+                loop: true,
+                typeSpeed: 100,
+                backSpeed: 50,
+                backDelay: 2000
+            });
+        }
+
+        // Smooth Scrolling logic
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active class
+                document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+
+                // Scroll to section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
