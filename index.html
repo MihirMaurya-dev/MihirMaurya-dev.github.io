@@ -50,6 +50,19 @@
       --tag-bg: rgba(0, 0, 0, 0.03);
     }
 
+    /* View Transitions for Theme Toggle */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+    ::view-transition-old(root) {
+      z-index: 1;
+    }
+    ::view-transition-new(root) {
+      z-index: 2;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
@@ -58,7 +71,7 @@
       font-family: var(--font-sans);
       line-height: 1.5;
       padding: 80px 20px 60px;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      /* Transitions removed to allow View Transition API to handle the color switch instantly under the clip-path */
     }
 
     a { text-decoration: none; color: inherit; }
@@ -90,7 +103,6 @@
       justify-content: space-between;
       width: calc(100% - 40px);
       max-width: 800px;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     
     .header-name { font-weight: 600; font-size: 14px; }
@@ -98,7 +110,6 @@
       background: transparent; border: none; color: var(--text-main);
       cursor: pointer; width: 28px; height: 28px; border-radius: 50%;
       display: inline-flex; align-items: center; justify-content: center;
-      transition: background 0.2s, color 0.3s ease;
     }
     .header-actions button:hover { background: var(--card-hover); }
 
@@ -108,7 +119,6 @@
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 24px;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
     .profile-card {
@@ -135,18 +145,18 @@
     .social-links { display: flex; gap: 4px; margin-top: 12px; }
     .social-link {
       width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-      border-radius: 8px; color: var(--text-muted); transition: 0.2s;
+      border-radius: 8px; color: var(--text-muted); transition: background 0.2s;
     }
     .social-link:hover { background: var(--card-hover); color: var(--text-main); }
 
     .action-buttons { display: flex; gap: 8px; }
     .btn {
       padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
-      cursor: pointer; transition: 0.2s; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 6px;
+      cursor: pointer; transition: opacity 0.2s, background 0.2s; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 6px;
     }
-    .btn-primary { background: var(--text-main); color: var(--bg); transition: background-color 0.3s ease, color 0.3s ease; }
+    .btn-primary { background: var(--text-main); color: var(--bg); }
     .btn-primary:hover { opacity: 0.9; }
-    .btn-secondary { background: var(--btn-secondary-bg); color: var(--text-main); border-color: var(--card-border); transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+    .btn-secondary { background: var(--btn-secondary-bg); color: var(--text-main); border-color: var(--card-border); }
     .btn-secondary:hover { background: var(--btn-secondary-hover); }
 
     /* About Section */
@@ -159,7 +169,6 @@
       overflow: hidden; white-space: nowrap; padding: 16px 0;
       border: 1px solid var(--card-border); border-radius: 16px;
       background: var(--card-bg); position: relative;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .marquee-wrapper::before, .marquee-wrapper::after {
       content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none;
@@ -173,7 +182,6 @@
     .marquee-tag {
       background: var(--tag-bg); border: 1px solid var(--card-border);
       padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 500; color: var(--text-main);
-      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -192,7 +200,6 @@
     .frame {
       background: var(--frame-bg); border: 1px solid var(--card-border);
       border-radius: 16px; display: flex; flex-direction: column; overflow: hidden;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .frame-header { padding: 16px 20px; }
     .frame-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
@@ -214,7 +221,7 @@
     .view-all {
       padding: 12px 20px; border-top: 1px solid var(--card-border);
       font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center;
-      transition: 0.2s;
+      transition: background 0.2s;
     }
     .view-all:hover { color: var(--text-main); background: var(--card-hover); }
 
@@ -415,7 +422,7 @@
       themeIcon.classList.replace('fa-sun', 'fa-moon');
     }
 
-    themeToggleBtn.addEventListener('click', () => {
+    function toggleTheme() {
       if (htmlElement.classList.contains('light')) {
         // Switch to Dark
         htmlElement.classList.remove('light');
@@ -427,6 +434,49 @@
         themeIcon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'light');
       }
+    }
+
+    themeToggleBtn.addEventListener('click', (e) => {
+      // Fallback for browsers that do not support View Transitions API
+      if (!document.startViewTransition) {
+        toggleTheme();
+        return;
+      }
+
+      // Get click coordinates to use as the center of the expanding circle
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      // Calculate the maximum radius needed to cover the screen
+      const endRadius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y)
+      );
+
+      // Start the view transition snapshot
+      const transition = document.startViewTransition(() => {
+        toggleTheme();
+      });
+
+      // Once the DOM is updated, animate the new frame's clip-path
+      transition.ready.then(() => {
+        const clipPath = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`
+        ];
+        
+        // Animate the new view expanding outward from the click position
+        document.documentElement.animate(
+          {
+            clipPath: clipPath,
+          },
+          {
+            duration: 600,
+            easing: 'ease-in-out',
+            pseudoElement: '::view-transition-new(root)',
+          }
+        );
+      });
     });
   </script>
 </body>
