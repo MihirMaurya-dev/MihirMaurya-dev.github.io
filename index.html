@@ -49,16 +49,20 @@
     .cursor-dot {
       width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
       position: fixed; pointer-events: none; z-index: 999998;
+      top: 0; left: 0;
       transform: translate(-50%, -50%);
       transition: width 0.2s, height 0.2s, background 0.2s;
       box-shadow: 0 0 10px rgba(255,194,0,0.6);
+      will-change: transform;
     }
     .cursor-ring {
       width: 36px; height: 36px; border-radius: 50%;
       border: 2px solid rgba(255,194,0,0.5);
       position: fixed; pointer-events: none; z-index: 999997;
+      top: 0; left: 0;
       transform: translate(-50%, -50%);
       transition: width 0.2s, height 0.2s, border-color 0.2s;
+      will-change: transform;
     }
     .cursor-dot.hovered { width: 12px; height: 12px; background: #fff; }
     .cursor-ring.hovered { width: 48px; height: 48px; border-color: var(--gold); }
@@ -450,16 +454,26 @@
     const dot = document.querySelector('.cursor-dot');
     const ring = document.querySelector('.cursor-ring');
     
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    
     window.addEventListener('mousemove', (e) => {
-      dot.style.left = e.clientX + 'px';
-      dot.style.top = e.clientY + 'px';
-      
-      // Delay for ring
-      setTimeout(() => {
-        ring.style.left = e.clientX + 'px';
-        ring.style.top = e.clientY + 'px';
-      }, 50);
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      // Instant update for the inner dot
+      dot.style.transform = `translate3d(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%), 0)`;
     });
+
+    // Smooth linear interpolation (lerp) for the outer ring
+    function renderCursor() {
+      ringX += (mouseX - ringX) * 0.25; // 0.25 determines the speed of trailing (higher is faster)
+      ringY += (mouseY - ringY) * 0.25;
+      ring.style.transform = `translate3d(calc(${ringX}px - 50%), calc(${ringY}px - 50%), 0)`;
+      requestAnimationFrame(renderCursor);
+    }
+    requestAnimationFrame(renderCursor);
 
     const hoverTargets = document.querySelectorAll('a, button, .exp-card, .project-card, .bento-card');
     hoverTargets.forEach(target => {
