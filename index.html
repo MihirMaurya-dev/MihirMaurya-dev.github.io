@@ -13,6 +13,9 @@
   
   <!-- Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <style>
     :root {
@@ -66,6 +69,9 @@
     }
     .cursor-dot.hovered { width: 12px; height: 12px; background: #fff; }
     .cursor-ring.hovered { width: 48px; height: 48px; border-color: var(--gold); }
+
+    /* PARTICLES BACKGROUND */
+    #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; }
 
     /* BACKGROUND BLOBS */
     .bg-blobs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
@@ -231,6 +237,9 @@
   <!-- Custom Cursor -->
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
+
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
 
   <!-- Background Blobs -->
   <div class="bg-blobs">
@@ -496,6 +505,48 @@
         navbar.style.padding = '15px 0';
       }
     });
+
+    // Particles.js Initialization
+    if (window.particlesJS) {
+      particlesJS("particles-js", {
+        "particles": {
+          "number": { "value": 70, "density": { "enable": true, "value_area": 800 } },
+          "color": { "value": "#ffc200" },
+          "shape": { "type": "circle" },
+          "opacity": { "value": 0.4, "random": false },
+          "size": { "value": 3, "random": true },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#ffc200",
+            "opacity": 0.2,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 2,
+            "direction": "none",
+            "random": false,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false
+          }
+        },
+        "interactivity": {
+          "detect_on": "window",
+          "events": {
+            "onhover": { "enable": true, "mode": "grab" },
+            "onclick": { "enable": true, "mode": "push" },
+            "resize": true
+          },
+          "modes": {
+            "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } },
+            "push": { "particles_nb": 4 }
+          }
+        },
+        "retina_detect": true
+      });
+    }
   </script>
 </body>
 </html>
