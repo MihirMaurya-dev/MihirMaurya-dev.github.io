@@ -14,6 +14,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
   <style>
+    /* Default Dark Theme Variables */
     :root {
       --bg: #030712;
       --card-bg: #0a0f1c;
@@ -23,8 +24,30 @@
       --text-muted: #9ca3af;
       --success: #10b981;
       --success-bg: rgba(16, 185, 129, 0.1);
+      --header-bg: rgba(3, 7, 18, 0.75);
+      --btn-secondary-bg: rgba(255, 255, 255, 0.03);
+      --btn-secondary-hover: rgba(255, 255, 255, 0.08);
+      --frame-bg: rgba(255, 255, 255, 0.01);
+      --tag-bg: rgba(255, 255, 255, 0.03);
       --font-sans: 'Inter', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* Light Theme Variables */
+    html.light {
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --card-border: rgba(0, 0, 0, 0.1);
+      --card-hover: rgba(0, 0, 0, 0.03);
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --success: #059669;
+      --success-bg: rgba(16, 185, 129, 0.1);
+      --header-bg: rgba(249, 250, 251, 0.75);
+      --btn-secondary-bg: rgba(0, 0, 0, 0.03);
+      --btn-secondary-hover: rgba(0, 0, 0, 0.08);
+      --frame-bg: rgba(0, 0, 0, 0.01);
+      --tag-bg: rgba(0, 0, 0, 0.03);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,6 +58,7 @@
       font-family: var(--font-sans);
       line-height: 1.5;
       padding: 80px 20px 60px;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     a { text-decoration: none; color: inherit; }
@@ -55,8 +79,9 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 100;
-      background: rgba(3, 7, 18, 0.75);
+      background: var(--header-bg);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 99px;
       padding: 10px 20px;
@@ -65,6 +90,7 @@
       justify-content: space-between;
       width: calc(100% - 40px);
       max-width: 800px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     
     .header-name { font-weight: 600; font-size: 14px; }
@@ -72,7 +98,7 @@
       background: transparent; border: none; color: var(--text-main);
       cursor: pointer; width: 28px; height: 28px; border-radius: 50%;
       display: inline-flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.3s ease;
     }
     .header-actions button:hover { background: var(--card-hover); }
 
@@ -82,6 +108,7 @@
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 24px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
     .profile-card {
@@ -117,10 +144,10 @@
       padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
       cursor: pointer; transition: 0.2s; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 6px;
     }
-    .btn-primary { background: var(--text-main); color: var(--bg); }
+    .btn-primary { background: var(--text-main); color: var(--bg); transition: background-color 0.3s ease, color 0.3s ease; }
     .btn-primary:hover { opacity: 0.9; }
-    .btn-secondary { background: rgba(255,255,255,0.03); color: var(--text-main); border-color: var(--card-border); }
-    .btn-secondary:hover { background: var(--card-hover); }
+    .btn-secondary { background: var(--btn-secondary-bg); color: var(--text-main); border-color: var(--card-border); transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+    .btn-secondary:hover { background: var(--btn-secondary-hover); }
 
     /* About Section */
     .about-card { padding: 20px 24px; }
@@ -132,6 +159,7 @@
       overflow: hidden; white-space: nowrap; padding: 16px 0;
       border: 1px solid var(--card-border); border-radius: 16px;
       background: var(--card-bg); position: relative;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .marquee-wrapper::before, .marquee-wrapper::after {
       content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none;
@@ -143,8 +171,9 @@
     }
     .marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
     .marquee-tag {
-      background: rgba(255,255,255,0.03); border: 1px solid var(--card-border);
+      background: var(--tag-bg); border: 1px solid var(--card-border);
       padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 500; color: var(--text-main);
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -161,8 +190,9 @@
     
     /* Frames (Experience, Projects) */
     .frame {
-      background: rgba(255,255,255,0.01); border: 1px solid var(--card-border);
+      background: var(--frame-bg); border: 1px solid var(--card-border);
       border-radius: 16px; display: flex; flex-direction: column; overflow: hidden;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .frame-header { padding: 16px 20px; }
     .frame-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
@@ -196,7 +226,7 @@
   <header class="header">
     <a href="#" class="header-name">Mihir Maurya</a>
     <div class="header-actions">
-      <button aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+      <button id="theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-sun" id="theme-icon"></i></button>
     </div>
   </header>
 
@@ -205,6 +235,7 @@
     <!-- Profile Card -->
     <div class="card profile-card">
       <div class="profile-info">
+        <!-- In a real implementation you would replace this URL with your actual image file -->
         <img src="https://ui-avatars.com/api/?name=Mihir+Maurya&background=2b67db&color=fff&size=200" alt="Mihir Maurya" class="avatar">
         <div>
           <div class="name-badge-row">
@@ -370,5 +401,33 @@
     </div>
 
   </main>
+
+  <script>
+    // Theme Toggle Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const htmlElement = document.documentElement;
+
+    // Check saved theme in local storage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      htmlElement.classList.add('light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (htmlElement.classList.contains('light')) {
+        // Switch to Dark
+        htmlElement.classList.remove('light');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        // Switch to Light
+        htmlElement.classList.add('light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
 </body>
 </html>
