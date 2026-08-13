@@ -241,8 +241,8 @@
     <!-- Profile Card -->
     <div class="card profile-card">
       <div class="profile-info">
-        <!-- In a real implementation you would replace this URL with your actual image file -->
-        <img src="https://ui-avatars.com/api/?name=Mihir+Maurya&background=2b67db&color=fff&size=200" alt="Mihir Maurya" class="avatar">
+        <!-- The browser will try to load profile.jpg, if it fails (not added yet), it uses the generated avatar -->
+        <img src="profile.jpg" alt="Mihir Maurya" class="avatar" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Mihir+Maurya&background=2b67db&color=fff&size=200';">
         <div>
           <div class="name-badge-row">
             <h1 class="name">Mihir Maurya</h1>
@@ -259,7 +259,7 @@
       </div>
       <div class="action-buttons">
         <a href="mailto:chhotuverma2238@gmail.com" class="btn btn-primary">Contact</a>
-        <button class="btn btn-secondary">Resume</button>
+        <a href="Mihir_Maurya_Resume.pdf" target="_blank" class="btn btn-secondary">Resume</a>
       </div>
     </div>
 
