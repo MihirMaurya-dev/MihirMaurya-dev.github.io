@@ -3,7 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mihir Maurya - Software Engineer</title>
+  
+  <!-- SEO & OpenGraph Meta Tags -->
+  <title>Mihir Maurya | Cloud & DevOps Engineer</title>
+  <meta name="description" content="Portfolio of Mihir Maurya, Fresher Cloud & DevOps Engineer specializing in Azure infrastructure automation, IaC, and CI/CD security.">
+  <meta property="og:title" content="Mihir Maurya | Cloud & DevOps Engineer">
+  <meta property="og:description" content="Portfolio of Mihir Maurya, Fresher Cloud & DevOps Engineer specializing in Azure infrastructure automation, IaC, and CI/CD security.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mihirmaurya-dev.github.io/">
+  <!-- Smart default OG image -->
+  <meta property="og:image" content="https://ui-avatars.com/api/?name=Mihir+Maurya&background=2b67db&color=fff&size=500">
+  <meta name="twitter:card" content="summary_large_image">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,6 +41,7 @@
       --tag-bg: rgba(255, 255, 255, 0.03);
       --font-sans: 'Inter', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      --spotlight-glow: rgba(255, 255, 255, 0.06);
     }
 
     /* Light Theme Variables */
@@ -48,6 +59,7 @@
       --btn-secondary-hover: rgba(0, 0, 0, 0.08);
       --frame-bg: rgba(0, 0, 0, 0.01);
       --tag-bg: rgba(0, 0, 0, 0.03);
+      --spotlight-glow: rgba(0, 0, 0, 0.05);
     }
 
     /* View Transitions for Theme Toggle */
@@ -111,6 +123,33 @@
       display: inline-flex; align-items: center; justify-content: center;
     }
     .header-actions button:hover { background: var(--card-hover); }
+
+    /* Hover Spotlight Effect */
+    .card, .frame {
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before, .frame::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), var(--spotlight-glow), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .card:hover::before, .frame:hover::before {
+      opacity: 1;
+    }
+    /* Ensure content stays above the spotlight */
+    .profile-info, .action-buttons, .about-title, .about-text, .frame-header, .frame-content {
+      position: relative;
+      z-index: 2;
+    }
 
     /* Profile Card */
     .card {
@@ -181,6 +220,11 @@
     .marquee-tag {
       background: var(--tag-bg); border: 2px solid var(--card-border);
       padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 500; color: var(--text-main);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .marquee-tag i {
+      font-size: 14px;
+      opacity: 0.8;
     }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -250,10 +294,10 @@
           </div>
           <p class="role-location">Engineer · India · Cloud · Automation</p>
           <div class="social-links">
-            <a href="https://github.com/MihirMaurya-dev" class="social-link" target="_blank"><i class="fa-brands fa-github"></i></a>
-            <a href="https://linkedin.com/in/mihirmauryaa1" class="social-link" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://b18g119.online" class="social-link" target="_blank"><i class="fa-solid fa-globe"></i></a>
-            <a href="mailto:chhotuverma2238@gmail.com" class="social-link"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://github.com/MihirMaurya-dev" class="social-link" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/in/mihirmauryaa1" class="social-link" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://b18g119.online" class="social-link" target="_blank" title="Website"><i class="fa-solid fa-globe"></i></a>
+            <a href="mailto:chhotuverma2238@gmail.com" class="social-link" title="Email"><i class="fa-solid fa-envelope"></i></a>
           </div>
         </div>
       </div>
@@ -267,8 +311,7 @@
     <div class="card about-card">
       <h2 class="about-title">About</h2>
       <p class="about-text">
-        I architect and build secure cloud infrastructure, automated CI/CD pipelines, and robust backend systems. 
-        Currently focused on Azure, Infrastructure-as-Code (Terraform), and implementing security-first DevOps practices to ship fast and safe.
+        Fresher Cloud & DevOps Engineer with hands-on, project-driven experience in Azure infrastructure automation, Infrastructure-as-Code, and CI/CD security. Specialized in Terraform, GitHub Actions, and IaC security scanning. Security-first, automation-driven, and looking to bring that rigor to a full-time DevOps role.
       </p>
     </div>
 
@@ -276,25 +319,25 @@
     <div class="marquee-wrapper">
       <div class="marquee-content">
         <!-- Duplicate items to create seamless loop -->
-        <span class="marquee-tag">Microsoft Azure</span>
-        <span class="marquee-tag">Terraform (IaC)</span>
-        <span class="marquee-tag">GitHub Actions</span>
-        <span class="marquee-tag">Docker</span>
-        <span class="marquee-tag">Linux (Ubuntu)</span>
-        <span class="marquee-tag">Bash / PowerShell</span>
-        <span class="marquee-tag">Python</span>
-        <span class="marquee-tag">PHP & MySQL</span>
-        <span class="marquee-tag">tfsec & Checkov</span>
+        <span class="marquee-tag"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
+        <span class="marquee-tag"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
+        <span class="marquee-tag"><i class="fa-brands fa-github"></i> GitHub Actions</span>
+        <span class="marquee-tag"><i class="fa-brands fa-docker"></i> Docker</span>
+        <span class="marquee-tag"><i class="fa-brands fa-linux"></i> Linux</span>
+        <span class="marquee-tag"><i class="fa-solid fa-terminal"></i> Bash / PowerShell</span>
+        <span class="marquee-tag"><i class="fa-brands fa-python"></i> Python</span>
+        <span class="marquee-tag"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
+        <span class="marquee-tag"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
         
-        <span class="marquee-tag">Microsoft Azure</span>
-        <span class="marquee-tag">Terraform (IaC)</span>
-        <span class="marquee-tag">GitHub Actions</span>
-        <span class="marquee-tag">Docker</span>
-        <span class="marquee-tag">Linux (Ubuntu)</span>
-        <span class="marquee-tag">Bash / PowerShell</span>
-        <span class="marquee-tag">Python</span>
-        <span class="marquee-tag">PHP & MySQL</span>
-        <span class="marquee-tag">tfsec & Checkov</span>
+        <span class="marquee-tag"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
+        <span class="marquee-tag"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
+        <span class="marquee-tag"><i class="fa-brands fa-github"></i> GitHub Actions</span>
+        <span class="marquee-tag"><i class="fa-brands fa-docker"></i> Docker</span>
+        <span class="marquee-tag"><i class="fa-brands fa-linux"></i> Linux</span>
+        <span class="marquee-tag"><i class="fa-solid fa-terminal"></i> Bash / PowerShell</span>
+        <span class="marquee-tag"><i class="fa-brands fa-python"></i> Python</span>
+        <span class="marquee-tag"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
+        <span class="marquee-tag"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
       </div>
     </div>
 
@@ -309,7 +352,7 @@
         </header>
         <div class="frame-content">
           
-          <a href="#" class="list-item">
+          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" class="list-item">
             <div class="item-info">
               <span class="item-title">DevOps Insiders</span>
               <span class="item-subtitle">Cloud & DevOps Engineer Intern</span>
@@ -317,9 +360,9 @@
             <span class="item-date">Jan 2026</span>
           </a>
           
-          <a href="#" class="view-all">
-            <span>View all</span>
-            <i class="fa-solid fa-arrow-up-right"></i>
+          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" class="view-all">
+            <span>View Full Timeline</span>
+            <i class="fa-brands fa-linkedin-in"></i>
           </a>
         </div>
       </div>
@@ -327,12 +370,12 @@
       <!-- Projects Frame -->
       <div class="frame">
         <header class="frame-header">
-          <h2 class="frame-title">Personal</h2>
-          <p class="frame-desc">Side projects</p>
+          <h2 class="frame-title">Projects</h2>
+          <p class="frame-desc">Cloud & automation builds</p>
         </header>
         <div class="frame-content">
           
-          <a href="#" class="list-item">
+          <a href="https://github.com/MihirMaurya-dev" target="_blank" class="list-item">
             <div class="item-info">
               <span class="item-title">Azure Hub-Spoke Network</span>
               <span class="item-subtitle">Architected a secure multi-tier network with modular Terraform, cutting provisioning time to under 15 mins.</span>
@@ -340,7 +383,7 @@
             <span class="item-date">Dec 2025</span>
           </a>
 
-          <a href="#" class="list-item">
+          <a href="https://github.com/MihirMaurya-dev" target="_blank" class="list-item">
             <div class="item-info">
               <span class="item-title">FlexZone</span>
               <span class="item-subtitle">Fitness tracking PHP 8 REST API deployed on Azure VM with Cloudflare CDN integration.</span>
@@ -348,9 +391,9 @@
             <span class="item-date">Dec 2025</span>
           </a>
           
-          <a href="#" class="view-all">
-            <span>View all</span>
-            <i class="fa-solid fa-arrow-up-right"></i>
+          <a href="https://github.com/MihirMaurya-dev" target="_blank" class="view-all">
+            <span>View GitHub Repos</span>
+            <i class="fa-brands fa-github"></i>
           </a>
         </div>
       </div>
@@ -363,7 +406,7 @@
         </header>
         <div class="frame-content">
           
-          <div class="list-item">
+          <div class="list-item" style="cursor: default;">
             <div class="item-info">
               <span class="item-title">University of Allahabad</span>
               <span class="item-subtitle">M.Sc, Computer Science</span>
@@ -371,7 +414,7 @@
             <span class="item-date">2026 - 2028</span>
           </div>
 
-          <div class="list-item">
+          <div class="list-item" style="cursor: default;">
             <div class="item-info">
               <span class="item-title">Ewing Christian College</span>
               <span class="item-subtitle">B.Sc, Mathematics & Computer Apps</span>
@@ -389,16 +432,16 @@
           <p class="frame-desc">Tools & practices</p>
         </header>
         <div class="frame-content">
-          <div class="list-item">
+          <div class="list-item" style="cursor: default;">
             <div class="item-info">
               <span class="item-title">Infrastructure-as-Code Scanning</span>
-              <span class="item-subtitle">tfsec, Checkov, Tflint</span>
+              <span class="item-subtitle">tfsec, Checkov, Tflint, Trivey</span>
             </div>
           </div>
-          <div class="list-item">
+          <div class="list-item" style="cursor: default;">
             <div class="item-info">
               <span class="item-title">Identity & Access Management</span>
-              <span class="item-subtitle">Microsoft Entra ID (RBAC), Workload Identity Federation</span>
+              <span class="item-subtitle">Microsoft Entra ID (RBAC), Workload Identity Fed.</span>
             </div>
           </div>
         </div>
@@ -409,6 +452,17 @@
   </main>
 
   <script>
+    // Hover Spotlight Effect Logic
+    document.querySelectorAll('.card, .frame').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        el.style.setProperty('--mouse-x', `${x}px`);
+        el.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
     // Theme Toggle Logic
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
