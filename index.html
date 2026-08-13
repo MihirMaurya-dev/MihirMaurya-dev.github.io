@@ -18,7 +18,7 @@
     :root {
       --bg: #030712;
       --card-bg: #0a0f1c;
-      --card-border: rgba(255, 255, 255, 0.1);
+      --card-border: rgba(255, 255, 255, 0.15);
       --card-hover: rgba(255, 255, 255, 0.03);
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
@@ -37,7 +37,7 @@
     html.light {
       --bg: #f9fafb;
       --card-bg: #ffffff;
-      --card-border: rgba(0, 0, 0, 0.1);
+      --card-border: rgba(0, 0, 0, 0.15);
       --card-hover: rgba(0, 0, 0, 0.03);
       --text-main: #111827;
       --text-muted: #6b7280;
@@ -71,7 +71,6 @@
       font-family: var(--font-sans);
       line-height: 1.5;
       padding: 80px 20px 60px;
-      /* Transitions removed to allow View Transition API to handle the color switch instantly under the clip-path */
     }
 
     a { text-decoration: none; color: inherit; }
@@ -95,7 +94,7 @@
       background: var(--header-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
+      border: 2px solid var(--card-border);
       border-radius: 99px;
       padding: 10px 20px;
       display: flex;
@@ -116,7 +115,7 @@
     /* Profile Card */
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      border: 2px solid var(--card-border);
       border-radius: 16px;
       padding: 24px;
     }
@@ -130,7 +129,7 @@
     }
 
     .profile-info { display: flex; align-items: center; gap: 16px; }
-    .avatar { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--card-border); }
+    .avatar { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--card-border); }
     
     .name-badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
     .name { font-size: 20px; font-weight: 600; letter-spacing: -0.5px; }
@@ -152,7 +151,7 @@
     .action-buttons { display: flex; gap: 8px; }
     .btn {
       padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
-      cursor: pointer; transition: opacity 0.2s, background 0.2s; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 6px;
+      cursor: pointer; transition: opacity 0.2s, background 0.2s; border: 2px solid transparent; display: inline-flex; align-items: center; gap: 6px;
     }
     .btn-primary { background: var(--text-main); color: var(--bg); }
     .btn-primary:hover { opacity: 0.9; }
@@ -167,7 +166,7 @@
     /* Marquee Skills */
     .marquee-wrapper {
       overflow: hidden; white-space: nowrap; padding: 16px 0;
-      border: 1px solid var(--card-border); border-radius: 16px;
+      border: 2px solid var(--card-border); border-radius: 16px;
       background: var(--card-bg); position: relative;
     }
     .marquee-wrapper::before, .marquee-wrapper::after {
@@ -180,7 +179,7 @@
     }
     .marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
     .marquee-tag {
-      background: var(--tag-bg); border: 1px solid var(--card-border);
+      background: var(--tag-bg); border: 2px solid var(--card-border);
       padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 500; color: var(--text-main);
     }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -198,7 +197,7 @@
     
     /* Frames (Experience, Projects) */
     .frame {
-      background: var(--frame-bg); border: 1px solid var(--card-border);
+      background: var(--frame-bg); border: 2px solid var(--card-border);
       border-radius: 16px; display: flex; flex-direction: column; overflow: hidden;
     }
     .frame-header { padding: 16px 20px; }
@@ -208,7 +207,7 @@
     .frame-content { padding: 0; display: flex; flex-direction: column; }
     .list-item {
       display: flex; justify-content: space-between; align-items: flex-start;
-      padding: 14px 20px; border-top: 1px solid var(--card-border); transition: background 0.2s;
+      padding: 14px 20px; border-top: 2px solid var(--card-border); transition: background 0.2s;
     }
     .list-item:hover { background: var(--card-hover); }
     
@@ -219,7 +218,7 @@
 
     /* Footer link */
     .view-all {
-      padding: 12px 20px; border-top: 1px solid var(--card-border);
+      padding: 12px 20px; border-top: 2px solid var(--card-border);
       font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center;
       transition: background 0.2s;
     }
@@ -477,6 +476,49 @@
           }
         );
       });
+    });
+
+    // Mechanical Keyboard "Tic Tic" Sound Logic
+    let audioCtx;
+    function playClickSound() {
+      // Initialize AudioContext on first interaction
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      
+      // Synthesize a mechanical keyboard "tic" using filtered noise burst
+      const bufferSize = audioCtx.sampleRate * 0.015; // 15ms burst
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1; // White noise
+      }
+      
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = buffer;
+      
+      // Filter to shape the click (make it sound "plastic-y" like a switch)
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.value = 4000;
+      
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime); // Volume
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.015);
+      
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      noise.start();
+    }
+
+    // Attach click sound to interactive elements
+    document.querySelectorAll('a, button, .list-item').forEach(el => {
+      el.addEventListener('mousedown', playClickSound);
     });
   </script>
 </body>
