@@ -28,7 +28,7 @@
     :root {
       --bg: #030712;
       --card-bg: #0a0f1c;
-      --card-border: rgba(255, 255, 255, 0.15);
+      --card-border: rgba(255, 255, 255, 0.4);
       --card-hover: rgba(255, 255, 255, 0.03);
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
@@ -48,7 +48,7 @@
     html.light {
       --bg: #f9fafb;
       --card-bg: #ffffff;
-      --card-border: rgba(0, 0, 0, 0.15);
+      --card-border: rgba(0, 0, 0, 0.6);
       --card-hover: rgba(0, 0, 0, 0.03);
       --text-main: #111827;
       --text-muted: #6b7280;
@@ -328,6 +328,8 @@
         <span class="marquee-tag"><i class="fa-brands fa-python"></i> Python</span>
         <span class="marquee-tag"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
         <span class="marquee-tag"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
+        <span class="marquee-tag"><i class="fa-solid fa-vial"></i> Terratest</span>
+        <span class="marquee-tag"><i class="fa-solid fa-money-bill"></i> Infracost</span>
         
         <span class="marquee-tag"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
         <span class="marquee-tag"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
@@ -338,6 +340,8 @@
         <span class="marquee-tag"><i class="fa-brands fa-python"></i> Python</span>
         <span class="marquee-tag"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
         <span class="marquee-tag"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
+        <span class="marquee-tag"><i class="fa-solid fa-vial"></i> Terratest</span>
+        <span class="marquee-tag"><i class="fa-solid fa-money-bill"></i> Infracost</span>
       </div>
     </div>
 
@@ -374,6 +378,19 @@
           <p class="frame-desc">Cloud & automation builds</p>
         </header>
         <div class="frame-content">
+          
+          <a href="https://github.com/MihirMaurya-dev?tab=repositories" target="_blank" class="list-item">
+            <div class="item-info">
+              <span class="item-title">Enterprise DevOps & CI/CD Ecosystem</span>
+              <span class="item-subtitle">A unified architecture comprising modular Terraform infrastructure, a centralized Master Pipeline, and automated CI/CD workflows spanning multiple repositories.</span>
+              <div style="display: flex; gap: 6px; margin-top: 8px;">
+                <span class="badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted); font-size: 9px;">Terraform</span>
+                <span class="badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted); font-size: 9px;">Master_PipeLine</span>
+                <span class="badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted); font-size: 9px;">CI-CD</span>
+              </div>
+            </div>
+            <span class="item-date">Aug 2026</span>
+          </a>
           
           <a href="https://github.com/MihirMaurya-dev" target="_blank" class="list-item">
             <div class="item-info">
@@ -435,7 +452,7 @@
           <div class="list-item" style="cursor: default;">
             <div class="item-info">
               <span class="item-title">Infrastructure-as-Code Scanning</span>
-              <span class="item-subtitle">tfsec, Checkov, Tflint, Trivey</span>
+              <span class="item-subtitle">tfsec, Checkov, Tflint, Terratest, Trufflehog, Gitleaks, Infracost</span>
             </div>
           </div>
           <div class="list-item" style="cursor: default;">
@@ -496,9 +513,10 @@
         return;
       }
 
-      // Get click coordinates to use as the center of the expanding circle
-      const x = e.clientX;
-      const y = e.clientY;
+      // Get button center to use as the origin of the expanding circle
+      const rect = themeToggleBtn.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
       
       // Calculate the maximum radius needed to cover the screen
       const endRadius = Math.hypot(
