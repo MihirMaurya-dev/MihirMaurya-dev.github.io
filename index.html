@@ -6,19 +6,18 @@
   
   <!-- SEO & OpenGraph Meta Tags -->
   <title>Mihir Maurya | Cloud & DevOps Engineer</title>
-  <meta name="description" content="Portfolio of Mihir Maurya, Fresher Cloud & DevOps Engineer specializing in Azure infrastructure automation, IaC, and CI/CD security.">
+  <meta name="description" content="Portfolio of Mihir Maurya, Cloud & DevOps Engineer specializing in Azure infrastructure automation, IaC, and CI/CD security.">
   <meta property="og:title" content="Mihir Maurya | Cloud & DevOps Engineer">
-  <meta property="og:description" content="Portfolio of Mihir Maurya, Fresher Cloud & DevOps Engineer specializing in Azure infrastructure automation, IaC, and CI/CD security.">
+  <meta property="og:description" content="Portfolio of Mihir Maurya, Cloud & DevOps Engineer specializing in Azure infrastructure automation, IaC, and CI/CD security.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mihirmaurya-dev.github.io/">
-  <!-- Smart default OG image -->
   <meta property="og:image" content="https://ui-avatars.com/api/?name=Mihir+Maurya&background=2b67db&color=fff&size=500">
   <meta name="twitter:card" content="summary_large_image">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
@@ -27,39 +26,53 @@
     /* Default Dark Theme Variables */
     :root {
       --bg: #030712;
-      --card-bg: #0a0f1c;
-      --card-border: rgba(255, 255, 255, 0.4);
+      --card-bg: #090d16;
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-border-hover: rgba(255, 255, 255, 0.28);
       --card-hover: rgba(255, 255, 255, 0.03);
-      --text-main: #ffffff;
-      --text-muted: #cbd5e1;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.25);
       --success: #10b981;
-      --success-bg: rgba(16, 185, 129, 0.1);
-      --header-bg: rgba(3, 7, 18, 0.75);
-      --btn-secondary-bg: rgba(255, 255, 255, 0.03);
-      --btn-secondary-hover: rgba(255, 255, 255, 0.08);
-      --frame-bg: rgba(255, 255, 255, 0.01);
-      --tag-bg: rgba(255, 255, 255, 0.03);
-      --font-sans: 'Inter', sans-serif;
+      --success-bg: rgba(16, 185, 129, 0.12);
+      --header-bg: rgba(9, 13, 22, 0.78);
+      --btn-secondary-bg: rgba(255, 255, 255, 0.04);
+      --btn-secondary-hover: rgba(255, 255, 255, 0.09);
+      --frame-bg: #090d16;
+      --tag-bg: rgba(255, 255, 255, 0.04);
+      --pill-bg: rgba(255, 255, 255, 0.06);
+      --pill-border: rgba(255, 255, 255, 0.12);
+      --spotlight-glow: rgba(255, 255, 255, 0.05);
+      --terminal-bg: #050811;
+      --backdrop: rgba(0, 0, 0, 0.7);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --spotlight-glow: rgba(255, 255, 255, 0.06);
     }
 
     /* Light Theme Variables */
     html.light {
-      --bg: #f9fafb;
+      --bg: #f8fafc;
       --card-bg: #ffffff;
-      --card-border: rgba(0, 0, 0, 0.6);
-      --card-hover: rgba(0, 0, 0, 0.03);
-      --text-main: #000000;
+      --card-border: rgba(15, 23, 42, 0.12);
+      --card-border-hover: rgba(15, 23, 42, 0.28);
+      --card-hover: rgba(15, 23, 42, 0.025);
+      --text-main: #0f172a;
       --text-muted: #475569;
+      --accent: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.2);
       --success: #059669;
-      --success-bg: rgba(16, 185, 129, 0.1);
-      --header-bg: rgba(249, 250, 251, 0.75);
-      --btn-secondary-bg: rgba(0, 0, 0, 0.03);
-      --btn-secondary-hover: rgba(0, 0, 0, 0.08);
-      --frame-bg: rgba(0, 0, 0, 0.01);
-      --tag-bg: rgba(0, 0, 0, 0.03);
-      --spotlight-glow: rgba(0, 0, 0, 0.05);
+      --success-bg: rgba(16, 185, 129, 0.12);
+      --header-bg: rgba(255, 255, 255, 0.82);
+      --btn-secondary-bg: rgba(15, 23, 42, 0.04);
+      --btn-secondary-hover: rgba(15, 23, 42, 0.08);
+      --frame-bg: #ffffff;
+      --tag-bg: rgba(15, 23, 42, 0.03);
+      --pill-bg: rgba(15, 23, 42, 0.05);
+      --pill-border: rgba(15, 23, 42, 0.12);
+      --spotlight-glow: rgba(15, 23, 42, 0.04);
+      --terminal-bg: #0f172a;
+      --backdrop: rgba(15, 23, 42, 0.45);
     }
 
     /* View Transitions for Theme Toggle */
@@ -68,12 +81,8 @@
       animation: none;
       mix-blend-mode: normal;
     }
-    ::view-transition-old(root) {
-      z-index: 1;
-    }
-    ::view-transition-new(root) {
-      z-index: 2;
-    }
+    ::view-transition-old(root) { z-index: 1; }
+    ::view-transition-new(root) { z-index: 2; }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
@@ -82,7 +91,8 @@
       color: var(--text-main);
       font-family: var(--font-sans);
       line-height: 1.5;
-      padding: 80px 20px 60px;
+      padding: 84px 20px 48px;
+      -webkit-font-smoothing: antialiased;
     }
 
     a { text-decoration: none; color: inherit; }
@@ -104,30 +114,96 @@
       transform: translateX(-50%);
       z-index: 100;
       background: var(--header-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 2px solid var(--card-border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
       border-radius: 99px;
-      padding: 10px 20px;
+      padding: 8px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: calc(100% - 40px);
       max-width: 800px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
     
-    .header-name { font-weight: 600; font-size: 14px; }
-    .header-actions button {
-      background: transparent; border: none; color: var(--text-main);
-      cursor: pointer; width: 28px; height: 28px; border-radius: 50%;
-      display: inline-flex; align-items: center; justify-content: center;
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 14px;
     }
-    .header-actions button:hover { background: var(--card-hover); }
+    .header-prompt {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .terminal-trigger {
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 99px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .terminal-trigger:hover {
+      border-color: var(--card-border-hover);
+      background: var(--btn-secondary-hover);
+    }
+    .kbd-shortcut {
+      font-size: 10px;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      padding: 1px 5px;
+      border-radius: 4px;
+      border: 1px solid var(--card-border);
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .icon-btn:hover {
+      background: var(--btn-secondary-hover);
+      color: var(--text-main);
+      border-color: var(--card-border);
+    }
 
     /* Hover Spotlight Effect */
     .card, .frame {
       position: relative;
       overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .card:hover, .frame:hover {
+      border-color: var(--card-border-hover);
     }
     .card::before, .frame::before {
       content: "";
@@ -136,7 +212,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), var(--spotlight-glow), transparent 40%);
+      background: radial-gradient(550px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), var(--spotlight-glow), transparent 40%);
       opacity: 0;
       transition: opacity 0.3s;
       pointer-events: none;
@@ -145,7 +221,6 @@
     .card:hover::before, .frame:hover::before {
       opacity: 1;
     }
-    /* Ensure content stays above the spotlight */
     .profile-info, .action-buttons, .about-title, .about-text, .frame-header, .frame-content {
       position: relative;
       z-index: 2;
@@ -154,7 +229,7 @@
     /* Profile Card */
     .card {
       background: var(--card-bg);
-      border: 2px solid var(--card-border);
+      border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 24px;
     }
@@ -168,115 +243,501 @@
     }
 
     .profile-info { display: flex; align-items: center; gap: 16px; }
-    .avatar { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--card-border); object-fit: cover; }
+    .avatar-wrap { position: relative; display: inline-flex; }
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 1px solid var(--card-border-hover);
+      object-fit: cover;
+    }
+    .status-dot {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 14px;
+      height: 14px;
+      background: var(--success);
+      border: 2.5px solid var(--card-bg);
+      border-radius: 50%;
+    }
     
-    .name-badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
-    .name { font-size: 20px; font-weight: 600; letter-spacing: -0.5px; }
+    .name-badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; flex-wrap: wrap; }
+    .name { font-size: 20px; font-weight: 600; letter-spacing: -0.4px; }
     .badge {
-      background: var(--success-bg); color: var(--success);
-      font-size: 10px; font-weight: 600; padding: 4px 8px;
-      border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+      background: var(--success-bg);
+      color: var(--success);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(16, 185, 129, 0.25);
     }
     
-    .role-location { font-size: 14px; color: var(--text-muted); }
+    .role-location { font-size: 13.5px; color: var(--text-muted); }
     
-    .social-links { display: flex; gap: 4px; margin-top: 12px; }
+    .social-links { display: flex; gap: 4px; margin-top: 10px; }
     .social-link {
-      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-      border-radius: 8px; color: var(--text-muted); transition: background 0.2s;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+      border: 1px solid transparent;
     }
-    .social-link:hover { background: var(--card-hover); color: var(--text-main); }
+    .social-link:hover {
+      background: var(--btn-secondary-hover);
+      color: var(--text-main);
+      border-color: var(--card-border);
+      transform: translateY(-1px);
+    }
 
     .action-buttons { display: flex; gap: 8px; }
     .btn {
-      padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
-      cursor: pointer; transition: opacity 0.2s, background 0.2s; border: 2px solid transparent; display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 15px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
     }
-    .btn-primary { background: var(--text-main); color: var(--bg); }
-    .btn-primary:hover { opacity: 0.9; }
-    .btn-secondary { background: var(--btn-secondary-bg); color: var(--text-main); border-color: var(--card-border); }
-    .btn-secondary:hover { background: var(--btn-secondary-hover); }
+    .btn-primary {
+      background: var(--text-main);
+      color: var(--bg);
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--btn-secondary-bg);
+      color: var(--text-main);
+      border-color: var(--card-border);
+    }
+    .btn-secondary:hover {
+      background: var(--btn-secondary-hover);
+      border-color: var(--card-border-hover);
+      transform: translateY(-1px);
+    }
 
     /* About Section */
     .about-card { padding: 20px 24px; }
-    .about-title { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 8px; }
-    .about-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .section-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .about-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+    .about-text { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+    .about-text strong { color: var(--text-main); font-weight: 500; }
     
     /* Marquee Skills */
+    .marquee-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .marquee-hint {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .clear-filter-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      display: none;
+    }
+    .clear-filter-btn.visible { display: inline-block; }
+
     .marquee-wrapper {
-      overflow: hidden; white-space: nowrap; padding: 16px 0;
-      border: 2px solid var(--card-border); border-radius: 16px;
-      background: var(--card-bg); position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 14px 0;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      background: var(--card-bg);
+      position: relative;
     }
     .marquee-wrapper::before, .marquee-wrapper::after {
-      content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      z-index: 2;
+      pointer-events: none;
     }
     .marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--card-bg), transparent); }
     .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--card-bg), transparent); }
     .marquee-content {
-      display: inline-flex; gap: 8px; padding-left: 8px; animation: scroll 25s linear infinite;
+      display: inline-flex;
+      gap: 8px;
+      padding-left: 8px;
+      animation: scroll 28s linear infinite;
     }
     .marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
     .marquee-tag {
-      background: var(--tag-bg); border: 2px solid var(--card-border);
-      padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 500; color: var(--text-main);
-      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--tag-bg);
+      border: 1px solid var(--card-border);
+      padding: 6px 13px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
     }
-    .marquee-tag i {
-      font-size: 14px;
-      opacity: 0.8;
+    .marquee-tag:hover {
+      border-color: var(--card-border-hover);
+      background: var(--btn-secondary-hover);
+      transform: translateY(-1px);
     }
+    .marquee-tag.active {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+      color: var(--text-main);
+    }
+    .marquee-tag i { font-size: 13px; opacity: 0.85; }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* Grid Layout */
     .bento-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       .bento-grid { grid-template-columns: 1fr; }
       .profile-card { flex-direction: column; align-items: flex-start; }
       .action-buttons { width: 100%; }
       .btn { flex: 1; justify-content: center; }
+      .kbd-shortcut { display: none; }
     }
     
     /* Frames (Experience, Projects) */
     .frame {
-      background: var(--frame-bg); border: 2px solid var(--card-border);
-      border-radius: 16px; display: flex; flex-direction: column; overflow: hidden;
+      background: var(--frame-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
     .frame-header { padding: 16px 20px; }
     .frame-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
-    .frame-desc { font-size: 13px; color: var(--text-muted); }
+    .frame-desc { font-size: 12.5px; color: var(--text-muted); }
     
-    .frame-content { padding: 0; display: flex; flex-direction: column; }
+    .frame-content { padding: 0; display: flex; flex-direction: column; flex: 1; }
     .list-item {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      padding: 14px 20px; border-top: 2px solid var(--card-border); transition: background 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 14px 20px;
+      border-top: 1px solid var(--card-border);
+      transition: background 0.2s, opacity 0.25s, border-left 0.2s;
     }
-    .list-item:hover { background: var(--card-hover); }
+    a.list-item:hover { background: var(--card-hover); }
+    .list-item.highlighted {
+      background: var(--accent-glow);
+      border-left: 3px solid var(--accent);
+    }
+    .list-item.dimmed {
+      opacity: 0.35;
+    }
     
-    .item-info { display: flex; flex-direction: column; gap: 4px; max-width: 75%; }
-    .item-title { font-size: 14px; font-weight: 500; }
-    .item-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .item-info { display: flex; flex-direction: column; gap: 4px; max-width: 76%; }
+    .item-title {
+      font-size: 13.5px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    a.list-item .item-title .arrow-icon {
+      font-size: 10px;
+      opacity: 0;
+      transform: translate(-3px, 3px);
+      transition: all 0.2s;
+      color: var(--text-muted);
+    }
+    a.list-item:hover .item-title .arrow-icon {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    .item-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
     .item-date { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); white-space: nowrap; }
 
-    /* Footer link */
+    /* Theme-Aware Tech Pills */
+    .tech-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+    .tech-pill {
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 5px;
+    }
+
+    /* Footer link inside frame */
     .view-all {
-      padding: 12px 20px; border-top: 2px solid var(--card-border);
-      font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center;
-      transition: background 0.2s;
+      margin-top: auto;
+      padding: 12px 20px;
+      border-top: 1px solid var(--card-border);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
     }
     .view-all:hover { color: var(--text-main); background: var(--card-hover); }
 
+    /* Telemetry Status Footer */
+    .telemetry-footer {
+      margin-top: 8px;
+      padding: 14px 20px;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+    .telemetry-left, .telemetry-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+      70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* Interactive Terminal Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--backdrop);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .terminal-window {
+      width: 100%;
+      max-width: 680px;
+      background: var(--terminal-bg);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+      transform: translateY(12px) scale(0.98);
+      transition: transform 0.2s ease;
+      font-family: var(--font-mono);
+    }
+    .modal-overlay.open .terminal-window {
+      transform: translateY(0) scale(1);
+    }
+    .terminal-topbar {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .window-dots { display: flex; gap: 7px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot-red { background: #ef4444; cursor: pointer; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .terminal-title { font-size: 11.5px; color: #94a3b8; }
+    .terminal-close {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .terminal-close:hover { color: #ffffff; }
+
+    .terminal-chips {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.015);
+    }
+    .chip-label { font-size: 10.5px; color: #64748b; margin-right: 4px; }
+    .cmd-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .cmd-chip:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: #3b82f6;
+      color: #ffffff;
+    }
+
+    .terminal-body {
+      padding: 16px;
+      height: 320px;
+      overflow-y: auto;
+      font-size: 12.5px;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .term-line { white-space: pre-wrap; word-break: break-word; }
+    .term-prompt { color: #10b981; font-weight: 600; }
+    .term-path { color: #3b82f6; }
+    .term-muted { color: #94a3b8; }
+    .term-add { color: #10b981; }
+    .term-info { color: #38bdf8; }
+    .term-warn { color: #fbbf24; }
+
+    .terminal-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.25);
+    }
+    .terminal-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #f8fafc;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      outline: none;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--text-main);
+      color: var(--bg);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 300;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
 
   <!-- Header -->
   <header class="header">
-    <a href="#" class="header-name">Mihir Maurya</a>
+    <div class="header-brand">
+      <a href="#" class="header-name">Mihir Maurya</a>
+      <span class="header-prompt">~/devops</span>
+    </div>
     <div class="header-actions">
-      <button id="theme-toggle" aria-label="Toggle Theme"><i class="fa-solid fa-sun" id="theme-icon"></i></button>
+      <button class="terminal-trigger" id="open-terminal-btn" title="Open Interactive Terminal (Ctrl+K)">
+        <i class="fa-solid fa-terminal"></i>
+        <span>Terminal</span>
+        <span class="kbd-shortcut">Ctrl K</span>
+      </button>
+      <button class="icon-btn" id="sound-toggle" aria-label="Toggle Sound" title="Toggle Mechanical Click Sound">
+        <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+      </button>
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle Theme" title="Toggle Dark/Light Theme">
+        <i class="fa-solid fa-sun" id="theme-icon"></i>
+      </button>
     </div>
   </header>
 
@@ -285,86 +746,105 @@
     <!-- Profile Card -->
     <div class="card profile-card">
       <div class="profile-info">
-        <!-- The browser will try to load profile.jpg, if it fails (not added yet), it uses the generated avatar -->
-        <img src="profile.jpg" alt="Mihir Maurya" class="avatar" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Mihir+Maurya&background=2b67db&color=fff&size=200';">
+        <div class="avatar-wrap">
+          <img src="profile.jpg" alt="Mihir Maurya" class="avatar" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Mihir+Maurya&background=2b67db&color=fff&size=200';">
+          <span class="status-dot" title="Available for Cloud & DevOps Roles"></span>
+        </div>
         <div>
           <div class="name-badge-row">
             <h1 class="name">Mihir Maurya</h1>
             <span class="badge">Open to work</span>
           </div>
-          <p class="role-location">Engineer · India · Cloud · Automation</p>
+          <p class="role-location">Cloud & DevOps Engineer · India · Azure & IaC</p>
           <div class="social-links">
-            <a href="https://github.com/MihirMaurya-dev" class="social-link" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://linkedin.com/in/mihirmauryaa1" class="social-link" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://b18g119.online" class="social-link" target="_blank" title="Website"><i class="fa-solid fa-globe"></i></a>
-            <a href="mailto:chhotuverma2238@gmail.com" class="social-link" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://github.com/MihirMaurya-dev" class="social-link" target="_blank" rel="noopener" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/in/mihirmauryaa1" class="social-link" target="_blank" rel="noopener" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://b18g119.online" class="social-link" target="_blank" rel="noopener" title="Website"><i class="fa-solid fa-globe"></i></a>
+            <a href="mailto:chhotuverma2238@gmail.com" class="social-link" title="Send Direct Email"><i class="fa-solid fa-envelope"></i></a>
           </div>
         </div>
       </div>
       <div class="action-buttons">
-        <a href="mailto:chhotuverma2238@gmail.com" class="btn btn-primary">Contact</a>
-        <a href="Mihir_Maurya_Resume.pdf" target="_blank" class="btn btn-secondary">Resume</a>
+        <button id="copy-email-btn" class="btn btn-primary" data-email="chhotuverma2238@gmail.com">
+          <i class="fa-regular fa-copy"></i>
+          <span>Copy Email</span>
+        </button>
+        <a href="Mihir_Maurya_Resume.pdf" target="_blank" rel="noopener" class="btn btn-secondary">
+          <i class="fa-regular fa-file-lines"></i>
+          <span>Resume</span>
+        </a>
       </div>
     </div>
 
     <!-- About Card -->
     <div class="card about-card">
-      <h2 class="about-title">About</h2>
+      <div class="section-header-row">
+        <h2 class="about-title">About</h2>
+      </div>
       <p class="about-text">
-        Fresher Cloud & DevOps Engineer with hands-on, project-driven experience in Azure infrastructure automation, Infrastructure-as-Code, and CI/CD security. Specialized in Terraform, GitHub Actions, and IaC security scanning. Security-first, automation-driven, and looking to bring that rigor to a full-time DevOps role.
+        Cloud & DevOps Engineer with hands-on, project-driven experience in <strong>Azure infrastructure automation</strong>, <strong>Infrastructure-as-Code</strong>, and <strong>shift-left CI/CD security</strong>. Specialized in modular Terraform, GitHub Actions, and automated policy enforcement. Security-first, automation-driven, and ready to bring high engineering rigor to a DevOps role.
       </p>
     </div>
 
-    <!-- Skills Marquee -->
-    <div class="marquee-wrapper">
-      <div class="marquee-content">
-        <!-- Duplicate items to create seamless loop -->
-        <span class="marquee-tag"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
-        <span class="marquee-tag"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
-        <span class="marquee-tag"><i class="fa-brands fa-github"></i> GitHub Actions</span>
-        <span class="marquee-tag"><i class="fa-brands fa-docker"></i> Docker</span>
-        <span class="marquee-tag"><i class="fa-brands fa-linux"></i> Linux</span>
-        <span class="marquee-tag"><i class="fa-solid fa-terminal"></i> Bash / PowerShell</span>
-        <span class="marquee-tag"><i class="fa-brands fa-python"></i> Python</span>
-        <span class="marquee-tag"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
-        <span class="marquee-tag"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
-        <span class="marquee-tag"><i class="fa-solid fa-vial"></i> Terratest</span>
-        <span class="marquee-tag"><i class="fa-solid fa-money-bill"></i> Infracost</span>
-        
-        <span class="marquee-tag"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
-        <span class="marquee-tag"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
-        <span class="marquee-tag"><i class="fa-brands fa-github"></i> GitHub Actions</span>
-        <span class="marquee-tag"><i class="fa-brands fa-docker"></i> Docker</span>
-        <span class="marquee-tag"><i class="fa-brands fa-linux"></i> Linux</span>
-        <span class="marquee-tag"><i class="fa-solid fa-terminal"></i> Bash / PowerShell</span>
-        <span class="marquee-tag"><i class="fa-brands fa-python"></i> Python</span>
-        <span class="marquee-tag"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
-        <span class="marquee-tag"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
-        <span class="marquee-tag"><i class="fa-solid fa-vial"></i> Terratest</span>
-        <span class="marquee-tag"><i class="fa-solid fa-money-bill"></i> Infracost</span>
+    <!-- Skills Marquee (Interactive Filter) -->
+    <div class="marquee-section">
+      <div class="marquee-hint">
+        <span><i class="fa-solid fa-wand-magic-sparkles"></i> Click any skill tag to highlight matching work</span>
+        <button class="clear-filter-btn" id="clear-filter">Clear filter ×</button>
+      </div>
+      <div class="marquee-wrapper">
+        <div class="marquee-content">
+          <!-- Set 1 -->
+          <span class="marquee-tag" data-skill="azure"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
+          <span class="marquee-tag" data-skill="terraform"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
+          <span class="marquee-tag" data-skill="cicd"><i class="fa-brands fa-github"></i> GitHub Actions</span>
+          <span class="marquee-tag" data-skill="docker"><i class="fa-brands fa-docker"></i> Docker</span>
+          <span class="marquee-tag" data-skill="linux"><i class="fa-brands fa-linux"></i> Linux</span>
+          <span class="marquee-tag" data-skill="scripting"><i class="fa-solid fa-terminal"></i> Bash / PowerShell</span>
+          <span class="marquee-tag" data-skill="scripting"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="marquee-tag" data-skill="php"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
+          <span class="marquee-tag" data-skill="security"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
+          <span class="marquee-tag" data-skill="testing"><i class="fa-solid fa-vial"></i> Terratest</span>
+          <span class="marquee-tag" data-skill="finops"><i class="fa-solid fa-money-bill"></i> Infracost</span>
+          
+          <!-- Set 2 (Seamless Loop) -->
+          <span class="marquee-tag" data-skill="azure"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
+          <span class="marquee-tag" data-skill="terraform"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
+          <span class="marquee-tag" data-skill="cicd"><i class="fa-brands fa-github"></i> GitHub Actions</span>
+          <span class="marquee-tag" data-skill="docker"><i class="fa-brands fa-docker"></i> Docker</span>
+          <span class="marquee-tag" data-skill="linux"><i class="fa-brands fa-linux"></i> Linux</span>
+          <span class="marquee-tag" data-skill="scripting"><i class="fa-solid fa-terminal"></i> Bash / PowerShell</span>
+          <span class="marquee-tag" data-skill="scripting"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="marquee-tag" data-skill="php"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
+          <span class="marquee-tag" data-skill="security"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
+          <span class="marquee-tag" data-skill="testing"><i class="fa-solid fa-vial"></i> Terratest</span>
+          <span class="marquee-tag" data-skill="finops"><i class="fa-solid fa-money-bill"></i> Infracost</span>
+        </div>
       </div>
     </div>
 
-    <!-- Bento Grid for Experience, Projects, Education -->
+    <!-- Bento Grid for Experience, Projects, Education, Security -->
     <div class="bento-grid">
       
       <!-- Experience Frame -->
       <div class="frame">
         <header class="frame-header">
           <h2 class="frame-title">Experience</h2>
-          <p class="frame-desc">Recent roles</p>
+          <p class="frame-desc">Recent roles & training</p>
         </header>
         <div class="frame-content">
-          
-          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" class="list-item">
+          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" rel="noopener" class="list-item" data-tags="azure,terraform,cicd,security,linux,scripting">
             <div class="item-info">
-              <span class="item-title">DevOps Insiders</span>
-              <span class="item-subtitle">Cloud & DevOps Engineer Intern</span>
+              <span class="item-title">
+                DevOps Insiders
+                <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+              </span>
+              <span class="item-subtitle">Cloud & DevOps Engineer Intern · Automated Azure workloads, modular IaC, and CI/CD pipelines.</span>
             </div>
             <span class="item-date">Jan 2026</span>
           </a>
           
-          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" class="view-all">
+          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" rel="noopener" class="view-all">
             <span>View Full Timeline</span>
             <i class="fa-brands fa-linkedin-in"></i>
           </a>
@@ -379,36 +859,45 @@
         </header>
         <div class="frame-content">
           
-          <a href="https://github.com/MihirMaurya-dev?tab=repositories" target="_blank" class="list-item">
+          <a href="https://github.com/MihirMaurya-dev?tab=repositories" target="_blank" rel="noopener" class="list-item" data-tags="azure,terraform,cicd,security,testing,finops,docker">
             <div class="item-info">
-              <span class="item-title">Enterprise DevOps & CI/CD Ecosystem</span>
-              <span class="item-subtitle">A unified architecture comprising modular Terraform infrastructure, a centralized Master Pipeline, and automated CI/CD workflows spanning multiple repositories.</span>
-              <div style="display: flex; gap: 6px; margin-top: 8px;">
-                <span class="badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted); font-size: 9px;">Terraform</span>
-                <span class="badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted); font-size: 9px;">Master_PipeLine</span>
-                <span class="badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted); font-size: 9px;">CI-CD</span>
+              <span class="item-title">
+                Enterprise DevOps & CI/CD Ecosystem
+                <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+              </span>
+              <span class="item-subtitle">Unified architecture with modular Terraform, centralized Master Pipeline, and shift-left security across repositories.</span>
+              <div class="tech-pill-row">
+                <span class="tech-pill">Terraform</span>
+                <span class="tech-pill">Master_Pipeline</span>
+                <span class="tech-pill">GitHub Actions</span>
               </div>
             </div>
             <span class="item-date">Aug 2026</span>
           </a>
           
-          <a href="https://github.com/MihirMaurya-dev" target="_blank" class="list-item">
+          <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="list-item" data-tags="azure,terraform,security,linux">
             <div class="item-info">
-              <span class="item-title">Azure Hub-Spoke Network</span>
+              <span class="item-title">
+                Azure Hub-Spoke Network
+                <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+              </span>
               <span class="item-subtitle">Architected a secure multi-tier network with modular Terraform, cutting provisioning time to under 15 mins.</span>
             </div>
             <span class="item-date">Dec 2025</span>
           </a>
 
-          <a href="https://github.com/MihirMaurya-dev" target="_blank" class="list-item">
+          <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="list-item" data-tags="azure,php,linux,scripting">
             <div class="item-info">
-              <span class="item-title">FlexZone</span>
+              <span class="item-title">
+                FlexZone
+                <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+              </span>
               <span class="item-subtitle">Fitness tracking PHP 8 REST API deployed on Azure VM with Cloudflare CDN integration.</span>
             </div>
             <span class="item-date">Dec 2025</span>
           </a>
           
-          <a href="https://github.com/MihirMaurya-dev" target="_blank" class="view-all">
+          <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="view-all">
             <span>View GitHub Repos</span>
             <i class="fa-brands fa-github"></i>
           </a>
@@ -422,43 +911,41 @@
           <p class="frame-desc">Academic background</p>
         </header>
         <div class="frame-content">
-          
-          <div class="list-item" style="cursor: default;">
+          <div class="list-item" data-tags="linux,scripting">
             <div class="item-info">
               <span class="item-title">University of Allahabad</span>
-              <span class="item-subtitle">M.Sc, Computer Science</span>
+              <span class="item-subtitle">M.Sc, Computer Science · J.K. Institute of Applied Physics & Technology</span>
             </div>
             <span class="item-date">2026 - 2028</span>
           </div>
 
-          <div class="list-item" style="cursor: default;">
+          <div class="list-item" data-tags="scripting,php">
             <div class="item-info">
               <span class="item-title">Ewing Christian College</span>
-              <span class="item-subtitle">B.Sc, Mathematics & Computer Apps</span>
+              <span class="item-subtitle">B.Sc, Mathematics & Computer Applications</span>
             </div>
             <span class="item-date">2023 - 2026</span>
           </div>
-          
         </div>
       </div>
 
-      <!-- Tech Frame -->
+      <!-- Security & Governance Frame -->
       <div class="frame">
         <header class="frame-header">
           <h2 class="frame-title">Security & Governance</h2>
-          <p class="frame-desc">Tools & practices</p>
+          <p class="frame-desc">Shift-left tools & practices</p>
         </header>
         <div class="frame-content">
-          <div class="list-item" style="cursor: default;">
+          <div class="list-item" data-tags="terraform,security,testing,finops,cicd">
             <div class="item-info">
-              <span class="item-title">Infrastructure-as-Code Scanning</span>
-              <span class="item-subtitle">tfsec, Checkov, Tflint, Terratest, Trufflehog, Gitleaks, Infracost</span>
+              <span class="item-title">IaC Scanning & Cost Governance</span>
+              <span class="item-subtitle">tfsec, Checkov, TFLint, Terratest, Trufflehog, Gitleaks, Infracost</span>
             </div>
           </div>
-          <div class="list-item" style="cursor: default;">
+          <div class="list-item" data-tags="azure,security,cicd">
             <div class="item-info">
               <span class="item-title">Identity & Access Management</span>
-              <span class="item-subtitle">Microsoft Entra ID (RBAC), Workload Identity Fed.</span>
+              <span class="item-subtitle">Microsoft Entra ID (RBAC), OIDC Workload Identity Federation, Azure Key Vault</span>
             </div>
           </div>
         </div>
@@ -466,94 +953,111 @@
 
     </div>
 
+    <!-- Live Telemetry Footer -->
+    <footer class="telemetry-footer">
+      <div class="telemetry-left">
+        <span class="status-indicator">
+          <span class="pulse-dot"></span>
+          All Systems Operational
+        </span>
+        <span>·</span>
+        <span>Region: centralindia</span>
+      </div>
+      <div class="telemetry-right">
+        <span id="live-clock">IST --:--:--</span>
+      </div>
+    </footer>
+
   </main>
 
+  <!-- Interactive DevOps Terminal Modal -->
+  <div class="modal-overlay" id="terminal-modal" aria-hidden="true">
+    <div class="terminal-window" role="dialog" aria-label="Interactive DevOps Terminal">
+      <div class="terminal-topbar">
+        <div class="window-dots">
+          <span class="dot dot-red" id="close-terminal-dot" title="Close"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <span class="terminal-title">mihir@azure-cloud: ~/portfolio (main)</span>
+        <button class="terminal-close" id="close-terminal-btn">ESC</button>
+      </div>
+      <div class="terminal-chips">
+        <span class="chip-label">Quick run:</span>
+        <button class="cmd-chip" data-cmd="terraform plan">terraform plan</button>
+        <button class="cmd-chip" data-cmd="security --audit">security --audit</button>
+        <button class="cmd-chip" data-cmd="whoami">whoami</button>
+        <button class="cmd-chip" data-cmd="skills">skills</button>
+        <button class="cmd-chip" data-cmd="contact">contact</button>
+        <button class="cmd-chip" data-cmd="clear">clear</button>
+      </div>
+      <div class="terminal-body" id="terminal-output">
+        <div class="term-line term-muted">Welcome to MihirOS v2.6 (Cloud & DevOps Shell). Type <span class="term-info">help</span> or click a command above.</div>
+      </div>
+      <form class="terminal-input-row" id="terminal-form">
+        <span class="term-prompt">mihir@devops</span>:<span class="term-path">~</span>$
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type a command (e.g., terraform plan, help)..." autocomplete="off" spellcheck="false">
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check" style="color: var(--success);"></i>
+    <span id="toast-msg">Email copied to clipboard!</span>
+  </div>
+
   <script>
-    // Hover Spotlight Effect Logic
+    // 1. Hover Spotlight Effect Logic
     document.querySelectorAll('.card, .frame').forEach(el => {
       el.addEventListener('mousemove', e => {
         const rect = el.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        el.style.setProperty('--mouse-x', `${x}px`);
-        el.style.setProperty('--mouse-y', `${y}px`);
+        el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
       });
     });
 
-    // Theme Toggle Logic
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const htmlElement = document.documentElement;
-
-    // Check saved theme in local storage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      htmlElement.classList.add('light');
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    // 2. Toast Notification Helper
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+    let toastTimeout;
+    function showToast(message) {
+      toastMsg.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.remove('show'), 2600);
     }
 
-    function toggleTheme() {
-      if (htmlElement.classList.contains('light')) {
-        // Switch to Dark
-        htmlElement.classList.remove('light');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        // Switch to Light
-        htmlElement.classList.add('light');
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
-      }
-    }
-
-    themeToggleBtn.addEventListener('click', (e) => {
-      // Fallback for browsers that do not support View Transitions API
-      if (!document.startViewTransition) {
-        toggleTheme();
-        return;
-      }
-
-      // Get button center to use as the origin of the expanding circle
-      const rect = themeToggleBtn.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-      
-      // Calculate the maximum radius needed to cover the screen
-      const endRadius = Math.hypot(
-        Math.max(x, innerWidth - x),
-        Math.max(y, innerHeight - y)
-      );
-
-      // Start the view transition snapshot
-      const transition = document.startViewTransition(() => {
-        toggleTheme();
-      });
-
-      // Once the DOM is updated, animate the new frame's clip-path
-      transition.ready.then(() => {
-        const clipPath = [
-          `circle(0px at ${x}px ${y}px)`,
-          `circle(${endRadius}px at ${x}px ${y}px)`
-        ];
-        
-        // Animate the new view expanding outward from the click position
-        document.documentElement.animate(
-          {
-            clipPath: clipPath,
-          },
-          {
-            duration: 600,
-            easing: 'ease-in-out',
-            pseudoElement: '::view-transition-new(root)',
-          }
-        );
+    // 3. One-Click Copy Email
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    copyEmailBtn.addEventListener('click', () => {
+      const email = copyEmailBtn.getAttribute('data-email');
+      navigator.clipboard.writeText(email).then(() => {
+        showToast('Copied chhotuverma2238@gmail.com to clipboard!');
       });
     });
 
-    // Mechanical Keyboard "Tic Tic" Sound Logic
+    // 4. Mechanical Keyboard Sound Logic + Mute Toggle
     let audioCtx;
-    function playClickSound() {
-      // Initialize AudioContext on first interaction
+    let soundEnabled = localStorage.getItem('sound') !== 'muted';
+    const soundToggleBtn = document.getElementById('sound-toggle');
+    const soundIcon = document.getElementById('sound-icon');
+
+    function updateSoundIcon() {
+      soundIcon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+    }
+    updateSoundIcon();
+
+    soundToggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem('sound', soundEnabled ? 'enabled' : 'muted');
+      updateSoundIcon();
+      if (soundEnabled) playClickSound(4200);
+      showToast(soundEnabled ? 'Mechanical key sounds enabled' : 'Audio muted');
+    });
+
+    function playClickSound(freq = 3800) {
+      if (!soundEnabled) return;
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
@@ -561,36 +1065,270 @@
         audioCtx.resume();
       }
       
-      // Synthesize a mechanical keyboard "tic" using filtered noise burst
-      const bufferSize = audioCtx.sampleRate * 0.015; // 15ms burst
+      const bufferSize = audioCtx.sampleRate * 0.014;
       const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1; // White noise
+        data[i] = Math.random() * 2 - 1;
       }
       
       const noise = audioCtx.createBufferSource();
       noise.buffer = buffer;
       
-      // Filter to shape the click (make it sound "plastic-y" like a switch)
       const filter = audioCtx.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.value = 4000;
+      // Slight pitch randomization for natural mechanical switch feel
+      filter.frequency.value = freq + (Math.random() * 400 - 200);
       
       const gain = audioCtx.createGain();
-      gain.gain.setValueAtTime(0.3, audioCtx.currentTime); // Volume
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.015);
+      gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.014);
       
       noise.connect(filter);
       filter.connect(gain);
       gain.connect(audioCtx.destination);
-      
       noise.start();
     }
 
-    // Attach click sound to interactive elements
-    document.querySelectorAll('a, button, .list-item').forEach(el => {
-      el.addEventListener('mousedown', playClickSound);
+    // Attach click sound ONLY to actual interactive controls
+    document.querySelectorAll('a, button, .marquee-tag, .cmd-chip').forEach(el => {
+      el.addEventListener('mousedown', () => playClickSound());
+    });
+
+    // 5. Theme Toggle with View Transitions API
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const htmlElement = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light') {
+      htmlElement.classList.add('light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+
+    function toggleTheme() {
+      if (htmlElement.classList.contains('light')) {
+        htmlElement.classList.remove('light');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        htmlElement.classList.add('light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (!document.startViewTransition) {
+        toggleTheme();
+        return;
+      }
+      const rect = themeToggleBtn.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+      const transition = document.startViewTransition(() => toggleTheme());
+      transition.ready.then(() => {
+        document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
+          { duration: 550, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+        );
+      });
+    });
+
+    // 6. Skill-to-Project Interactive Filter
+    let activeSkill = null;
+    const skillTags = document.querySelectorAll('.marquee-tag');
+    const listItems = document.querySelectorAll('.list-item[data-tags]');
+    const clearFilterBtn = document.getElementById('clear-filter');
+
+    function applySkillFilter(skill) {
+      if (activeSkill === skill) {
+        activeSkill = null;
+      } else {
+        activeSkill = skill;
+      }
+
+      skillTags.forEach(t => {
+        t.classList.toggle('active', t.getAttribute('data-skill') === activeSkill);
+      });
+
+      listItems.forEach(item => {
+        if (!activeSkill) {
+          item.classList.remove('highlighted', 'dimmed');
+          return;
+        }
+        const tags = item.getAttribute('data-tags').split(',');
+        if (tags.includes(activeSkill)) {
+          item.classList.add('highlighted');
+          item.classList.remove('dimmed');
+        } else {
+          item.classList.remove('highlighted');
+          item.classList.add('dimmed');
+        }
+      });
+
+      clearFilterBtn.classList.toggle('visible', Boolean(activeSkill));
+    }
+
+    skillTags.forEach(tag => {
+      tag.addEventListener('click', () => applySkillFilter(tag.getAttribute('data-skill')));
+    });
+    clearFilterBtn.addEventListener('click', () => applySkillFilter(null));
+
+    // 7. Live IST Clock in Telemetry Footer
+    const clockEl = document.getElementById('live-clock');
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      clockEl.textContent = `IST ${timeStr} (UTC+5:30)`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // 8. Interactive DevOps Terminal
+    const terminalModal = document.getElementById('terminal-modal');
+    const openTerminalBtn = document.getElementById('open-terminal-btn');
+    const closeTerminalBtn = document.getElementById('close-terminal-btn');
+    const closeTerminalDot = document.getElementById('close-terminal-dot');
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalForm = document.getElementById('terminal-form');
+    const terminalInput = document.getElementById('terminal-input');
+
+    function openTerminal() {
+      terminalModal.classList.add('open');
+      terminalModal.setAttribute('aria-hidden', 'false');
+      setTimeout(() => terminalInput.focus(), 50);
+    }
+
+    function closeTerminal() {
+      terminalModal.classList.remove('open');
+      terminalModal.setAttribute('aria-hidden', 'true');
+    }
+
+    openTerminalBtn.addEventListener('click', openTerminal);
+    closeTerminalBtn.addEventListener('click', closeTerminal);
+    closeTerminalDot.addEventListener('click', closeTerminal);
+    terminalModal.addEventListener('click', (e) => {
+      if (e.target === terminalModal) closeTerminal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        terminalModal.classList.contains('open') ? closeTerminal() : openTerminal();
+      } else if (e.key === 'Escape' && terminalModal.classList.contains('open')) {
+        closeTerminal();
+      }
+    });
+
+    terminalInput.addEventListener('keydown', () => playClickSound(4400));
+
+    function appendLine(htmlContent) {
+      const div = document.createElement('div');
+      div.className = 'term-line';
+      div.innerHTML = htmlContent;
+      terminalOutput.appendChild(div);
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+
+    function runCommand(rawCmd) {
+      const cmd = rawCmd.trim().toLowerCase();
+      if (!cmd) return;
+
+      appendLine(`<span class="term-prompt">mihir@devops</span>:<span class="term-path">~</span>$ ${rawCmd}`);
+
+      if (cmd === 'help') {
+        appendLine(
+`<span class="term-info">Available Commands:</span>
+  <span class="term-add">terraform plan</span>    Simulate Azure Hub-Spoke & CI/CD infrastructure plan
+  <span class="term-add">security --audit</span>  Run shift-left policy checks (tfsec, Checkov, Gitleaks)
+  <span class="term-add">whoami</span>            Display engineer profile & current academic status
+  <span class="term-add">skills</span>            List core Cloud, IaC, and DevSecOps stack
+  <span class="term-add">projects</span>          Show featured infrastructure repositories
+  <span class="term-add">contact</span>           Copy email address & show social endpoints
+  <span class="term-add">theme</span>             Toggle light/dark mode
+  <span class="term-add">clear</span>             Clear terminal output`
+        );
+      } else if (cmd === 'whoami') {
+        appendLine(
+`<strong>Mihir Maurya</strong> — Cloud & DevOps Engineer (India)
+• Role: Cloud & DevOps Engineer Intern @ DevOps Insiders
+• Education: M.Sc. Computer Science @ University of Allahabad (2026–2028)
+• Focus: Modular Terraform, Azure Architecture, GitHub Actions, Shift-Left Security`
+        );
+      } else if (cmd === 'skills') {
+        appendLine(
+`<span class="term-info">[Cloud & IaC]</span>     Microsoft Azure, Terraform (Modular), Docker, Linux
+<span class="term-info">[CI/CD & DevSec]</span>  GitHub Actions, tfsec, Checkov, TFLint, Terratest, Gitleaks
+<span class="term-info">[FinOps & IAM]</span>    Infracost, Microsoft Entra ID (RBAC), OIDC Federation
+<span class="term-info">[Scripting]</span>       Bash, PowerShell, Python, PHP & MySQL`
+        );
+      } else if (cmd === 'projects') {
+        appendLine(
+`1. <span class="term-add">Enterprise DevOps & CI/CD Ecosystem</span> (Terraform + Master Pipeline + GitHub Actions)
+2. <span class="term-add">Azure Hub-Spoke Network</span> (Multi-tier modular VNet architecture in <15m)
+3. <span class="term-add">FlexZone</span> (PHP 8 REST API on Azure VM + Cloudflare CDN)
+→ View all at: <a href="https://github.com/MihirMaurya-dev" target="_blank" style="text-decoration:underline;color:#38bdf8;">github.com/MihirMaurya-dev</a>`
+        );
+      } else if (cmd === 'security --audit') {
+        appendLine(
+`<span class="term-muted">Running pre-commit & CI security gates...</span>
+✔ <span class="term-add">[gitleaks]</span>   0 hardcoded secrets detected across commits
+✔ <span class="term-add">[tflint]</span>     0 syntax or provider warnings in ./modules
+✔ <span class="term-add">[tfsec]</span>      Passed 48/48 Azure NSG, KeyVault & Storage checks
+✔ <span class="term-add">[checkov]</span>    CIS Azure Benchmark compliance verified
+✔ <span class="term-add">[infracost]</span>  Estimated monthly delta: +$42.10/mo (within budget threshold)`
+        );
+      } else if (cmd === 'terraform plan') {
+        appendLine(`<span class="term-muted">Initializing provider plugins (hashicorp/azurerm v3.116.0)...</span>`);
+        setTimeout(() => {
+          appendLine(
+`<span class="term-add">+ module.hub_network.azurerm_virtual_network.hub</span>       (centralindia)
+<span class="term-add">+ module.spoke_workload.azurerm_subnet.app_tier</span>        (10.1.1.0/24)
+<span class="term-add">+ module.security.azurerm_key_vault.kv_prod</span>            (RBAC enabled)
+<span class="term-add">+ module.compute.azurerm_linux_virtual_machine_scale_set.vmss</span>
+<span class="term-add">+ module.oidc.azuread_application_federated_identity_credential.github</span>
+
+<span class="term-info">Plan:</span> <span class="term-add">5 to add</span>, 0 to change, 0 to destroy.
+<span class="term-muted">✔ OIDC Workload Identity verified. Ready for automated GitHub Actions apply.</span>`
+          );
+        }, 280);
+      } else if (cmd === 'contact') {
+        navigator.clipboard.writeText('chhotuverma2238@gmail.com');
+        appendLine(
+`<span class="term-add">✔ Copied chhotuverma2238@gmail.com to your clipboard!</span>
+• GitHub:   https://github.com/MihirMaurya-dev
+• LinkedIn: https://linkedin.com/in/mihirmauryaa1`
+        );
+        showToast('Copied chhotuverma2238@gmail.com to clipboard!');
+      } else if (cmd === 'theme') {
+        toggleTheme();
+        appendLine(`<span class="term-info">Theme switched to ${htmlElement.classList.contains('light') ? 'Light' : 'Dark'} mode.</span>`);
+      } else if (cmd === 'clear') {
+        terminalOutput.innerHTML = '';
+      } else {
+        appendLine(`<span class="term-warn">Command not found: ${rawCmd}.</span> Type <span class="term-info">help</span> for available commands.`);
+      }
+    }
+
+    terminalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = terminalInput.value;
+      terminalInput.value = '';
+      runCommand(val);
+    });
+
+    document.querySelectorAll('.cmd-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        runCommand(chip.getAttribute('data-cmd'));
+      });
     });
   </script>
 </body>
