@@ -33,7 +33,7 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent: #3b82f6;
-      --accent-glow: rgba(59, 130, 246, 0.25);
+      --accent-glow: rgba(59, 130, 246, 0.22);
       --success: #10b981;
       --success-bg: rgba(16, 185, 129, 0.12);
       --header-bg: rgba(9, 13, 22, 0.78);
@@ -45,7 +45,10 @@
       --pill-border: rgba(255, 255, 255, 0.12);
       --spotlight-glow: rgba(255, 255, 255, 0.05);
       --terminal-bg: #050811;
-      --backdrop: rgba(0, 0, 0, 0.7);
+      --modal-surface: #0b1120;
+      --svg-canvas: #060a12;
+      --svg-node-bg: #0f172a;
+      --backdrop: rgba(0, 0, 0, 0.72);
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
@@ -60,7 +63,7 @@
       --text-main: #0f172a;
       --text-muted: #475569;
       --accent: #2563eb;
-      --accent-glow: rgba(37, 99, 235, 0.2);
+      --accent-glow: rgba(37, 99, 235, 0.16);
       --success: #059669;
       --success-bg: rgba(16, 185, 129, 0.12);
       --header-bg: rgba(255, 255, 255, 0.82);
@@ -72,7 +75,10 @@
       --pill-border: rgba(15, 23, 42, 0.12);
       --spotlight-glow: rgba(15, 23, 42, 0.04);
       --terminal-bg: #0f172a;
-      --backdrop: rgba(15, 23, 42, 0.45);
+      --modal-surface: #ffffff;
+      --svg-canvas: #f1f5f9;
+      --svg-node-bg: #ffffff;
+      --backdrop: rgba(15, 23, 42, 0.5);
     }
 
     /* View Transitions for Theme Toggle */
@@ -460,8 +466,16 @@
       padding: 14px 20px;
       border-top: 1px solid var(--card-border);
       transition: background 0.2s, opacity 0.25s, border-left 0.2s;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      font-family: inherit;
+      color: inherit;
     }
-    a.list-item:hover { background: var(--card-hover); }
+    a.list-item:hover, button.list-item:hover { background: var(--card-hover); cursor: pointer; }
     .list-item.highlighted {
       background: var(--accent-glow);
       border-left: 3px solid var(--accent);
@@ -477,15 +491,18 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
     }
-    a.list-item .item-title .arrow-icon {
+    a.list-item .item-title .arrow-icon,
+    button.list-item .item-title .arrow-icon {
       font-size: 10px;
       opacity: 0;
       transform: translate(-3px, 3px);
       transition: all 0.2s;
       color: var(--text-muted);
     }
-    a.list-item:hover .item-title .arrow-icon {
+    a.list-item:hover .item-title .arrow-icon,
+    button.list-item:hover .item-title .arrow-icon {
       opacity: 1;
       transform: translate(0, 0);
     }
@@ -508,6 +525,14 @@
       font-weight: 500;
       padding: 2px 7px;
       border-radius: 5px;
+    }
+    .tech-pill.interactive-pill {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-glow);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     /* Footer link inside frame */
@@ -568,7 +593,7 @@
       100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
 
-    /* Interactive Terminal Modal */
+    /* Modal Shared Overlay */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -579,7 +604,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s ease;
@@ -588,6 +613,233 @@
       opacity: 1;
       pointer-events: auto;
     }
+
+    /* Interactive Architecture Modal */
+    .arch-window {
+      width: 100%;
+      max-width: 780px;
+      max-height: 90vh;
+      background: var(--modal-surface);
+      color: var(--text-main);
+      border: 1px solid var(--card-border-hover);
+      border-radius: 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(12px) scale(0.98);
+      transition: transform 0.2s ease;
+    }
+    .modal-overlay.open .arch-window {
+      transform: translateY(0) scale(1);
+    }
+
+    .arch-topbar {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .arch-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .arch-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .arch-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .arch-tab-btn, .arch-sim-btn {
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .arch-tab-btn.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--text-main);
+    }
+    .arch-sim-btn {
+      color: var(--success);
+      border-color: rgba(16, 185, 129, 0.35);
+      background: var(--success-bg);
+    }
+    .arch-sim-btn:hover {
+      opacity: 0.9;
+    }
+
+    .arch-body {
+      padding: 18px 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .svg-diagram-container {
+      background: var(--svg-canvas);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px;
+      overflow-x: auto;
+    }
+    .arch-svg {
+      width: 100%;
+      min-width: 640px;
+      height: auto;
+      display: block;
+    }
+
+    /* Animated SVG Pipeline Flow */
+    .flow-line {
+      stroke: var(--text-muted);
+      stroke-width: 2;
+      stroke-dasharray: 6 6;
+      animation: dashFlow 1.2s linear infinite;
+      opacity: 0.55;
+    }
+    .flow-line.active-flow {
+      stroke: var(--success);
+      stroke-width: 2.5;
+      opacity: 1;
+    }
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -12; }
+    }
+
+    .arch-node {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .arch-node rect.node-box {
+      fill: var(--svg-node-bg);
+      stroke: var(--card-border-hover);
+      stroke-width: 1.5;
+      transition: stroke 0.2s, fill 0.2s, filter 0.2s;
+    }
+    .arch-node:hover rect.node-box {
+      stroke: var(--accent);
+    }
+    .arch-node.selected rect.node-box {
+      stroke: var(--accent);
+      stroke-width: 2.2;
+      filter: drop-shadow(0 0 10px var(--accent-glow));
+    }
+    .arch-node.sim-passed rect.node-box {
+      stroke: var(--success);
+      stroke-width: 2.2;
+    }
+    .svg-heading {
+      fill: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .svg-sub {
+      fill: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+    }
+    .svg-badge {
+      fill: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    /* Inspector Card inside Modal */
+    .arch-inspector {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .inspector-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .inspector-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .inspector-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--success);
+      background: var(--success-bg);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .inspector-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Mermaid Code Tab View */
+    .mermaid-view {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mermaid-view.active {
+      display: flex;
+    }
+    .svg-view.hidden {
+      display: none;
+    }
+    .mermaid-pre {
+      background: var(--terminal-bg);
+      color: #e2e8f0;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    .arch-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Interactive Terminal Modal */
     .terminal-window {
       width: 100%;
       max-width: 680px;
@@ -859,21 +1111,22 @@
         </header>
         <div class="frame-content">
           
-          <a href="https://github.com/MihirMaurya-dev?tab=repositories" target="_blank" rel="noopener" class="list-item" data-tags="azure,terraform,cicd,security,testing,finops,docker">
+          <!-- Clicking this opens the Interactive Architecture Modal -->
+          <button type="button" id="open-arch-project" class="list-item" data-tags="azure,terraform,cicd,security,testing,finops,docker">
             <div class="item-info">
               <span class="item-title">
                 Enterprise DevOps & CI/CD Ecosystem
-                <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+                <i class="fa-solid fa-diagram-project arrow-icon" style="opacity: 1; transform: none; color: var(--accent);"></i>
               </span>
               <span class="item-subtitle">Unified architecture with modular Terraform, centralized Master Pipeline, and shift-left security across repositories.</span>
               <div class="tech-pill-row">
+                <span class="tech-pill interactive-pill"><i class="fa-solid fa-magnifying-glass-chart"></i> View Architecture</span>
                 <span class="tech-pill">Terraform</span>
                 <span class="tech-pill">Master_Pipeline</span>
-                <span class="tech-pill">GitHub Actions</span>
               </div>
             </div>
             <span class="item-date">Aug 2026</span>
-          </a>
+          </button>
           
           <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="list-item" data-tags="azure,terraform,security,linux">
             <div class="item-info">
@@ -970,6 +1223,141 @@
 
   </main>
 
+  <!-- Interactive Architecture Diagram Modal -->
+  <div class="modal-overlay" id="arch-modal" aria-hidden="true">
+    <div class="arch-window" role="dialog" aria-label="Enterprise DevOps Architecture Diagram">
+      <div class="arch-topbar">
+        <div class="arch-title-group">
+          <div class="window-dots">
+            <span class="dot dot-red" id="close-arch-dot" title="Close"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <span class="arch-title">Enterprise DevOps & CI/CD Ecosystem — Architecture</span>
+        </div>
+        <div class="arch-controls">
+          <button class="arch-sim-btn" id="simulate-pipeline-btn" title="Simulate End-to-End Pipeline Flow">
+            <i class="fa-solid fa-play"></i>
+            <span>Simulate Run</span>
+          </button>
+          <button class="arch-tab-btn active" id="tab-svg-btn">Interactive SVG</button>
+          <button class="arch-tab-btn" id="tab-mermaid-btn">Mermaid Code</button>
+          <button class="terminal-close" id="close-arch-btn">ESC</button>
+        </div>
+      </div>
+
+      <div class="arch-body">
+        <!-- Interactive SVG View -->
+        <div class="svg-view" id="arch-svg-view">
+          <div class="svg-diagram-container">
+            <svg class="arch-svg" viewBox="0 0 740 205" xmlns="http://www.w3.org/2000/svg">
+              <!-- Animated Flow Connectors -->
+              <line id="flow-1" class="flow-line" x1="168" y1="102" x2="198" y2="102" />
+              <line id="flow-2" class="flow-line" x1="356" y1="102" x2="386" y2="102" />
+              <line id="flow-3" class="flow-line" x1="544" y1="102" x2="574" y2="102" />
+
+              <!-- Node 1: Pre-Commit & Shift-Left -->
+              <g class="arch-node selected" data-stage="1" transform="translate(12, 32)">
+                <rect class="node-box" width="156" height="140" rx="12" />
+                <text x="16" y="28" class="svg-badge">STAGE 01 · LOCAL/PR</text>
+                <text x="16" y="50" class="svg-heading">Shift-Left Gate</text>
+                <text x="16" y="74" class="svg-sub">• terraform fmt/validate</text>
+                <text x="16" y="92" class="svg-sub">• Gitleaks &amp; Trufflehog</text>
+                <text x="16" y="110" class="svg-sub">• TFLint pre-commit</text>
+                <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ Pre-Commit Verified</text>
+              </g>
+
+              <!-- Node 2: Master CI/CD Pipeline -->
+              <g class="arch-node" data-stage="2" transform="translate(200, 32)">
+                <rect class="node-box" width="156" height="140" rx="12" />
+                <text x="16" y="28" class="svg-badge">STAGE 02 · CI/CD</text>
+                <text x="16" y="50" class="svg-heading">Master Pipeline</text>
+                <text x="16" y="74" class="svg-sub">• tfsec &amp; Checkov SAST</text>
+                <text x="16" y="92" class="svg-sub">• Infracost FinOps Gate</text>
+                <text x="16" y="110" class="svg-sub">• Terratest Validation</text>
+                <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ Policy Gate Passed</text>
+              </g>
+
+              <!-- Node 3: OIDC & Remote State -->
+              <g class="arch-node" data-stage="3" transform="translate(388, 32)">
+                <rect class="node-box" width="156" height="140" rx="12" />
+                <text x="16" y="28" class="svg-badge">STAGE 03 · AUTH/STATE</text>
+                <text x="16" y="50" class="svg-heading">Entra ID &amp; State</text>
+                <text x="16" y="74" class="svg-sub">• OIDC Workload Fed.</text>
+                <text x="16" y="92" class="svg-sub">• Zero Static Secrets</text>
+                <text x="16" y="110" class="svg-sub">• Azure Blob State Lock</text>
+                <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ RBAC Token Issued</text>
+              </g>
+
+              <!-- Node 4: Azure Cloud Workload -->
+              <g class="arch-node" data-stage="4" transform="translate(576, 32)">
+                <rect class="node-box" width="152" height="140" rx="12" />
+                <text x="16" y="28" class="svg-badge">STAGE 04 · AZURE</text>
+                <text x="16" y="50" class="svg-heading">Hub-Spoke Cloud</text>
+                <text x="16" y="74" class="svg-sub">• Hub VNet + Bastion</text>
+                <text x="16" y="92" class="svg-sub">• App Gateway + NSGs</text>
+                <text x="16" y="110" class="svg-sub">• Key Vault + VMSS</text>
+                <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ centralindia Live</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Node Details Inspector -->
+          <div class="arch-inspector" id="arch-inspector" style="margin-top: 14px;">
+            <div class="inspector-header">
+              <span class="inspector-title" id="inspector-title">
+                <i class="fa-solid fa-shield-halved" style="color: var(--accent);"></i>
+                Stage 01: Developer Pre-Commit & Shift-Left Gate
+              </span>
+              <span class="inspector-status" id="inspector-status">Gate: Active</span>
+            </div>
+            <p class="inspector-desc" id="inspector-desc">
+              Enforces code quality and secret hygiene before code ever leaves the workstation. Automated pre-commit hooks run <code>terraform fmt</code>, <code>terraform validate</code>, <code>TFLint</code>, and secret scanning via <code>Gitleaks</code> and <code>Trufflehog</code> across modular repositories.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mermaid Source View -->
+        <div class="mermaid-view" id="arch-mermaid-view">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 12px; color: var(--text-muted);">Mermaid.js Architecture Definition (Compatible with GitHub &amp; Obsidian)</span>
+            <button class="arch-tab-btn" id="copy-mermaid-btn"><i class="fa-regular fa-copy"></i> Copy Mermaid</button>
+          </div>
+          <pre class="mermaid-pre" id="mermaid-code">graph LR
+  subgraph S1["1. Pre-Commit & Shift-Left"]
+    A[Git Push / PR] --> B[terraform fmt & validate]
+    B --> C[TFLint & Gitleaks]
+  end
+
+  subgraph S2["2. Master CI/CD Pipeline (GitHub Actions)"]
+    C --> D[tfsec & Checkov SAST]
+    D --> E[Infracost FinOps Gate]
+    E --> F[Terratest Modules]
+  end
+
+  subgraph S3["3. Identity & State Governance"]
+    F --> G[Entra ID OIDC Federation]
+    G --> H[Azure Blob Remote State]
+  end
+
+  subgraph S4["4. Azure Infrastructure (centralindia)"]
+    H --> I[Hub-Spoke VNet & Bastion]
+    I --> J[App Gateway & NSGs]
+    J --> K[Azure Key Vault & Linux VMSS]
+  end</pre>
+        </div>
+      </div>
+
+      <div class="arch-footer">
+        <span><i class="fa-regular fa-hand-pointer"></i> Click any stage node above to inspect its controls</span>
+        <a href="https://github.com/MihirMaurya-dev?tab=repositories" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 6px 12px; font-size: 12px;">
+          <i class="fa-brands fa-github"></i>
+          <span>Open Repositories on GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Interactive DevOps Terminal Modal -->
   <div class="modal-overlay" id="terminal-modal" aria-hidden="true">
     <div class="terminal-window" role="dialog" aria-label="Interactive DevOps Terminal">
@@ -986,6 +1374,7 @@
         <span class="chip-label">Quick run:</span>
         <button class="cmd-chip" data-cmd="terraform plan">terraform plan</button>
         <button class="cmd-chip" data-cmd="security --audit">security --audit</button>
+        <button class="cmd-chip" data-cmd="arch">arch</button>
         <button class="cmd-chip" data-cmd="whoami">whoami</button>
         <button class="cmd-chip" data-cmd="skills">skills</button>
         <button class="cmd-chip" data-cmd="contact">contact</button>
@@ -996,7 +1385,7 @@
       </div>
       <form class="terminal-input-row" id="terminal-form">
         <span class="term-prompt">mihir@devops</span>:<span class="term-path">~</span>$
-        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type a command (e.g., terraform plan, help)..." autocomplete="off" spellcheck="false">
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type a command (e.g., terraform plan, arch, help)..." autocomplete="off" spellcheck="false">
       </form>
     </div>
   </div>
@@ -1077,7 +1466,6 @@
       
       const filter = audioCtx.createBiquadFilter();
       filter.type = 'bandpass';
-      // Slight pitch randomization for natural mechanical switch feel
       filter.frequency.value = freq + (Math.random() * 400 - 200);
       
       const gain = audioCtx.createGain();
@@ -1090,8 +1478,8 @@
       noise.start();
     }
 
-    // Attach click sound ONLY to actual interactive controls
-    document.querySelectorAll('a, button, .marquee-tag, .cmd-chip').forEach(el => {
+    // Attach click sound to interactive controls
+    document.querySelectorAll('a, button, .marquee-tag, .cmd-chip, .arch-node').forEach(el => {
       el.addEventListener('mousedown', () => playClickSound());
     });
 
@@ -1143,11 +1531,7 @@
     const clearFilterBtn = document.getElementById('clear-filter');
 
     function applySkillFilter(skill) {
-      if (activeSkill === skill) {
-        activeSkill = null;
-      } else {
-        activeSkill = skill;
-      }
+      activeSkill = (activeSkill === skill) ? null : skill;
 
       skillTags.forEach(t => {
         t.classList.toggle('active', t.getAttribute('data-skill') === activeSkill);
@@ -1192,7 +1576,135 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    // 8. Interactive DevOps Terminal
+    // 8. Interactive Architecture Diagram Modal Logic
+    const archModal = document.getElementById('arch-modal');
+    const openArchBtn = document.getElementById('open-arch-project');
+    const closeArchBtn = document.getElementById('close-arch-btn');
+    const closeArchDot = document.getElementById('close-arch-dot');
+    const tabSvgBtn = document.getElementById('tab-svg-btn');
+    const tabMermaidBtn = document.getElementById('tab-mermaid-btn');
+    const archSvgView = document.getElementById('arch-svg-view');
+    const archMermaidView = document.getElementById('arch-mermaid-view');
+    const copyMermaidBtn = document.getElementById('copy-mermaid-btn');
+    const simulatePipelineBtn = document.getElementById('simulate-pipeline-btn');
+    const archNodes = document.querySelectorAll('.arch-node');
+    const inspectorTitle = document.getElementById('inspector-title');
+    const inspectorStatus = document.getElementById('inspector-status');
+    const inspectorDesc = document.getElementById('inspector-desc');
+
+    const stageData = {
+      1: {
+        title: 'Stage 01: Developer Pre-Commit & Shift-Left Gate',
+        status: 'Pre-Commit: Verified',
+        desc: 'Enforces code quality and secret hygiene before code ever leaves the workstation. Automated pre-commit hooks run <code>terraform fmt</code>, <code>terraform validate</code>, <code>TFLint</code>, and secret scanning via <code>Gitleaks</code> and <code>Trufflehog</code> across modular repositories.'
+      },
+      2: {
+        title: 'Stage 02: Centralized Master CI/CD Pipeline (GitHub Actions)',
+        status: 'Policy & FinOps: Passed',
+        desc: 'Reusable GitHub Actions workflows orchestrate static code analysis (<code>tfsec</code> & <code>Checkov</code>), automated infrastructure testing (<code>Terratest</code>), and pull-request cloud cost breakdowns via <code>Infracost</code> before any plan is approved.'
+      },
+      3: {
+        title: 'Stage 03: Passwordless OIDC Auth & Remote State Locking',
+        status: 'Entra OIDC: Authenticated',
+        desc: 'Eliminates long-lived static credentials by using <strong>Microsoft Entra ID Workload Identity Federation (OIDC)</strong> with scoped RBAC roles. Terraform state is encrypted at rest in Azure Blob Storage with native lease locking.'
+      },
+      4: {
+        title: 'Stage 04: Modular Azure Hub-Spoke Infrastructure',
+        status: 'Region: centralindia (Live)',
+        desc: 'Provisions a multi-tier Azure Hub-Spoke topology featuring Azure Bastion, Application Gateway, isolated subnet NSGs, RBAC-secured Azure Key Vault secrets, and auto-scaling Linux Virtual Machine Scale Sets (VMSS).'
+      }
+    };
+
+    function selectArchStage(stageId) {
+      archNodes.forEach(node => {
+        node.classList.toggle('selected', node.getAttribute('data-stage') === String(stageId));
+      });
+      const info = stageData[stageId];
+      if (info) {
+        inspectorTitle.innerHTML = `<i class="fa-solid fa-layer-group" style="color: var(--accent);"></i> ${info.title}`;
+        inspectorStatus.textContent = info.status;
+        inspectorDesc.innerHTML = info.desc;
+      }
+    }
+
+    archNodes.forEach(node => {
+      node.addEventListener('click', () => {
+        selectArchStage(node.getAttribute('data-stage'));
+      });
+    });
+
+    function openArchModal() {
+      archModal.classList.add('open');
+      archModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeArchModal() {
+      archModal.classList.remove('open');
+      archModal.setAttribute('aria-hidden', 'true');
+    }
+
+    openArchBtn.addEventListener('click', openArchModal);
+    closeArchBtn.addEventListener('click', closeArchModal);
+    closeArchDot.addEventListener('click', closeArchModal);
+    archModal.addEventListener('click', (e) => {
+      if (e.target === archModal) closeArchModal();
+    });
+
+    tabSvgBtn.addEventListener('click', () => {
+      tabSvgBtn.classList.add('active');
+      tabMermaidBtn.classList.remove('active');
+      archSvgView.classList.remove('hidden');
+      archMermaidView.classList.remove('active');
+    });
+
+    tabMermaidBtn.addEventListener('click', () => {
+      tabMermaidBtn.classList.add('active');
+      tabSvgBtn.classList.remove('active');
+      archSvgView.classList.add('hidden');
+      archMermaidView.classList.add('active');
+    });
+
+    copyMermaidBtn.addEventListener('click', () => {
+      const code = document.getElementById('mermaid-code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Mermaid.js diagram code copied!');
+      });
+    });
+
+    // Simulate End-to-End Pipeline Run
+    let simRunning = false;
+    simulatePipelineBtn.addEventListener('click', () => {
+      if (simRunning) return;
+      simRunning = true;
+      tabSvgBtn.click();
+
+      const flows = [
+        document.getElementById('flow-1'),
+        document.getElementById('flow-2'),
+        document.getElementById('flow-3')
+      ];
+      archNodes.forEach(n => n.classList.remove('sim-passed'));
+      flows.forEach(f => f.classList.remove('active-flow'));
+
+      const steps = [1, 2, 3, 4];
+      steps.forEach((stage, idx) => {
+        setTimeout(() => {
+          playClickSound(4300 + idx * 180);
+          selectArchStage(stage);
+          const currentNode = document.querySelector(`.arch-node[data-stage="${stage}"]`);
+          if (currentNode) currentNode.classList.add('sim-passed');
+          if (idx > 0 && flows[idx - 1]) {
+            flows[idx - 1].classList.add('active-flow');
+          }
+          if (idx === steps.length - 1) {
+            showToast('Pipeline simulation complete: All 4 stages healthy!');
+            simRunning = false;
+          }
+        }, idx * 650);
+      });
+    });
+
+    // 9. Interactive DevOps Terminal
     const terminalModal = document.getElementById('terminal-modal');
     const openTerminalBtn = document.getElementById('open-terminal-btn');
     const closeTerminalBtn = document.getElementById('close-terminal-btn');
@@ -1222,9 +1734,11 @@
     document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
+        closeArchModal();
         terminalModal.classList.contains('open') ? closeTerminal() : openTerminal();
-      } else if (e.key === 'Escape' && terminalModal.classList.contains('open')) {
-        closeTerminal();
+      } else if (e.key === 'Escape') {
+        if (archModal.classList.contains('open')) closeArchModal();
+        if (terminalModal.classList.contains('open')) closeTerminal();
       }
     });
 
@@ -1249,6 +1763,7 @@
 `<span class="term-info">Available Commands:</span>
   <span class="term-add">terraform plan</span>    Simulate Azure Hub-Spoke & CI/CD infrastructure plan
   <span class="term-add">security --audit</span>  Run shift-left policy checks (tfsec, Checkov, Gitleaks)
+  <span class="term-add">arch</span>              Open Interactive Enterprise DevOps Architecture Diagram
   <span class="term-add">whoami</span>            Display engineer profile & current academic status
   <span class="term-add">skills</span>            List core Cloud, IaC, and DevSecOps stack
   <span class="term-add">projects</span>          Show featured infrastructure repositories
@@ -1256,6 +1771,12 @@
   <span class="term-add">theme</span>             Toggle light/dark mode
   <span class="term-add">clear</span>             Clear terminal output`
         );
+      } else if (cmd === 'arch' || cmd === 'diagram') {
+        appendLine(`<span class="term-add">✔ Launching Enterprise DevOps Architecture Explorer...</span>`);
+        setTimeout(() => {
+          closeTerminal();
+          openArchModal();
+        }, 220);
       } else if (cmd === 'whoami') {
         appendLine(
 `<strong>Mihir Maurya</strong> — Cloud & DevOps Engineer (India)
@@ -1272,7 +1793,7 @@
         );
       } else if (cmd === 'projects') {
         appendLine(
-`1. <span class="term-add">Enterprise DevOps & CI/CD Ecosystem</span> (Terraform + Master Pipeline + GitHub Actions)
+`1. <span class="term-add">Enterprise DevOps & CI/CD Ecosystem</span> (Type <span class="term-info">arch</span> to view interactive diagram)
 2. <span class="term-add">Azure Hub-Spoke Network</span> (Multi-tier modular VNet architecture in <15m)
 3. <span class="term-add">FlexZone</span> (PHP 8 REST API on Azure VM + Cloudflare CDN)
 → View all at: <a href="https://github.com/MihirMaurya-dev" target="_blank" style="text-decoration:underline;color:#38bdf8;">github.com/MihirMaurya-dev</a>`
