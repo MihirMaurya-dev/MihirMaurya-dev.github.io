@@ -617,8 +617,8 @@
     /* Interactive Architecture Modal */
     .arch-window {
       width: 100%;
-      max-width: 780px;
-      max-height: 90vh;
+      max-width: 800px;
+      max-height: 92vh;
       background: var(--modal-surface);
       color: var(--text-main);
       border: 1px solid var(--card-border-hover);
@@ -635,7 +635,7 @@
     }
 
     .arch-topbar {
-      padding: 14px 20px;
+      padding: 12px 20px;
       border-bottom: 1px solid var(--card-border);
       display: flex;
       align-items: center;
@@ -649,15 +649,16 @@
       gap: 10px;
     }
     .arch-title {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 600;
     }
     .arch-controls {
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
-    .arch-tab-btn, .arch-sim-btn {
+    .arch-tab-btn, .arch-sim-btn, .project-switch-btn {
       background: var(--pill-bg);
       border: 1px solid var(--pill-border);
       color: var(--text-muted);
@@ -669,9 +670,9 @@
       transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
-    .arch-tab-btn.active {
+    .arch-tab-btn.active, .project-switch-btn.active {
       background: var(--accent-glow);
       border-color: var(--accent);
       color: var(--text-main);
@@ -681,8 +682,23 @@
       border-color: rgba(16, 185, 129, 0.35);
       background: var(--success-bg);
     }
-    .arch-sim-btn:hover {
-      opacity: 0.9;
+    .arch-sim-btn:hover { opacity: 0.9; }
+
+    /* Sub-header bar to switch between DevOps Ecosystem & Hub-Spoke Topology */
+    .arch-project-bar {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--card-border);
+      background: var(--card-hover);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .arch-project-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .arch-body {
@@ -702,18 +718,22 @@
     }
     .arch-svg {
       width: 100%;
-      min-width: 640px;
+      min-width: 650px;
       height: auto;
       display: block;
     }
+    .arch-svg.hidden {
+      display: none;
+    }
 
-    /* Animated SVG Pipeline Flow */
+    /* Animated SVG Pipeline & Network Flow */
     .flow-line {
       stroke: var(--text-muted);
       stroke-width: 2;
       stroke-dasharray: 6 6;
       animation: dashFlow 1.2s linear infinite;
       opacity: 0.55;
+      fill: none;
     }
     .flow-line.active-flow {
       stroke: var(--success);
@@ -762,6 +782,11 @@
       font-family: var(--font-mono);
       font-size: 9px;
       font-weight: 600;
+    }
+    .peering-pill {
+      fill: var(--svg-node-bg);
+      stroke: var(--accent);
+      stroke-width: 1;
     }
 
     /* Inspector Card inside Modal */
@@ -1107,20 +1132,20 @@
       <div class="frame">
         <header class="frame-header">
           <h2 class="frame-title">Projects</h2>
-          <p class="frame-desc">Cloud & automation builds</p>
+          <p class="frame-desc">Click to inspect architecture &amp; topology</p>
         </header>
         <div class="frame-content">
           
-          <!-- Clicking this opens the Interactive Architecture Modal -->
-          <button type="button" id="open-arch-project" class="list-item" data-tags="azure,terraform,cicd,security,testing,finops,docker">
+          <!-- Project 1: Enterprise DevOps Ecosystem (Opens Pipeline Architecture) -->
+          <button type="button" id="open-arch-devops" class="list-item" data-tags="azure,terraform,cicd,security,testing,finops,docker">
             <div class="item-info">
               <span class="item-title">
-                Enterprise DevOps & CI/CD Ecosystem
+                Enterprise DevOps &amp; CI/CD Ecosystem
                 <i class="fa-solid fa-diagram-project arrow-icon" style="opacity: 1; transform: none; color: var(--accent);"></i>
               </span>
               <span class="item-subtitle">Unified architecture with modular Terraform, centralized Master Pipeline, and shift-left security across repositories.</span>
               <div class="tech-pill-row">
-                <span class="tech-pill interactive-pill"><i class="fa-solid fa-magnifying-glass-chart"></i> View Architecture</span>
+                <span class="tech-pill interactive-pill"><i class="fa-solid fa-magnifying-glass-chart"></i> Pipeline Diagram</span>
                 <span class="tech-pill">Terraform</span>
                 <span class="tech-pill">Master_Pipeline</span>
               </div>
@@ -1128,17 +1153,24 @@
             <span class="item-date">Aug 2026</span>
           </button>
           
-          <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="list-item" data-tags="azure,terraform,security,linux">
+          <!-- Project 2: Azure Hub-Spoke Network (Opens Network Topology) -->
+          <button type="button" id="open-arch-hubspoke" class="list-item" data-tags="azure,terraform,security,linux">
             <div class="item-info">
               <span class="item-title">
                 Azure Hub-Spoke Network
-                <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+                <i class="fa-solid fa-network-wired arrow-icon" style="opacity: 1; transform: none; color: var(--accent);"></i>
               </span>
               <span class="item-subtitle">Architected a secure multi-tier network with modular Terraform, cutting provisioning time to under 15 mins.</span>
+              <div class="tech-pill-row">
+                <span class="tech-pill interactive-pill"><i class="fa-solid fa-network-wired"></i> Topology View</span>
+                <span class="tech-pill">VNet Peering</span>
+                <span class="tech-pill">Bastion &amp; WAF</span>
+              </div>
             </div>
             <span class="item-date">Dec 2025</span>
-          </a>
+          </button>
 
+          <!-- Project 3: FlexZone -->
           <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="list-item" data-tags="azure,php,linux,scripting">
             <div class="item-info">
               <span class="item-title">
@@ -1167,7 +1199,7 @@
           <div class="list-item" data-tags="linux,scripting">
             <div class="item-info">
               <span class="item-title">University of Allahabad</span>
-              <span class="item-subtitle">M.Sc, Computer Science · J.K. Institute of Applied Physics & Technology</span>
+              <span class="item-subtitle">M.Sc, Computer Science · J.K. Institute of Applied Physics &amp; Technology</span>
             </div>
             <span class="item-date">2026 - 2028</span>
           </div>
@@ -1175,7 +1207,7 @@
           <div class="list-item" data-tags="scripting,php">
             <div class="item-info">
               <span class="item-title">Ewing Christian College</span>
-              <span class="item-subtitle">B.Sc, Mathematics & Computer Applications</span>
+              <span class="item-subtitle">B.Sc, Mathematics &amp; Computer Applications</span>
             </div>
             <span class="item-date">2023 - 2026</span>
           </div>
@@ -1185,19 +1217,19 @@
       <!-- Security & Governance Frame -->
       <div class="frame">
         <header class="frame-header">
-          <h2 class="frame-title">Security & Governance</h2>
-          <p class="frame-desc">Shift-left tools & practices</p>
+          <h2 class="frame-title">Security &amp; Governance</h2>
+          <p class="frame-desc">Shift-left tools &amp; practices</p>
         </header>
         <div class="frame-content">
           <div class="list-item" data-tags="terraform,security,testing,finops,cicd">
             <div class="item-info">
-              <span class="item-title">IaC Scanning & Cost Governance</span>
+              <span class="item-title">IaC Scanning &amp; Cost Governance</span>
               <span class="item-subtitle">tfsec, Checkov, TFLint, Terratest, Trufflehog, Gitleaks, Infracost</span>
             </div>
           </div>
           <div class="list-item" data-tags="azure,security,cicd">
             <div class="item-info">
-              <span class="item-title">Identity & Access Management</span>
+              <span class="item-title">Identity &amp; Access Management</span>
               <span class="item-subtitle">Microsoft Entra ID (RBAC), OIDC Workload Identity Federation, Azure Key Vault</span>
             </div>
           </div>
@@ -1223,9 +1255,9 @@
 
   </main>
 
-  <!-- Interactive Architecture Diagram Modal -->
+  <!-- Dual-Project Interactive Architecture & Topology Modal -->
   <div class="modal-overlay" id="arch-modal" aria-hidden="true">
-    <div class="arch-window" role="dialog" aria-label="Enterprise DevOps Architecture Diagram">
+    <div class="arch-window" role="dialog" aria-label="Interactive Architecture & Topology Explorer">
       <div class="arch-topbar">
         <div class="arch-title-group">
           <div class="window-dots">
@@ -1233,31 +1265,47 @@
             <span class="dot dot-yellow"></span>
             <span class="dot dot-green"></span>
           </div>
-          <span class="arch-title">Enterprise DevOps & CI/CD Ecosystem — Architecture</span>
+          <span class="arch-title" id="arch-modal-heading">Enterprise DevOps &amp; CI/CD Ecosystem</span>
         </div>
         <div class="arch-controls">
-          <button class="arch-sim-btn" id="simulate-pipeline-btn" title="Simulate End-to-End Pipeline Flow">
+          <button class="arch-sim-btn" id="simulate-pipeline-btn" title="Simulate Flow">
             <i class="fa-solid fa-play"></i>
-            <span>Simulate Run</span>
+            <span id="sim-btn-label">Simulate Run</span>
           </button>
-          <button class="arch-tab-btn active" id="tab-svg-btn">Interactive SVG</button>
+          <button class="arch-tab-btn active" id="tab-svg-btn">Interactive Diagram</button>
           <button class="arch-tab-btn" id="tab-mermaid-btn">Mermaid Code</button>
           <button class="terminal-close" id="close-arch-btn">ESC</button>
         </div>
+      </div>
+
+      <!-- Project Switcher Bar -->
+      <div class="arch-project-bar">
+        <div class="arch-project-pills">
+          <button class="project-switch-btn active" id="switch-devops-btn">
+            <i class="fa-solid fa-diagram-project"></i>
+            1. Enterprise DevOps CI/CD
+          </button>
+          <button class="project-switch-btn" id="switch-hubspoke-btn">
+            <i class="fa-solid fa-network-wired"></i>
+            2. Azure Hub-Spoke Topology
+          </button>
+        </div>
+        <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);" id="arch-sub-meta">4-Stage Automated Pipeline</span>
       </div>
 
       <div class="arch-body">
         <!-- Interactive SVG View -->
         <div class="svg-view" id="arch-svg-view">
           <div class="svg-diagram-container">
-            <svg class="arch-svg" viewBox="0 0 740 205" xmlns="http://www.w3.org/2000/svg">
-              <!-- Animated Flow Connectors -->
-              <line id="flow-1" class="flow-line" x1="168" y1="102" x2="198" y2="102" />
-              <line id="flow-2" class="flow-line" x1="356" y1="102" x2="386" y2="102" />
-              <line id="flow-3" class="flow-line" x1="544" y1="102" x2="574" y2="102" />
+            
+            <!-- SVG 1: Enterprise DevOps & CI/CD Ecosystem -->
+            <svg id="svg-devops" class="arch-svg" viewBox="0 0 740 205" xmlns="http://www.w3.org/2000/svg">
+              <line id="devops-flow-1" class="flow-line" x1="168" y1="102" x2="198" y2="102" />
+              <line id="devops-flow-2" class="flow-line" x1="356" y1="102" x2="386" y2="102" />
+              <line id="devops-flow-3" class="flow-line" x1="544" y1="102" x2="574" y2="102" />
 
-              <!-- Node 1: Pre-Commit & Shift-Left -->
-              <g class="arch-node selected" data-stage="1" transform="translate(12, 32)">
+              <!-- Stage 1 -->
+              <g class="arch-node devops-node selected" data-project="devops" data-stage="1" transform="translate(12, 32)">
                 <rect class="node-box" width="156" height="140" rx="12" />
                 <text x="16" y="28" class="svg-badge">STAGE 01 · LOCAL/PR</text>
                 <text x="16" y="50" class="svg-heading">Shift-Left Gate</text>
@@ -1267,8 +1315,8 @@
                 <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ Pre-Commit Verified</text>
               </g>
 
-              <!-- Node 2: Master CI/CD Pipeline -->
-              <g class="arch-node" data-stage="2" transform="translate(200, 32)">
+              <!-- Stage 2 -->
+              <g class="arch-node devops-node" data-project="devops" data-stage="2" transform="translate(200, 32)">
                 <rect class="node-box" width="156" height="140" rx="12" />
                 <text x="16" y="28" class="svg-badge">STAGE 02 · CI/CD</text>
                 <text x="16" y="50" class="svg-heading">Master Pipeline</text>
@@ -1278,8 +1326,8 @@
                 <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ Policy Gate Passed</text>
               </g>
 
-              <!-- Node 3: OIDC & Remote State -->
-              <g class="arch-node" data-stage="3" transform="translate(388, 32)">
+              <!-- Stage 3 -->
+              <g class="arch-node devops-node" data-project="devops" data-stage="3" transform="translate(388, 32)">
                 <rect class="node-box" width="156" height="140" rx="12" />
                 <text x="16" y="28" class="svg-badge">STAGE 03 · AUTH/STATE</text>
                 <text x="16" y="50" class="svg-heading">Entra ID &amp; State</text>
@@ -1289,17 +1337,80 @@
                 <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ RBAC Token Issued</text>
               </g>
 
-              <!-- Node 4: Azure Cloud Workload -->
-              <g class="arch-node" data-stage="4" transform="translate(576, 32)">
+              <!-- Stage 4 -->
+              <g class="arch-node devops-node" data-project="devops" data-stage="4" transform="translate(576, 32)">
                 <rect class="node-box" width="152" height="140" rx="12" />
                 <text x="16" y="28" class="svg-badge">STAGE 04 · AZURE</text>
-                <text x="16" y="50" class="svg-heading">Hub-Spoke Cloud</text>
+                <text x="16" y="50" class="svg-heading">Cloud Workload</text>
                 <text x="16" y="74" class="svg-sub">• Hub VNet + Bastion</text>
                 <text x="16" y="92" class="svg-sub">• App Gateway + NSGs</text>
                 <text x="16" y="110" class="svg-sub">• Key Vault + VMSS</text>
                 <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ centralindia Live</text>
               </g>
             </svg>
+
+            <!-- SVG 2: Azure Hub-Spoke Network Topology -->
+            <svg id="svg-hubspoke" class="arch-svg hidden" viewBox="0 0 740 240" xmlns="http://www.w3.org/2000/svg">
+              <!-- Animated VNet Peering & Traffic Connectors -->
+              <!-- Edge to Hub -->
+              <line id="net-flow-1" class="flow-line" x1="168" y1="120" x2="212" y2="120" />
+              <!-- Hub to Spoke 1 (Upper Branch) -->
+              <path id="net-flow-2" class="flow-line" d="M 412 85 C 450 85, 455 62, 496 62" />
+              <!-- Hub to Spoke 2 (Lower Branch) -->
+              <path id="net-flow-3" class="flow-line" d="M 412 155 C 450 155, 455 178, 496 178" />
+
+              <!-- VNet Peering Labels -->
+              <g transform="translate(425, 46)">
+                <rect class="peering-pill" width="56" height="18" rx="9" />
+                <text x="10" y="12" class="svg-sub" style="font-size: 8.5px; fill: var(--accent);">Peering</text>
+              </g>
+              <g transform="translate(425, 174)">
+                <rect class="peering-pill" width="56" height="18" rx="9" />
+                <text x="10" y="12" class="svg-sub" style="font-size: 8.5px; fill: var(--accent);">Peering</text>
+              </g>
+
+              <!-- Node 1: Ingress & Edge Security -->
+              <g class="arch-node hubspoke-node" data-project="hubspoke" data-stage="1" transform="translate(12, 48)">
+                <rect class="node-box" width="156" height="144" rx="12" />
+                <text x="14" y="26" class="svg-badge">TIER 01 · INGRESS</text>
+                <text x="14" y="48" class="svg-heading">Edge &amp; Admin</text>
+                <text x="14" y="72" class="svg-sub">• Cloudflare DNS/CDN</text>
+                <text x="14" y="90" class="svg-sub">• HTTPS TLS 1.3</text>
+                <text x="14" y="108" class="svg-sub">• SSH/RDP Blocked</text>
+                <text x="14" y="128" class="svg-sub" style="fill: var(--success);">✔ Zero Public VMs</text>
+              </g>
+
+              <!-- Node 2: Central Hub VNet -->
+              <g class="arch-node hubspoke-node" data-project="hubspoke" data-stage="2" transform="translate(212, 30)">
+                <rect class="node-box" width="200" height="180" rx="12" />
+                <text x="16" y="26" class="svg-badge">TIER 02 · HUB VNET (10.0.0.0/16)</text>
+                <text x="16" y="48" class="svg-heading">Shared Transit Hub</text>
+                <text x="16" y="72" class="svg-sub">• AzureFrontDoor / AppGW WAF</text>
+                <text x="16" y="92" class="svg-sub">• AzureBastionSubnet (/26)</text>
+                <text x="16" y="112" class="svg-sub">• Central Firewall &amp; UDRs</text>
+                <text x="16" y="132" class="svg-sub">• Log Analytics Workspace</text>
+                <text x="16" y="156" class="svg-sub" style="fill: var(--success);">✔ Provisioned in &lt;15m</text>
+              </g>
+
+              <!-- Node 3: Spoke 01 (Application & Compute Tier) -->
+              <g class="arch-node hubspoke-node" data-project="hubspoke" data-stage="3" transform="translate(496, 12)">
+                <rect class="node-box" width="230" height="100" rx="12" />
+                <text x="14" y="24" class="svg-badge">SPOKE 01 · COMPUTE (10.1.0.0/16)</text>
+                <text x="14" y="44" class="svg-heading">Application Workload VNet</text>
+                <text x="14" y="64" class="svg-sub">• Linux VM Scale Sets (Auto-Scale)</text>
+                <text x="14" y="82" class="svg-sub" style="fill: var(--success);">✔ Strict NSG + UDR via Hub</text>
+              </g>
+
+              <!-- Node 4: Spoke 02 (Data & Key Vault Tier) -->
+              <g class="arch-node hubspoke-node" data-project="hubspoke" data-stage="4" transform="translate(496, 128)">
+                <rect class="node-box" width="230" height="100" rx="12" />
+                <text x="14" y="24" class="svg-badge">SPOKE 02 · DATA/SEC (10.2.0.0/16)</text>
+                <text x="14" y="44" class="svg-heading">Isolated Data &amp; Key Vault</text>
+                <text x="14" y="64" class="svg-sub">• Azure Key Vault (Private Link)</text>
+                <text x="14" y="82" class="svg-sub" style="fill: var(--success);">✔ Public Network Access: Deny</text>
+              </g>
+            </svg>
+
           </div>
 
           <!-- Node Details Inspector -->
@@ -1307,7 +1418,7 @@
             <div class="inspector-header">
               <span class="inspector-title" id="inspector-title">
                 <i class="fa-solid fa-shield-halved" style="color: var(--accent);"></i>
-                Stage 01: Developer Pre-Commit & Shift-Left Gate
+                Stage 01: Developer Pre-Commit &amp; Shift-Left Gate
               </span>
               <span class="inspector-status" id="inspector-status">Gate: Active</span>
             </div>
@@ -1320,36 +1431,15 @@
         <!-- Mermaid Source View -->
         <div class="mermaid-view" id="arch-mermaid-view">
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 12px; color: var(--text-muted);">Mermaid.js Architecture Definition (Compatible with GitHub &amp; Obsidian)</span>
+            <span style="font-size: 12px; color: var(--text-muted);" id="mermaid-caption">Mermaid.js Architecture Definition (Compatible with GitHub &amp; Obsidian)</span>
             <button class="arch-tab-btn" id="copy-mermaid-btn"><i class="fa-regular fa-copy"></i> Copy Mermaid</button>
           </div>
-          <pre class="mermaid-pre" id="mermaid-code">graph LR
-  subgraph S1["1. Pre-Commit & Shift-Left"]
-    A[Git Push / PR] --> B[terraform fmt & validate]
-    B --> C[TFLint & Gitleaks]
-  end
-
-  subgraph S2["2. Master CI/CD Pipeline (GitHub Actions)"]
-    C --> D[tfsec & Checkov SAST]
-    D --> E[Infracost FinOps Gate]
-    E --> F[Terratest Modules]
-  end
-
-  subgraph S3["3. Identity & State Governance"]
-    F --> G[Entra ID OIDC Federation]
-    G --> H[Azure Blob Remote State]
-  end
-
-  subgraph S4["4. Azure Infrastructure (centralindia)"]
-    H --> I[Hub-Spoke VNet & Bastion]
-    I --> J[App Gateway & NSGs]
-    J --> K[Azure Key Vault & Linux VMSS]
-  end</pre>
+          <pre class="mermaid-pre" id="mermaid-code"></pre>
         </div>
       </div>
 
       <div class="arch-footer">
-        <span><i class="fa-regular fa-hand-pointer"></i> Click any stage node above to inspect its controls</span>
+        <span><i class="fa-regular fa-hand-pointer"></i> Click any node in the diagram above to inspect its configuration</span>
         <a href="https://github.com/MihirMaurya-dev?tab=repositories" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 6px 12px; font-size: 12px;">
           <i class="fa-brands fa-github"></i>
           <span>Open Repositories on GitHub</span>
@@ -1374,18 +1464,18 @@
         <span class="chip-label">Quick run:</span>
         <button class="cmd-chip" data-cmd="terraform plan">terraform plan</button>
         <button class="cmd-chip" data-cmd="security --audit">security --audit</button>
-        <button class="cmd-chip" data-cmd="arch">arch</button>
+        <button class="cmd-chip" data-cmd="arch">arch (CI/CD)</button>
+        <button class="cmd-chip" data-cmd="net">net (Hub-Spoke)</button>
         <button class="cmd-chip" data-cmd="whoami">whoami</button>
-        <button class="cmd-chip" data-cmd="skills">skills</button>
         <button class="cmd-chip" data-cmd="contact">contact</button>
         <button class="cmd-chip" data-cmd="clear">clear</button>
       </div>
       <div class="terminal-body" id="terminal-output">
-        <div class="term-line term-muted">Welcome to MihirOS v2.6 (Cloud & DevOps Shell). Type <span class="term-info">help</span> or click a command above.</div>
+        <div class="term-line term-muted">Welcome to MihirOS v2.6 (Cloud &amp; DevOps Shell). Type <span class="term-info">help</span> or click a command above.</div>
       </div>
       <form class="terminal-input-row" id="terminal-form">
         <span class="term-prompt">mihir@devops</span>:<span class="term-path">~</span>$
-        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type a command (e.g., terraform plan, arch, help)..." autocomplete="off" spellcheck="false">
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type a command (e.g., terraform plan, arch, net, help)..." autocomplete="off" spellcheck="false">
       </form>
     </div>
   </div>
@@ -1576,64 +1666,179 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    // 8. Interactive Architecture Diagram Modal Logic
+    // 8. Dual-Project Interactive Architecture & Hub-Spoke Topology Explorer
     const archModal = document.getElementById('arch-modal');
-    const openArchBtn = document.getElementById('open-arch-project');
+    const openArchDevopsBtn = document.getElementById('open-arch-devops');
+    const openArchHubspokeBtn = document.getElementById('open-arch-hubspoke');
+    const switchDevopsBtn = document.getElementById('switch-devops-btn');
+    const switchHubspokeBtn = document.getElementById('switch-hubspoke-btn');
+    const archModalHeading = document.getElementById('arch-modal-heading');
+    const archSubMeta = document.getElementById('arch-sub-meta');
+    const simBtnLabel = document.getElementById('sim-btn-label');
+    const svgDevops = document.getElementById('svg-devops');
+    const svgHubspoke = document.getElementById('svg-hubspoke');
     const closeArchBtn = document.getElementById('close-arch-btn');
     const closeArchDot = document.getElementById('close-arch-dot');
     const tabSvgBtn = document.getElementById('tab-svg-btn');
     const tabMermaidBtn = document.getElementById('tab-mermaid-btn');
     const archSvgView = document.getElementById('arch-svg-view');
     const archMermaidView = document.getElementById('arch-mermaid-view');
+    const mermaidCodeEl = document.getElementById('mermaid-code');
     const copyMermaidBtn = document.getElementById('copy-mermaid-btn');
     const simulatePipelineBtn = document.getElementById('simulate-pipeline-btn');
-    const archNodes = document.querySelectorAll('.arch-node');
     const inspectorTitle = document.getElementById('inspector-title');
     const inspectorStatus = document.getElementById('inspector-status');
     const inspectorDesc = document.getElementById('inspector-desc');
 
-    const stageData = {
-      1: {
-        title: 'Stage 01: Developer Pre-Commit & Shift-Left Gate',
-        status: 'Pre-Commit: Verified',
-        desc: 'Enforces code quality and secret hygiene before code ever leaves the workstation. Automated pre-commit hooks run <code>terraform fmt</code>, <code>terraform validate</code>, <code>TFLint</code>, and secret scanning via <code>Gitleaks</code> and <code>Trufflehog</code> across modular repositories.'
+    let currentArchProject = 'devops'; // 'devops' or 'hubspoke'
+
+    const projectConfigs = {
+      devops: {
+        heading: 'Enterprise DevOps & CI/CD Ecosystem — Architecture',
+        meta: '4-Stage Automated Pipeline',
+        simLabel: 'Simulate Pipeline',
+        mermaid: `graph LR
+  subgraph S1["1. Pre-Commit & Shift-Left"]
+    A[Git Push / PR] --> B[terraform fmt & validate]
+    B --> C[TFLint & Gitleaks]
+  end
+
+  subgraph S2["2. Master CI/CD Pipeline (GitHub Actions)"]
+    C --> D[tfsec & Checkov SAST]
+    D --> E[Infracost FinOps Gate]
+    E --> F[Terratest Modules]
+  end
+
+  subgraph S3["3. Identity & State Governance"]
+    F --> G[Entra ID OIDC Federation]
+    G --> H[Azure Blob Remote State]
+  end
+
+  subgraph S4["4. Azure Infrastructure (centralindia)"]
+    H --> I[Hub-Spoke VNet & Bastion]
+    I --> J[App Gateway & NSGs]
+    J --> K[Azure Key Vault & Linux VMSS]
+  end`,
+        stages: {
+          1: {
+            title: 'Stage 01: Developer Pre-Commit & Shift-Left Gate',
+            status: 'Pre-Commit: Verified',
+            desc: 'Enforces code quality and secret hygiene before code ever leaves the workstation. Automated pre-commit hooks run <code>terraform fmt</code>, <code>terraform validate</code>, <code>TFLint</code>, and secret scanning via <code>Gitleaks</code> and <code>Trufflehog</code> across modular repositories.'
+          },
+          2: {
+            title: 'Stage 02: Centralized Master CI/CD Pipeline (GitHub Actions)',
+            status: 'Policy & FinOps: Passed',
+            desc: 'Reusable GitHub Actions workflows orchestrate static code analysis (<code>tfsec</code> & <code>Checkov</code>), automated infrastructure testing (<code>Terratest</code>), and pull-request cloud cost breakdowns via <code>Infracost</code> before any plan is approved.'
+          },
+          3: {
+            title: 'Stage 03: Passwordless OIDC Auth & Remote State Locking',
+            status: 'Entra OIDC: Authenticated',
+            desc: 'Eliminates long-lived static credentials by using <strong>Microsoft Entra ID Workload Identity Federation (OIDC)</strong> with scoped RBAC roles. Terraform state is encrypted at rest in Azure Blob Storage with native lease locking.'
+          },
+          4: {
+            title: 'Stage 04: Modular Azure Cloud Deployment',
+            status: 'Region: centralindia (Live)',
+            desc: 'Automated <code>terraform apply</code> provisions the Hub-Spoke network, Bastion host, Application Gateway, Key Vault, and Linux VM Scale Sets with zero manual portal intervention.'
+          }
+        }
       },
-      2: {
-        title: 'Stage 02: Centralized Master CI/CD Pipeline (GitHub Actions)',
-        status: 'Policy & FinOps: Passed',
-        desc: 'Reusable GitHub Actions workflows orchestrate static code analysis (<code>tfsec</code> & <code>Checkov</code>), automated infrastructure testing (<code>Terratest</code>), and pull-request cloud cost breakdowns via <code>Infracost</code> before any plan is approved.'
-      },
-      3: {
-        title: 'Stage 03: Passwordless OIDC Auth & Remote State Locking',
-        status: 'Entra OIDC: Authenticated',
-        desc: 'Eliminates long-lived static credentials by using <strong>Microsoft Entra ID Workload Identity Federation (OIDC)</strong> with scoped RBAC roles. Terraform state is encrypted at rest in Azure Blob Storage with native lease locking.'
-      },
-      4: {
-        title: 'Stage 04: Modular Azure Hub-Spoke Infrastructure',
-        status: 'Region: centralindia (Live)',
-        desc: 'Provisions a multi-tier Azure Hub-Spoke topology featuring Azure Bastion, Application Gateway, isolated subnet NSGs, RBAC-secured Azure Key Vault secrets, and auto-scaling Linux Virtual Machine Scale Sets (VMSS).'
+      hubspoke: {
+        heading: 'Azure Hub-Spoke Network — Multi-Tier Cloud Topology',
+        meta: 'VNet Peering · Zero-Trust Segmentation · <15m Provisioning',
+        simLabel: 'Simulate Packet Flow',
+        mermaid: `graph LR
+  subgraph Edge["1. Edge & Admin Ingress"]
+    U[HTTPS Client Traffic] --> CF[Cloudflare CDN / WAF]
+    ADM[DevOps Engineer] --> BAS[Azure Bastion TLS]
+  end
+
+  subgraph Hub["2. Hub VNet (10.0.0.0/16)"]
+    CF --> AGW[Application Gateway WAF v2]
+    BAS --> BSUB[AzureBastionSubnet /26]
+    AGW --> FW[Central Firewall & UDR Routing]
+  end
+
+  subgraph Spoke1["3. Spoke 01: Compute VNet (10.1.0.0/16)"]
+    FW == VNet Peering ==> VMSS[Linux VM Scale Sets]
+    BSUB -. Private SSH .-> VMSS
+  end
+
+  subgraph Spoke2["4. Spoke 02: Isolated Data & Security (10.2.0.0/16)"]
+    VMSS == Private Endpoint ==> KV[Azure Key Vault RBAC]
+  end`,
+        stages: {
+          1: {
+            title: 'Tier 01: Edge Ingress & Zero-Public-IP Admin Access',
+            status: 'Ingress: TLS 1.3 / WAF',
+            desc: 'Public user traffic enters exclusively via <strong>Cloudflare CDN</strong> and HTTPS TLS 1.3 termination. Direct public SSH (port 22) and RDP (port 3389) are completely denied at the perimeter—all administrative access routes through <strong>Azure Bastion</strong> over TLS.'
+          },
+          2: {
+            title: 'Tier 02: Shared Transit Hub VNet (10.0.0.0/16)',
+            status: 'Hub VNet: Active',
+            desc: 'Acts as the central security and transit boundary in <code>centralindia</code>. Hosts the <code>AzureBastionSubnet (/26)</code>, <strong>Application Gateway WAF v2</strong>, centralized User-Defined Routes (UDRs), and Azure Monitor Log Analytics.'
+          },
+          3: {
+            title: 'Spoke 01: Application & Compute VNet (10.1.0.0/16)',
+            status: 'VNet Peering: Connected',
+            desc: 'Connected to the Hub via non-transitive, low-latency <strong>VNet Peering</strong>. Runs auto-scaling <strong>Linux Virtual Machine Scale Sets (VMSS)</strong> locked down by strict Subnet Network Security Groups (NSGs) that only accept traffic from the Hub Application Gateway.'
+          },
+          4: {
+            title: 'Spoke 02: Isolated Data & Key Vault Tier (10.2.0.0/16)',
+            status: 'Private Link: Enforced',
+            desc: 'Houses <strong>Azure Key Vault</strong> with public network access disabled (<code>public_network_access_enabled = false</code>). Spoke 01 compute nodes retrieve secrets and certificates privately over <strong>Azure Private Endpoint</strong> and Private DNS Zones using Managed Identities.'
+          }
+        }
       }
     };
 
     function selectArchStage(stageId) {
-      archNodes.forEach(node => {
+      const activeNodes = document.querySelectorAll(`.${currentArchProject}-node`);
+      activeNodes.forEach(node => {
         node.classList.toggle('selected', node.getAttribute('data-stage') === String(stageId));
       });
-      const info = stageData[stageId];
+      const info = projectConfigs[currentArchProject].stages[stageId];
       if (info) {
-        inspectorTitle.innerHTML = `<i class="fa-solid fa-layer-group" style="color: var(--accent);"></i> ${info.title}`;
+        const iconClass = currentArchProject === 'devops' ? 'fa-layer-group' : 'fa-network-wired';
+        inspectorTitle.innerHTML = `<i class="fa-solid ${iconClass}" style="color: var(--accent);"></i> ${info.title}`;
         inspectorStatus.textContent = info.status;
         inspectorDesc.innerHTML = info.desc;
       }
     }
 
-    archNodes.forEach(node => {
+    function switchArchProject(projectKey) {
+      currentArchProject = projectKey;
+      const cfg = projectConfigs[projectKey];
+
+      // Update headings & buttons
+      archModalHeading.textContent = cfg.heading;
+      archSubMeta.textContent = cfg.meta;
+      simBtnLabel.textContent = cfg.simLabel;
+      mermaidCodeEl.textContent = cfg.mermaid;
+
+      switchDevopsBtn.classList.toggle('active', projectKey === 'devops');
+      switchHubspokeBtn.classList.toggle('active', projectKey === 'hubspoke');
+
+      svgDevops.classList.toggle('hidden', projectKey !== 'devops');
+      svgHubspoke.classList.toggle('hidden', projectKey !== 'hubspoke');
+
+      // Reset simulation highlights and select Stage 1
+      document.querySelectorAll('.arch-node').forEach(n => n.classList.remove('sim-passed'));
+      document.querySelectorAll('.flow-line').forEach(f => f.classList.remove('active-flow'));
+      selectArchStage(1);
+    }
+
+    document.querySelectorAll('.arch-node').forEach(node => {
       node.addEventListener('click', () => {
+        const proj = node.getAttribute('data-project');
+        if (proj && proj !== currentArchProject) {
+          switchArchProject(proj);
+        }
         selectArchStage(node.getAttribute('data-stage'));
       });
     });
 
-    function openArchModal() {
+    function openArchModal(projectKey = 'devops') {
+      switchArchProject(projectKey);
       archModal.classList.add('open');
       archModal.setAttribute('aria-hidden', 'false');
     }
@@ -1643,7 +1848,11 @@
       archModal.setAttribute('aria-hidden', 'true');
     }
 
-    openArchBtn.addEventListener('click', openArchModal);
+    openArchDevopsBtn.addEventListener('click', () => openArchModal('devops'));
+    openArchHubspokeBtn.addEventListener('click', () => openArchModal('hubspoke'));
+    switchDevopsBtn.addEventListener('click', () => switchArchProject('devops'));
+    switchHubspokeBtn.addEventListener('click', () => switchArchProject('hubspoke'));
+
     closeArchBtn.addEventListener('click', closeArchModal);
     closeArchDot.addEventListener('click', closeArchModal);
     archModal.addEventListener('click', (e) => {
@@ -1665,39 +1874,45 @@
     });
 
     copyMermaidBtn.addEventListener('click', () => {
-      const code = document.getElementById('mermaid-code').textContent;
+      const code = mermaidCodeEl.textContent;
       navigator.clipboard.writeText(code).then(() => {
         showToast('Mermaid.js diagram code copied!');
       });
     });
 
-    // Simulate End-to-End Pipeline Run
+    // Simulate End-to-End Pipeline or Packet Flow
     let simRunning = false;
     simulatePipelineBtn.addEventListener('click', () => {
       if (simRunning) return;
       simRunning = true;
       tabSvgBtn.click();
 
+      const flowPrefix = currentArchProject === 'devops' ? 'devops-flow-' : 'net-flow-';
       const flows = [
-        document.getElementById('flow-1'),
-        document.getElementById('flow-2'),
-        document.getElementById('flow-3')
+        document.getElementById(`${flowPrefix}1`),
+        document.getElementById(`${flowPrefix}2`),
+        document.getElementById(`${flowPrefix}3`)
       ];
-      archNodes.forEach(n => n.classList.remove('sim-passed'));
-      flows.forEach(f => f.classList.remove('active-flow'));
+      const activeNodes = document.querySelectorAll(`.${currentArchProject}-node`);
+
+      activeNodes.forEach(n => n.classList.remove('sim-passed'));
+      flows.forEach(f => f && f.classList.remove('active-flow'));
 
       const steps = [1, 2, 3, 4];
       steps.forEach((stage, idx) => {
         setTimeout(() => {
           playClickSound(4300 + idx * 180);
           selectArchStage(stage);
-          const currentNode = document.querySelector(`.arch-node[data-stage="${stage}"]`);
+          const currentNode = document.querySelector(`.${currentArchProject}-node[data-stage="${stage}"]`);
           if (currentNode) currentNode.classList.add('sim-passed');
           if (idx > 0 && flows[idx - 1]) {
             flows[idx - 1].classList.add('active-flow');
           }
           if (idx === steps.length - 1) {
-            showToast('Pipeline simulation complete: All 4 stages healthy!');
+            const msg = currentArchProject === 'devops'
+              ? 'Pipeline simulation complete: All 4 stages healthy!'
+              : 'Packet trace complete: Hub-Spoke peering & Private Link verified!';
+            showToast(msg);
             simRunning = false;
           }
         }, idx * 650);
@@ -1763,7 +1978,8 @@
 `<span class="term-info">Available Commands:</span>
   <span class="term-add">terraform plan</span>    Simulate Azure Hub-Spoke & CI/CD infrastructure plan
   <span class="term-add">security --audit</span>  Run shift-left policy checks (tfsec, Checkov, Gitleaks)
-  <span class="term-add">arch</span>              Open Interactive Enterprise DevOps Architecture Diagram
+  <span class="term-add">arch</span>              Open Enterprise DevOps CI/CD Pipeline Diagram
+  <span class="term-add">net</span>               Open Azure Hub-Spoke Network Topology View
   <span class="term-add">whoami</span>            Display engineer profile & current academic status
   <span class="term-add">skills</span>            List core Cloud, IaC, and DevSecOps stack
   <span class="term-add">projects</span>          Show featured infrastructure repositories
@@ -1772,10 +1988,16 @@
   <span class="term-add">clear</span>             Clear terminal output`
         );
       } else if (cmd === 'arch' || cmd === 'diagram') {
-        appendLine(`<span class="term-add">✔ Launching Enterprise DevOps Architecture Explorer...</span>`);
+        appendLine(`<span class="term-add">✔ Launching Enterprise DevOps CI/CD Architecture Explorer...</span>`);
         setTimeout(() => {
           closeTerminal();
-          openArchModal();
+          openArchModal('devops');
+        }, 220);
+      } else if (cmd === 'net' || cmd === 'topology' || cmd === 'hubspoke') {
+        appendLine(`<span class="term-add">✔ Launching Azure Hub-Spoke Network Topology Explorer...</span>`);
+        setTimeout(() => {
+          closeTerminal();
+          openArchModal('hubspoke');
         }, 220);
       } else if (cmd === 'whoami') {
         appendLine(
@@ -1793,8 +2015,8 @@
         );
       } else if (cmd === 'projects') {
         appendLine(
-`1. <span class="term-add">Enterprise DevOps & CI/CD Ecosystem</span> (Type <span class="term-info">arch</span> to view interactive diagram)
-2. <span class="term-add">Azure Hub-Spoke Network</span> (Multi-tier modular VNet architecture in <15m)
+`1. <span class="term-add">Enterprise DevOps & CI/CD Ecosystem</span> (Type <span class="term-info">arch</span> for pipeline diagram)
+2. <span class="term-add">Azure Hub-Spoke Network</span> (Type <span class="term-info">net</span> for VNet peering topology)
 3. <span class="term-add">FlexZone</span> (PHP 8 REST API on Azure VM + Cloudflare CDN)
 → View all at: <a href="https://github.com/MihirMaurya-dev" target="_blank" style="text-decoration:underline;color:#38bdf8;">github.com/MihirMaurya-dev</a>`
         );
@@ -1851,6 +2073,9 @@
         runCommand(chip.getAttribute('data-cmd'));
       });
     });
+
+    // Initialize default Mermaid code on load
+    switchArchProject('devops');
   </script>
 </body>
 </html>
