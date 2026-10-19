@@ -6,9 +6,9 @@
   
   <!-- SEO & OpenGraph Meta Tags -->
   <title>Mihir Maurya | Cloud & DevOps Engineer</title>
-  <meta name="description" content="Portfolio of Mihir Maurya, Cloud & DevOps Engineer specializing in Azure infrastructure automation, IaC, and CI/CD security.">
+  <meta name="description" content="Portfolio of Mihir Maurya, Cloud & DevOps Engineer specializing in Azure Hub-Spoke infrastructure, modular Terraform, Zero-Secret Key Vault, and secretless CI/CD.">
   <meta property="og:title" content="Mihir Maurya | Cloud & DevOps Engineer">
-  <meta property="og:description" content="Portfolio of Mihir Maurya, Cloud & DevOps Engineer specializing in Azure infrastructure automation, IaC, and CI/CD security.">
+  <meta property="og:description" content="Portfolio of Mihir Maurya, Cloud & DevOps Engineer specializing in Azure Hub-Spoke infrastructure, modular Terraform, Zero-Secret Key Vault, and secretless CI/CD.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mihirmaurya-dev.github.io/">
   <meta property="og:image" content="https://ui-avatars.com/api/?name=Mihir+Maurya&background=2b67db&color=fff&size=500">
@@ -36,6 +36,8 @@
       --accent-glow: rgba(59, 130, 246, 0.22);
       --success: #10b981;
       --success-bg: rgba(16, 185, 129, 0.12);
+      --warn: #f59e0b;
+      --warn-bg: rgba(245, 158, 11, 0.15);
       --header-bg: rgba(9, 13, 22, 0.78);
       --btn-secondary-bg: rgba(255, 255, 255, 0.04);
       --btn-secondary-hover: rgba(255, 255, 255, 0.09);
@@ -48,7 +50,7 @@
       --modal-surface: #0b1120;
       --svg-canvas: #060a12;
       --svg-node-bg: #0f172a;
-      --backdrop: rgba(0, 0, 0, 0.72);
+      --backdrop: rgba(0, 0, 0, 0.75);
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
@@ -66,7 +68,9 @@
       --accent-glow: rgba(37, 99, 235, 0.16);
       --success: #059669;
       --success-bg: rgba(16, 185, 129, 0.12);
-      --header-bg: rgba(255, 255, 255, 0.82);
+      --warn: #d97706;
+      --warn-bg: rgba(245, 158, 11, 0.18);
+      --header-bg: rgba(255, 255, 255, 0.85);
       --btn-secondary-bg: rgba(15, 23, 42, 0.04);
       --btn-secondary-hover: rgba(15, 23, 42, 0.08);
       --frame-bg: #ffffff;
@@ -78,7 +82,7 @@
       --modal-surface: #ffffff;
       --svg-canvas: #f1f5f9;
       --svg-node-bg: #ffffff;
-      --backdrop: rgba(15, 23, 42, 0.5);
+      --backdrop: rgba(15, 23, 42, 0.55);
     }
 
     /* View Transitions for Theme Toggle */
@@ -105,7 +109,7 @@
 
     /* Layout Container */
     .container {
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -129,7 +133,7 @@
       align-items: center;
       justify-content: space-between;
       width: calc(100% - 40px);
-      max-width: 800px;
+      max-width: 820px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
     
@@ -400,7 +404,7 @@
       display: inline-flex;
       gap: 8px;
       padding-left: 8px;
-      animation: scroll 28s linear infinite;
+      animation: scroll 32s linear infinite;
     }
     .marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
     .marquee-tag {
@@ -437,7 +441,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
-    @media (max-width: 640px) {
+    @media (max-width: 660px) {
       .bento-grid { grid-template-columns: 1fr; }
       .profile-card { flex-direction: column; align-items: flex-start; }
       .action-buttons { width: 100%; }
@@ -484,7 +488,7 @@
       opacity: 0.35;
     }
     
-    .item-info { display: flex; flex-direction: column; gap: 4px; max-width: 76%; }
+    .item-info { display: flex; flex-direction: column; gap: 4px; max-width: 78%; }
     .item-title {
       font-size: 13.5px;
       font-weight: 500;
@@ -506,7 +510,7 @@
       opacity: 1;
       transform: translate(0, 0);
     }
-    .item-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
+    .item-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.48; }
     .item-date { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); white-space: nowrap; }
 
     /* Theme-Aware Tech Pills */
@@ -547,6 +551,13 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s;
+      background: transparent;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      width: 100%;
+      cursor: pointer;
+      font-family: inherit;
     }
     .view-all:hover { color: var(--text-main); background: var(--card-hover); }
 
@@ -614,23 +625,24 @@
       pointer-events: auto;
     }
 
-    /* Interactive Architecture Modal */
-    .arch-window {
+    /* Interactive Architecture & HR Resume Modals */
+    .arch-window, .resume-window {
       width: 100%;
-      max-width: 800px;
+      max-width: 840px;
       max-height: 92vh;
       background: var(--modal-surface);
       color: var(--text-main);
       border: 1px solid var(--card-border-hover);
       border-radius: 16px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       transform: translateY(12px) scale(0.98);
       transition: transform 0.2s ease;
     }
-    .modal-overlay.open .arch-window {
+    .modal-overlay.open .arch-window,
+    .modal-overlay.open .resume-window {
       transform: translateY(0) scale(1);
     }
 
@@ -649,16 +661,16 @@
       gap: 10px;
     }
     .arch-title {
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 600;
     }
     .arch-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
-    .arch-tab-btn, .arch-sim-btn, .project-switch-btn {
+    .arch-tab-btn, .arch-sim-btn, .project-switch-btn, .hr-chip {
       background: var(--pill-bg);
       border: 1px solid var(--pill-border);
       color: var(--text-muted);
@@ -670,9 +682,13 @@
       transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
-    .arch-tab-btn.active, .project-switch-btn.active {
+    .arch-tab-btn:hover, .project-switch-btn:hover, .hr-chip:hover {
+      color: var(--text-main);
+      border-color: var(--card-border-hover);
+    }
+    .arch-tab-btn.active, .project-switch-btn.active, .hr-chip.active {
       background: var(--accent-glow);
       border-color: var(--accent);
       color: var(--text-main);
@@ -684,8 +700,8 @@
     }
     .arch-sim-btn:hover { opacity: 0.9; }
 
-    /* Sub-header bar to switch between DevOps Ecosystem & Hub-Spoke Topology */
-    .arch-project-bar {
+    /* Sub-header bar in modals */
+    .arch-project-bar, .hr-Toobar-bar {
       padding: 10px 20px;
       border-bottom: 1px solid var(--card-border);
       background: var(--card-hover);
@@ -699,6 +715,7 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .arch-body {
@@ -709,6 +726,166 @@
       gap: 16px;
     }
 
+    /* HR Resume Modal Specific Styles */
+    .hr-quick-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--card-border);
+      background: var(--card-bg);
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hr-quick-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .hr-meta-pill {
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: var(--text-main);
+      font-size: 11.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .hr-meta-pill:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .hr-search-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-hover);
+      padding: 4px 10px;
+      border-radius: 8px;
+      min-width: 210px;
+    }
+    .hr-search-input {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      outline: none;
+      width: 100%;
+    }
+    .match-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--warn);
+      background: var(--warn-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+      display: none;
+    }
+    .match-badge.visible { display: inline-block; }
+
+    .resume-doc-container {
+      padding: 24px 28px;
+      overflow-y: auto;
+      font-size: 13.5px;
+      line-height: 1.6;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      transition: font-size 0.15s ease;
+    }
+    .resume-doc-header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .resume-doc-name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+    .resume-doc-role {
+      font-size: 13.5px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .resume-doc-contact {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      text-align: right;
+    }
+    .resume-sec-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin: 16px 0 8px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 4px;
+    }
+    .resume-job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-weight: 600;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .resume-bullets {
+      padding-left: 18px;
+      margin-top: 6px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .resume-bullets li strong {
+      color: var(--text-main);
+    }
+    .resume-skills-grid {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 6px 12px;
+      font-size: 12.5px;
+    }
+    @media (max-width: 600px) {
+      .resume-skills-grid { grid-template-columns: 1fr; }
+      .resume-doc-contact { text-align: left; }
+    }
+    mark.hr-highlight {
+      background: rgba(245, 158, 11, 0.35);
+      color: var(--text-main);
+      padding: 0 3px;
+      border-radius: 3px;
+      border-bottom: 1px solid var(--warn);
+    }
+    .pdf-iframe-container {
+      display: none;
+      width: 100%;
+      height: 500px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #1e293b;
+    }
+    .pdf-iframe-container.active { display: block; }
+    .resume-doc-container.hidden { display: none; }
+
+    /* SVG Diagram Styles */
     .svg-diagram-container {
       background: var(--svg-canvas);
       border: 1px solid var(--card-border);
@@ -722,11 +899,8 @@
       height: auto;
       display: block;
     }
-    .arch-svg.hidden {
-      display: none;
-    }
+    .arch-svg.hidden { display: none; }
 
-    /* Animated SVG Pipeline & Network Flow */
     .flow-line {
       stroke: var(--text-muted);
       stroke-width: 2;
@@ -740,9 +914,7 @@
       stroke-width: 2.5;
       opacity: 1;
     }
-    @keyframes dashFlow {
-      to { stroke-dashoffset: -12; }
-    }
+    @keyframes dashFlow { to { stroke-dashoffset: -12; } }
 
     .arch-node {
       cursor: pointer;
@@ -754,9 +926,7 @@
       stroke-width: 1.5;
       transition: stroke 0.2s, fill 0.2s, filter 0.2s;
     }
-    .arch-node:hover rect.node-box {
-      stroke: var(--accent);
-    }
+    .arch-node:hover rect.node-box { stroke: var(--accent); }
     .arch-node.selected rect.node-box {
       stroke: var(--accent);
       stroke-width: 2.2;
@@ -834,12 +1004,8 @@
       flex-direction: column;
       gap: 10px;
     }
-    .mermaid-view.active {
-      display: flex;
-    }
-    .svg-view.hidden {
-      display: none;
-    }
+    .mermaid-view.active { display: flex; }
+    .svg-view.hidden { display: none; }
     .mermaid-pre {
       background: var(--terminal-bg);
       color: #e2e8f0;
@@ -994,8 +1160,8 @@
       opacity: 1;
     }
   </style>
-</head>
-<body>
+</head>  
+  <body>
 
   <!-- Header -->
   <header class="header">
@@ -1032,12 +1198,13 @@
             <h1 class="name">Mihir Maurya</h1>
             <span class="badge">Open to work</span>
           </div>
-          <p class="role-location">Cloud & DevOps Engineer · India · Azure & IaC</p>
+          <p class="role-location">Cloud &amp; DevOps Engineer · Prayagraj, India · Azure &amp; IaC</p>
           <div class="social-links">
             <a href="https://github.com/MihirMaurya-dev" class="social-link" target="_blank" rel="noopener" title="GitHub"><i class="fa-brands fa-github"></i></a>
             <a href="https://linkedin.com/in/mihirmauryaa1" class="social-link" target="_blank" rel="noopener" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://b18g119.online" class="social-link" target="_blank" rel="noopener" title="Website"><i class="fa-solid fa-globe"></i></a>
-            <a href="mailto:chhotuverma2238@gmail.com" class="social-link" title="Send Direct Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://b18g119.online" class="social-link" target="_blank" rel="noopener" title="Website (b18g119.online)"><i class="fa-solid fa-globe"></i></a>
+            <a href="mailto:chhotuverma2238@gmail.com" class="social-link" title="Email: chhotuverma2238@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            <a href="tel:+919415909254" class="social-link" title="Call: +91-9415909254"><i class="fa-solid fa-phone"></i></a>
           </div>
         </div>
       </div>
@@ -1046,27 +1213,27 @@
           <i class="fa-regular fa-copy"></i>
           <span>Copy Email</span>
         </button>
-        <a href="Mihir_Maurya_Resume.pdf" target="_blank" rel="noopener" class="btn btn-secondary">
+        <button id="open-resume-btn" type="button" class="btn btn-secondary" title="Open Interactive HR Resume Viewer">
           <i class="fa-regular fa-file-lines"></i>
-          <span>Resume</span>
-        </a>
+          <span>Resume (HR View)</span>
+        </button>
       </div>
     </div>
 
     <!-- About Card -->
     <div class="card about-card">
       <div class="section-header-row">
-        <h2 class="about-title">About</h2>
+        <h2 class="about-title">Professional Summary</h2>
       </div>
       <p class="about-text">
-        Cloud & DevOps Engineer with hands-on, project-driven experience in <strong>Azure infrastructure automation</strong>, <strong>Infrastructure-as-Code</strong>, and <strong>shift-left CI/CD security</strong>. Specialized in modular Terraform, GitHub Actions, and automated policy enforcement. Security-first, automation-driven, and ready to bring high engineering rigor to a DevOps role.
+        Cloud &amp; DevOps Engineer pursuing an <strong>M.Sc. in Computer Science</strong> at the University of Allahabad, with hands-on experience architecting <strong>Azure Hub-Spoke network infrastructure</strong> using modular Terraform, implementing <strong>Zero-Secret Azure Key Vault patterns</strong>, enforcing shift-left IaC security (<code>tfsec</code>, <code>Checkov</code>, <code>Gitleaks</code>, <code>TruffleHog</code>), and building secretless CI/CD pipelines across <strong>GitHub Actions (OIDC)</strong> and <strong>Azure DevOps (Self-Hosted Agents)</strong>.
       </p>
     </div>
 
     <!-- Skills Marquee (Interactive Filter) -->
     <div class="marquee-section">
       <div class="marquee-hint">
-        <span><i class="fa-solid fa-wand-magic-sparkles"></i> Click any skill tag to highlight matching work</span>
+        <span><i class="fa-solid fa-wand-magic-sparkles"></i> Click any skill tag to highlight matching experience &amp; builds</span>
         <button class="clear-filter-btn" id="clear-filter">Clear filter ×</button>
       </div>
       <div class="marquee-wrapper">
@@ -1074,28 +1241,38 @@
           <!-- Set 1 -->
           <span class="marquee-tag" data-skill="azure"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
           <span class="marquee-tag" data-skill="terraform"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
-          <span class="marquee-tag" data-skill="cicd"><i class="fa-brands fa-github"></i> GitHub Actions</span>
-          <span class="marquee-tag" data-skill="docker"><i class="fa-brands fa-docker"></i> Docker</span>
-          <span class="marquee-tag" data-skill="linux"><i class="fa-brands fa-linux"></i> Linux</span>
-          <span class="marquee-tag" data-skill="scripting"><i class="fa-solid fa-terminal"></i> Bash / PowerShell</span>
-          <span class="marquee-tag" data-skill="scripting"><i class="fa-brands fa-python"></i> Python</span>
-          <span class="marquee-tag" data-skill="php"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
-          <span class="marquee-tag" data-skill="security"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
-          <span class="marquee-tag" data-skill="testing"><i class="fa-solid fa-vial"></i> Terratest</span>
-          <span class="marquee-tag" data-skill="finops"><i class="fa-solid fa-money-bill"></i> Infracost</span>
+          <span class="marquee-tag" data-skill="keyvault"><i class="fa-solid fa-key"></i> Azure Key Vault</span>
+          <span class="marquee-tag" data-skill="ado"><i class="fa-solid fa-gears"></i> Azure DevOps (YAML)</span>
+          <span class="marquee-tag" data-skill="cicd"><i class="fa-brands fa-github"></i> GitHub Actions (OIDC)</span>
+          <span class="marquee-tag" data-skill="agents"><i class="fa-solid fa-server"></i> Self-Hosted Build Agents</span>
+          <span class="marquee-tag" data-skill="iam"><i class="fa-solid fa-id-badge"></i> Entra ID (RBAC &amp; OIDC)</span>
+          <span class="marquee-tag" data-skill="security"><i class="fa-solid fa-shield-halved"></i> tfsec &amp; Checkov</span>
+          <span class="marquee-tag" data-skill="security"><i class="fa-solid fa-user-secret"></i> Gitleaks &amp; TruffleHog</span>
+          <span class="marquee-tag" data-skill="testing"><i class="fa-solid fa-vial"></i> TFLint &amp; Terratest</span>
+          <span class="marquee-tag" data-skill="finops"><i class="fa-solid fa-coins"></i> Infracost &amp; FinOps</span>
+          <span class="marquee-tag" data-skill="cloudflare"><i class="fa-brands fa-cloudflare"></i> Cloudflare CDN/WAF</span>
+          <span class="marquee-tag" data-skill="linux"><i class="fa-brands fa-linux"></i> Linux (Ubuntu)</span>
+          <span class="marquee-tag" data-skill="scripting"><i class="fa-solid fa-terminal"></i> Bash &amp; PowerShell</span>
+          <span class="marquee-tag" data-skill="scripting"><i class="fa-brands fa-python"></i> Python &amp; C++</span>
+          <span class="marquee-tag" data-skill="php"><i class="fa-brands fa-php"></i> PHP 8.x &amp; MySQL</span>
           
           <!-- Set 2 (Seamless Loop) -->
           <span class="marquee-tag" data-skill="azure"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</span>
           <span class="marquee-tag" data-skill="terraform"><i class="fa-solid fa-cloud"></i> Terraform (IaC)</span>
-          <span class="marquee-tag" data-skill="cicd"><i class="fa-brands fa-github"></i> GitHub Actions</span>
-          <span class="marquee-tag" data-skill="docker"><i class="fa-brands fa-docker"></i> Docker</span>
-          <span class="marquee-tag" data-skill="linux"><i class="fa-brands fa-linux"></i> Linux</span>
-          <span class="marquee-tag" data-skill="scripting"><i class="fa-solid fa-terminal"></i> Bash / PowerShell</span>
-          <span class="marquee-tag" data-skill="scripting"><i class="fa-brands fa-python"></i> Python</span>
-          <span class="marquee-tag" data-skill="php"><i class="fa-brands fa-php"></i> PHP & MySQL</span>
-          <span class="marquee-tag" data-skill="security"><i class="fa-solid fa-shield-halved"></i> tfsec & Checkov</span>
-          <span class="marquee-tag" data-skill="testing"><i class="fa-solid fa-vial"></i> Terratest</span>
-          <span class="marquee-tag" data-skill="finops"><i class="fa-solid fa-money-bill"></i> Infracost</span>
+          <span class="marquee-tag" data-skill="keyvault"><i class="fa-solid fa-key"></i> Azure Key Vault</span>
+          <span class="marquee-tag" data-skill="ado"><i class="fa-solid fa-gears"></i> Azure DevOps (YAML)</span>
+          <span class="marquee-tag" data-skill="cicd"><i class="fa-brands fa-github"></i> GitHub Actions (OIDC)</span>
+          <span class="marquee-tag" data-skill="agents"><i class="fa-solid fa-server"></i> Self-Hosted Build Agents</span>
+          <span class="marquee-tag" data-skill="iam"><i class="fa-solid fa-id-badge"></i> Entra ID (RBAC &amp; OIDC)</span>
+          <span class="marquee-tag" data-skill="security"><i class="fa-solid fa-shield-halved"></i> tfsec &amp; Checkov</span>
+          <span class="marquee-tag" data-skill="security"><i class="fa-solid fa-user-secret"></i> Gitleaks &amp; TruffleHog</span>
+          <span class="marquee-tag" data-skill="testing"><i class="fa-solid fa-vial"></i> TFLint &amp; Terratest</span>
+          <span class="marquee-tag" data-skill="finops"><i class="fa-solid fa-coins"></i> Infracost &amp; FinOps</span>
+          <span class="marquee-tag" data-skill="cloudflare"><i class="fa-brands fa-cloudflare"></i> Cloudflare CDN/WAF</span>
+          <span class="marquee-tag" data-skill="linux"><i class="fa-brands fa-linux"></i> Linux (Ubuntu)</span>
+          <span class="marquee-tag" data-skill="scripting"><i class="fa-solid fa-terminal"></i> Bash &amp; PowerShell</span>
+          <span class="marquee-tag" data-skill="scripting"><i class="fa-brands fa-python"></i> Python &amp; C++</span>
+          <span class="marquee-tag" data-skill="php"><i class="fa-brands fa-php"></i> PHP 8.x &amp; MySQL</span>
         </div>
       </div>
     </div>
@@ -1107,24 +1284,37 @@
       <div class="frame">
         <header class="frame-header">
           <h2 class="frame-title">Experience</h2>
-          <p class="frame-desc">Recent roles & training</p>
+          <p class="frame-desc">Cloud &amp; DevOps Engineer Intern @ DevOps Insiders</p>
         </header>
         <div class="frame-content">
-          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" rel="noopener" class="list-item" data-tags="azure,terraform,cicd,security,linux,scripting">
+          <div class="list-item" data-tags="azure,terraform,keyvault,cloudflare">
             <div class="item-info">
-              <span class="item-title">
-                DevOps Insiders
-                <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
-              </span>
-              <span class="item-subtitle">Cloud & DevOps Engineer Intern · Automated Azure workloads, modular IaC, and CI/CD pipelines.</span>
+              <span class="item-title">Modular Hub-Spoke IaC &amp; App Gateway</span>
+              <span class="item-subtitle">Deployed reusable <code>network</code>, <code>vpn</code>, and <code>key_vault</code> modules with <code>for_each</code> subnetting and isolated <code>hub</code>/<code>spoke-dev</code>/<code>spoke-prod</code> remote states (&lt;15m provisioning). Load-balanced 3 Azure VMs behind Application Gateway &amp; Cloudflare.</span>
             </div>
-            <span class="item-date">Jan 2026</span>
-          </a>
+            <span class="item-date">Jan 2026 – Present</span>
+          </div>
+
+          <div class="list-item" data-tags="ado,cicd,agents,iam,scripting">
+            <div class="item-info">
+              <span class="item-title">Secretless OIDC &amp; Self-Hosted Runners</span>
+              <span class="item-subtitle">Built GitHub Actions (OIDC) &amp; Azure DevOps YAML pipelines with locked <code>terraform plan -out</code> artifacts. Configured self-hosted agents (<code>Velociraptor-Agent</code>, <code>T-Rex-Agent</code>) with JIT PowerShell tool bootstrapping and agentless <code>pool: server</code> gates.</span>
+            </div>
+            <span class="item-date">CI/CD</span>
+          </div>
+
+          <div class="list-item" data-tags="security,keyvault,iam,testing">
+            <div class="item-info">
+              <span class="item-title">Pre-Merge Policy &amp; RBAC Governance</span>
+              <span class="item-subtitle">Enforced <code>tfsec</code>, <code>Checkov</code>, <code>Gitleaks</code>, and <code>TruffleHog</code> pre-merge gates—catching missing NSGs and disabled Key Vault purge protection to block 100% of misconfigurations.</span>
+            </div>
+            <span class="item-date">DevSecOps</span>
+          </div>
           
-          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" rel="noopener" class="view-all">
-            <span>View Full Timeline</span>
-            <i class="fa-brands fa-linkedin-in"></i>
-          </a>
+          <button type="button" id="exp-open-resume" class="view-all">
+            <span>Inspect Full Experience in HR Resume View</span>
+            <i class="fa-regular fa-file-lines"></i>
+          </button>
         </div>
       </div>
 
@@ -1136,54 +1326,54 @@
         </header>
         <div class="frame-content">
           
-          <!-- Project 1: Enterprise DevOps Ecosystem (Opens Pipeline Architecture) -->
-          <button type="button" id="open-arch-devops" class="list-item" data-tags="azure,terraform,cicd,security,testing,finops,docker">
+          <!-- Project 1: Enterprise DevOps Ecosystem -->
+          <button type="button" id="open-arch-devops" class="list-item" data-tags="azure,terraform,ado,cicd,agents,security,testing,finops,scripting">
             <div class="item-info">
               <span class="item-title">
-                Enterprise DevOps &amp; CI/CD Ecosystem
+                Enterprise DevOps &amp; Dual CI/CD Ecosystem
                 <i class="fa-solid fa-diagram-project arrow-icon" style="opacity: 1; transform: none; color: var(--accent);"></i>
               </span>
-              <span class="item-subtitle">Unified architecture with modular Terraform, centralized Master Pipeline, and shift-left security across repositories.</span>
+              <span class="item-subtitle">Monorepo change detection, self-hosted agent JIT binary bootstrapping, agentless approval gates, SARIF/JUnit reporting, and FinOps cost delta extraction.</span>
               <div class="tech-pill-row">
                 <span class="tech-pill interactive-pill"><i class="fa-solid fa-magnifying-glass-chart"></i> Pipeline Diagram</span>
-                <span class="tech-pill">Terraform</span>
-                <span class="tech-pill">Master_Pipeline</span>
+                <span class="tech-pill">Azure DevOps</span>
+                <span class="tech-pill">GitHub Actions OIDC</span>
               </div>
             </div>
-            <span class="item-date">Aug 2026</span>
+            <span class="item-date">2026</span>
           </button>
           
-          <!-- Project 2: Azure Hub-Spoke Network (Opens Network Topology) -->
-          <button type="button" id="open-arch-hubspoke" class="list-item" data-tags="azure,terraform,security,linux">
+          <!-- Project 2: Azure Hub-Spoke Network & Key Vault -->
+          <button type="button" id="open-arch-hubspoke" class="list-item" data-tags="azure,terraform,keyvault,iam,security,cloudflare">
             <div class="item-info">
               <span class="item-title">
-                Azure Hub-Spoke Network
+                Azure Hub-Spoke &amp; Zero-Secret Key Vault
                 <i class="fa-solid fa-network-wired arrow-icon" style="opacity: 1; transform: none; color: var(--accent);"></i>
               </span>
-              <span class="item-subtitle">Architected a secure multi-tier network with modular Terraform, cutting provisioning time to under 15 mins.</span>
+              <span class="item-subtitle">Dynamic <code>for_each</code> subnetting, bi-directional VNet peering with gateway transit, and Private Endpoint Key Vault with Managed Identity runtime retrieval.</span>
               <div class="tech-pill-row">
                 <span class="tech-pill interactive-pill"><i class="fa-solid fa-network-wired"></i> Topology View</span>
+                <span class="tech-pill">Key Vault RBAC</span>
                 <span class="tech-pill">VNet Peering</span>
-                <span class="tech-pill">Bastion &amp; WAF</span>
               </div>
             </div>
-            <span class="item-date">Dec 2025</span>
+            <span class="item-date">2026</span>
           </button>
 
           <!-- Project 3: FlexZone -->
-          <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="list-item" data-tags="azure,php,linux,scripting">
+          <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="list-item" data-tags="azure,terraform,php,cloudflare,linux">
             <div class="item-info">
               <span class="item-title">
-                FlexZone
+                FlexZone — Fitness Tracking API on Azure
                 <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
               </span>
-              <span class="item-subtitle">Fitness tracking PHP 8 REST API deployed on Azure VM with Cloudflare CDN integration.</span>
+              <span class="item-subtitle">PHP 8.x &amp; MySQL REST API (&lt;200ms response) provisioned on Azure VM via Terraform with scoped NSGs and Cloudflare CDN (<code>b18g119.online</code>, ~30% faster delivery).</span>
             </div>
-            <span class="item-date">Dec 2025</span>
+            <span class="item-date">Mar 2024 – Present</span>
           </a>
           
           <a href="https://github.com/MihirMaurya-dev" target="_blank" rel="noopener" class="view-all">
-            <span>View GitHub Repos</span>
+            <span>View GitHub Repositories</span>
             <i class="fa-brands fa-github"></i>
           </a>
         </div>
@@ -1201,36 +1391,36 @@
               <span class="item-title">University of Allahabad</span>
               <span class="item-subtitle">M.Sc, Computer Science · J.K. Institute of Applied Physics &amp; Technology</span>
             </div>
-            <span class="item-date">2026 - 2028</span>
+            <span class="item-date">2026 – 2028</span>
           </div>
 
           <div class="list-item" data-tags="scripting,php">
             <div class="item-info">
-              <span class="item-title">Ewing Christian College</span>
+              <span class="item-title">Ewing Christian College, Allahabad</span>
               <span class="item-subtitle">B.Sc, Mathematics &amp; Computer Applications</span>
             </div>
-            <span class="item-date">2023 - 2026</span>
+            <span class="item-date">2023 – 2026</span>
           </div>
         </div>
       </div>
 
-      <!-- Security & Governance Frame -->
+      <!-- Security, Key Vault & Governance Frame -->
       <div class="frame">
         <header class="frame-header">
-          <h2 class="frame-title">Security &amp; Governance</h2>
-          <p class="frame-desc">Shift-left tools &amp; practices</p>
+          <h2 class="frame-title">Security, Key Vault &amp; Governance</h2>
+          <p class="frame-desc">Secret Zero &amp; shift-left engineering</p>
         </header>
         <div class="frame-content">
-          <div class="list-item" data-tags="terraform,security,testing,finops,cicd">
+          <div class="list-item" data-tags="keyvault,iam,azure,terraform">
             <div class="item-info">
-              <span class="item-title">IaC Scanning &amp; Cost Governance</span>
-              <span class="item-subtitle">tfsec, Checkov, TFLint, Terratest, Trufflehog, Gitleaks, Infracost</span>
+              <span class="item-title">Zero-Secret Key Vault Architecture</span>
+              <span class="item-subtitle">Dynamic <code>random_password</code> injection, Entra ID RBAC (Secrets Officer/User), Private Endpoints (<code>privatelink.vaultcore.azure.net</code>), Managed Identities (IMDS), and Purge Protection.</span>
             </div>
           </div>
-          <div class="list-item" data-tags="azure,security,cicd">
+          <div class="list-item" data-tags="security,testing,finops,cicd,ado">
             <div class="item-info">
-              <span class="item-title">Identity &amp; Access Management</span>
-              <span class="item-subtitle">Microsoft Entra ID (RBAC), OIDC Workload Identity Federation, Azure Key Vault</span>
+              <span class="item-title">Shift-Left DevSecOps &amp; FinOps Gates</span>
+              <span class="item-subtitle"><code>Gitleaks</code>, <code>TruffleHog</code>, <code>tfsec</code>, <code>Checkov</code> (SARIF &amp; JUnit dashboards), <code>TFLint</code>, <code>Terratest</code>, and <code>Infracost</code> + Azure Retail Prices API.</span>
             </div>
           </div>
         </div>
@@ -1254,8 +1444,154 @@
     </footer>
 
   </main>
+  <!-- 1. In-Tab HR & Recruiter Interactive Resume Modal -->
+  <div class="modal-overlay" id="resume-modal" aria-hidden="true">
+    <div class="resume-window" role="dialog" aria-label="Interactive HR Resume Viewer">
+      <!-- Top Controls Bar -->
+      <div class="arch-topbar">
+        <div class="arch-title-group">
+          <div class="window-dots">
+            <span class="dot dot-red" id="close-resume-dot" title="Close"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <span class="arch-title">Mihir_Maurya_Resume.pdf — HR &amp; Recruiter View</span>
+        </div>
+        <div class="arch-controls">
+          <button class="arch-tab-btn active" id="resume-tab-ats" title="Interactive ATS & Keyword Highlighter View">
+            <i class="fa-solid fa-bolt"></i> Interactive ATS View
+          </button>
+          <button class="arch-tab-btn" id="resume-tab-pdf" title="View Embedded Original PDF">
+            <i class="fa-regular fa-file-pdf"></i> Original PDF
+          </button>
+          <button class="arch-tab-btn" id="zoom-out-btn" title="Decrease Font Size">A-</button>
+          <button class="arch-tab-btn" id="zoom-in-btn" title="Increase Font Size">A+</button>
+          <button class="arch-sim-btn" id="copy-hr-summary-btn" title="Copy Formatted Candidate Evaluation Note for Slack/Teams/ATS">
+            <i class="fa-regular fa-clipboard"></i> Copy HR Summary
+          </button>
+          <button class="arch-tab-btn" id="print-resume-btn" title="Print Resume">
+            <i class="fa-solid fa-print"></i>
+          </button>
+          <a href="Mihir_Maurya_Resume.pdf" download="Mihir_Maurya_Resume.pdf" class="arch-tab-btn" style="color: var(--text-main);" title="Download PDF File">
+            <i class="fa-solid fa-download"></i> Download
+          </a>
+          <button class="terminal-close" id="close-resume-btn">ESC</button>
+        </div>
+      </div>
 
-  <!-- Dual-Project Interactive Architecture & Topology Modal -->
+      <!-- HR Quick-Glance & Keyword Highlighter Bar -->
+      <div class="hr-quick-strip">
+        <div class="hr-quick-items">
+          <button class="hr-meta-pill" data-copy="+91-9415909254" title="Click to copy phone number">
+            <i class="fa-solid fa-phone" style="color: var(--success);"></i> +91-9415909254
+          </button>
+          <button class="hr-meta-pill" data-copy="chhotuverma2238@gmail.com" title="Click to copy email">
+            <i class="fa-regular fa-envelope" style="color: var(--accent);"></i> chhotuverma2238@gmail.com
+          </button>
+          <span class="hr-meta-pill" style="cursor: default;">
+            <i class="fa-solid fa-location-dot" style="color: var(--warn);"></i> Prayagraj, India (Open to Relocate/Remote)
+          </span>
+        </div>
+        <div class="hr-search-box">
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 11px; color: var(--text-muted);"></i>
+          <input type="text" id="hr-keyword-input" class="hr-search-input" placeholder="Highlight skill (e.g., OIDC, Key Vault)...">
+          <span class="match-badge" id="hr-match-count">0 hits</span>
+        </div>
+      </div>
+
+      <!-- Quick HR Skill Highlight Chips -->
+      <div class="arch-project-bar" style="padding: 8px 20px;">
+        <div class="arch-project-pills">
+          <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">HR Quick-Scan:</span>
+          <button class="hr-chip" data-kw="Terraform">Terraform</button>
+          <button class="hr-chip" data-kw="Key Vault">Key Vault</button>
+          <button class="hr-chip" data-kw="OIDC">OIDC</button>
+          <button class="hr-chip" data-kw="Azure DevOps">Azure DevOps</button>
+          <button class="hr-chip" data-kw="Self-Hosted">Self-Hosted Agents</button>
+          <button class="hr-chip" data-kw="Hub-Spoke">Hub-Spoke</button>
+          <button class="hr-chip" data-kw="Checkov">tfsec / Checkov</button>
+          <button class="hr-chip" data-kw="" id="clear-hr-kw">Clear</button>
+        </div>
+      </div>
+
+      <!-- Resume Modal Body -->
+      <div class="arch-body">
+        <!-- View 1: Interactive ATS Resume Document -->
+        <div class="resume-doc-container" id="resume-ats-content">
+          <div class="resume-doc-header">
+            <div>
+              <div class="resume-doc-name">MIHIR MAURYA</div>
+              <div class="resume-doc-role">Cloud &amp; DevOps Engineer · Azure Infrastructure, IaC &amp; DevSecOps</div>
+            </div>
+            <div class="resume-doc-contact">
+              <div>Prayagraj, India · +91-9415909254</div>
+              <div>chhotuverma2238@gmail.com</div>
+              <div>linkedin.com/in/mihirmauryaa1 · github.com/MihirMaurya-dev</div>
+            </div>
+          </div>
+
+          <div class="resume-sec-title">Professional Summary</div>
+          <p style="color: var(--text-muted); font-size: 13px;">
+            Fresher Cloud &amp; DevOps Engineer pursuing an M.Sc in Computer Science at the University of Allahabad, following a B.Sc in Mathematics and Computer Applications. Hands-on experience architecting Azure Hub-Spoke network infrastructure using modular Terraform, implementing Zero-Secret Azure Key Vault architectures, enforcing IaC security through tfsec, Checkov, Gitleaks, and TruffleHog, and building secretless CI/CD pipelines across GitHub Actions (OIDC) and Azure DevOps (YAML Pipelines &amp; Self-Hosted Build Agents). Comfortable across Linux, Git, and scripting in Python, Bash, and PowerShell.
+          </p>
+
+          <div class="resume-sec-title">Technical Skills</div>
+          <div class="resume-skills-grid">
+            <strong>Cloud &amp; Infrastructure:</strong>
+            <span style="color: var(--text-muted);">Microsoft Azure, Terraform (Modular IaC, <code>for_each</code>, Remote State Locking), Azure Key Vault (Private Endpoints, RBAC, Soft Delete/Purge Protection), Azure Application Gateway (WAF), Azure Bastion, Azure VNet/NSG, Azure VM</span>
+            <strong>CI/CD &amp; Runner Eng:</strong>
+            <span style="color: var(--text-muted);">GitHub Actions (OIDC Workload Identity Federation), Azure DevOps (Multi-Stage YAML Pipelines, Service Connections), Self-Hosted Windows/Linux Agent Pools (JIT PowerShell Bootstrapping, Agentless <code>pool: server</code> Gates), Dynamic Monorepo Matrix</span>
+            <strong>Security &amp; FinOps:</strong>
+            <span style="color: var(--text-muted);">tfsec, Checkov (SARIF &amp; JUnit Dashboards), Gitleaks, TruffleHog, TFLint, Terratest, Microsoft Entra ID (RBAC &amp; Managed Identities), Infracost &amp; Azure Retail Prices API, Cloudflare (CDN/DNS)</span>
+            <strong>OS, Scripting &amp; Web:</strong>
+            <span style="color: var(--text-muted);">Linux (Ubuntu), Bash, PowerShell, Python, C++, PHP 8.x, MySQL, REST APIs</span>
+          </div>
+
+          <div class="resume-sec-title">Experience</div>
+          <div class="resume-job-header">
+            <span>Cloud &amp; DevOps Engineer Intern — DevOps Insiders</span>
+            <span style="font-family: var(--font-mono); font-size: 11.5px; color: var(--text-muted);">Jan 2026 – Present</span>
+          </div>
+          <ul class="resume-bullets">
+            <li><strong>Modular Hub-Spoke IaC:</strong> Deployed modular Terraform IaC with custom, reusable modules (<code>network</code>, <code>vpn</code>, <code>key_vault</code>) across a Hub-Spoke VNet topology, using <code>for_each</code> maps of objects to dynamically provision subnets and bi-directional peerings, reducing manual provisioning time from days to <strong>under 15 minutes</strong>.</li>
+            <li><strong>Zero-Secret Key Vault Architecture:</strong> Engineered dynamic secret injection in Terraform utilizing <code>random_password</code>, <code>azurerm_key_vault_secret</code>, and System-Assigned Managed Identities (IMDS) over Private Endpoints (<code>privatelink.vaultcore.azure.net</code>) with Entra ID RBAC and Purge Protection—eliminating 100% of plaintext credentials from source control.</li>
+            <li><strong>Secretless OIDC &amp; Dual CI/CD Pipelines:</strong> Built secretless CI/CD pipelines in GitHub Actions using Workload Identity Federation (OIDC) and migrated local PowerShell automation to multi-stage Azure DevOps YAML pipelines with locked <code>terraform plan -out</code> binary artifacts and live FinOps cost estimation.</li>
+            <li><strong>Self-Hosted Build Agent Engineering:</strong> Stood up and maintained private Windows/Linux self-hosted build agent pools (<code>Velociraptor-Agent</code>, <code>T-Rex-Agent</code>); authored JIT PowerShell bootstrapping scripts for security binaries and engineered agentless manual validation gates (<code>pool: server</code>) to prevent idle runner thread locks.</li>
+            <li><strong>Pre-Merge DevSecOps Governance:</strong> Embedded <code>tfsec</code>, <code>Checkov</code>, <code>Gitleaks</code>, and <code>TruffleHog</code> into pre-merge CI gates with SARIF and JUnit XML reporting—blocking 100% of misconfigurations before deployment.</li>
+            <li><strong>High-Availability Load Balancing &amp; State Isolation:</strong> Load-balanced a dynamic web application across 3 Azure VMs using Azure Application Gateway behind a Cloudflare-managed subdomain with scoped NSGs; restructured Terraform into isolated <code>hub</code>/<code>spoke-dev</code>/<code>spoke-prod</code> remote state files for parallel execution without state-lock conflicts.</li>
+          </ul>
+
+          <div class="resume-sec-title">Projects</div>
+          <div class="resume-job-header">
+            <span>FlexZone — Fitness Tracking API on Azure (b18g119.online)</span>
+            <span style="font-family: var(--font-mono); font-size: 11.5px; color: var(--text-muted);">Mar 2024 – Present</span>
+          </div>
+          <ul class="resume-bullets">
+            <li>Developed a RESTful API in <strong>PHP 8.x</strong> with a relational <strong>MySQL</strong> schema, serving requests in <strong>under 200ms</strong>.</li>
+            <li>Provisioned and secured the <strong>Azure VM</strong> hosting environment via <strong>Terraform</strong>, configuring NSGs to restrict unauthorized ports.</li>
+            <li>Hardened domain security (<code>b18g119.online</code>) using <strong>Cloudflare CDN</strong>, improving content delivery speed by roughly <strong>30%</strong>.</li>
+          </ul>
+
+          <div class="resume-sec-title">Education</div>
+          <div class="resume-job-header">
+            <span>M.Sc, Computer Science — University of Allahabad</span>
+            <span style="font-family: var(--font-mono); font-size: 11.5px; color: var(--text-muted);">2026 – 2028 (In Progress)</span>
+          </div>
+          <div class="resume-job-header">
+            <span>B.Sc, Mathematics &amp; Computer Applications — Ewing Christian College, Allahabad</span>
+            <span style="font-family: var(--font-mono); font-size: 11.5px; color: var(--text-muted);">2023 – 2026</span>
+          </div>
+        </div>
+
+        <!-- View 2: Embedded Original PDF -->
+        <div class="pdf-iframe-container" id="resume-pdf-container">
+          <iframe src="Mihir_Maurya_Resume.pdf" width="100%" height="100%" style="border: none;" title="Mihir Maurya Resume PDF"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Dual-Project Interactive Architecture & Topology Modal -->
   <div class="modal-overlay" id="arch-modal" aria-hidden="true">
     <div class="arch-window" role="dialog" aria-label="Interactive Architecture & Topology Explorer">
       <div class="arch-topbar">
@@ -1265,12 +1601,12 @@
             <span class="dot dot-yellow"></span>
             <span class="dot dot-green"></span>
           </div>
-          <span class="arch-title" id="arch-modal-heading">Enterprise DevOps &amp; CI/CD Ecosystem</span>
+          <span class="arch-title" id="arch-modal-heading">Enterprise DevOps &amp; Dual CI/CD Ecosystem</span>
         </div>
         <div class="arch-controls">
           <button class="arch-sim-btn" id="simulate-pipeline-btn" title="Simulate Flow">
             <i class="fa-solid fa-play"></i>
-            <span id="sim-btn-label">Simulate Run</span>
+            <span id="sim-btn-label">Simulate Pipeline</span>
           </button>
           <button class="arch-tab-btn active" id="tab-svg-btn">Interactive Diagram</button>
           <button class="arch-tab-btn" id="tab-mermaid-btn">Mermaid Code</button>
@@ -1283,22 +1619,21 @@
         <div class="arch-project-pills">
           <button class="project-switch-btn active" id="switch-devops-btn">
             <i class="fa-solid fa-diagram-project"></i>
-            1. Enterprise DevOps CI/CD
+            1. Dual CI/CD &amp; Self-Hosted Agents
           </button>
           <button class="project-switch-btn" id="switch-hubspoke-btn">
             <i class="fa-solid fa-network-wired"></i>
-            2. Azure Hub-Spoke Topology
+            2. Hub-Spoke &amp; Zero-Secret Key Vault
           </button>
         </div>
-        <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);" id="arch-sub-meta">4-Stage Automated Pipeline</span>
+        <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);" id="arch-sub-meta">OIDC · JIT Agents · pool: server</span>
       </div>
 
       <div class="arch-body">
-        <!-- Interactive SVG View -->
         <div class="svg-view" id="arch-svg-view">
           <div class="svg-diagram-container">
             
-            <!-- SVG 1: Enterprise DevOps & CI/CD Ecosystem -->
+            <!-- SVG 1: Enterprise DevOps & Dual CI/CD Ecosystem -->
             <svg id="svg-devops" class="arch-svg" viewBox="0 0 740 205" xmlns="http://www.w3.org/2000/svg">
               <line id="devops-flow-1" class="flow-line" x1="168" y1="102" x2="198" y2="102" />
               <line id="devops-flow-2" class="flow-line" x1="356" y1="102" x2="386" y2="102" />
@@ -1307,59 +1642,55 @@
               <!-- Stage 1 -->
               <g class="arch-node devops-node selected" data-project="devops" data-stage="1" transform="translate(12, 32)">
                 <rect class="node-box" width="156" height="140" rx="12" />
-                <text x="16" y="28" class="svg-badge">STAGE 01 · LOCAL/PR</text>
-                <text x="16" y="50" class="svg-heading">Shift-Left Gate</text>
-                <text x="16" y="74" class="svg-sub">• terraform fmt/validate</text>
-                <text x="16" y="92" class="svg-sub">• Gitleaks &amp; Trufflehog</text>
-                <text x="16" y="110" class="svg-sub">• TFLint pre-commit</text>
-                <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ Pre-Commit Verified</text>
+                <text x="14" y="28" class="svg-badge">STAGE 01 · MONOREPO</text>
+                <text x="14" y="50" class="svg-heading">Diff &amp; Secret Gate</text>
+                <text x="14" y="74" class="svg-sub">• Changed-Files Matrix</text>
+                <text x="14" y="92" class="svg-sub">• Gitleaks &amp; TruffleHog</text>
+                <text x="14" y="110" class="svg-sub">• terraform fmt &amp; TFLint</text>
+                <text x="14" y="128" class="svg-sub" style="fill: var(--success);">✔ 0 Secrets Leaked</text>
               </g>
 
               <!-- Stage 2 -->
               <g class="arch-node devops-node" data-project="devops" data-stage="2" transform="translate(200, 32)">
                 <rect class="node-box" width="156" height="140" rx="12" />
-                <text x="16" y="28" class="svg-badge">STAGE 02 · CI/CD</text>
-                <text x="16" y="50" class="svg-heading">Master Pipeline</text>
-                <text x="16" y="74" class="svg-sub">• tfsec &amp; Checkov SAST</text>
-                <text x="16" y="92" class="svg-sub">• Infracost FinOps Gate</text>
-                <text x="16" y="110" class="svg-sub">• Terratest Validation</text>
-                <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ Policy Gate Passed</text>
+                <text x="14" y="28" class="svg-badge">STAGE 02 · JIT AGENTS</text>
+                <text x="14" y="50" class="svg-heading">SAST &amp; FinOps</text>
+                <text x="14" y="74" class="svg-sub">• Velociraptor / T-Rex</text>
+                <text x="14" y="92" class="svg-sub">• tfsec &amp; Checkov SARIF</text>
+                <text x="14" y="110" class="svg-sub">• Azure Retail Prices API</text>
+                <text x="14" y="128" class="svg-sub" style="fill: var(--success);">✔ JUnit &amp; Cost Posted</text>
               </g>
 
               <!-- Stage 3 -->
               <g class="arch-node devops-node" data-project="devops" data-stage="3" transform="translate(388, 32)">
                 <rect class="node-box" width="156" height="140" rx="12" />
-                <text x="16" y="28" class="svg-badge">STAGE 03 · AUTH/STATE</text>
-                <text x="16" y="50" class="svg-heading">Entra ID &amp; State</text>
-                <text x="16" y="74" class="svg-sub">• OIDC Workload Fed.</text>
-                <text x="16" y="92" class="svg-sub">• Zero Static Secrets</text>
-                <text x="16" y="110" class="svg-sub">• Azure Blob State Lock</text>
-                <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ RBAC Token Issued</text>
+                <text x="14" y="28" class="svg-badge">STAGE 03 · OIDC/GATE</text>
+                <text x="14" y="50" class="svg-heading">Serverless Gate</text>
+                <text x="14" y="74" class="svg-sub">• Entra OIDC Federation</text>
+                <text x="14" y="92" class="svg-sub">• pool: server Validation</text>
+                <text x="14" y="110" class="svg-sub">• Locked plan -out</text>
+                <text x="14" y="128" class="svg-sub" style="fill: var(--success);">✔ 0 Idle Runner Locks</text>
               </g>
 
               <!-- Stage 4 -->
               <g class="arch-node devops-node" data-project="devops" data-stage="4" transform="translate(576, 32)">
                 <rect class="node-box" width="152" height="140" rx="12" />
-                <text x="16" y="28" class="svg-badge">STAGE 04 · AZURE</text>
-                <text x="16" y="50" class="svg-heading">Cloud Workload</text>
-                <text x="16" y="74" class="svg-sub">• Hub VNet + Bastion</text>
-                <text x="16" y="92" class="svg-sub">• App Gateway + NSGs</text>
-                <text x="16" y="110" class="svg-sub">• Key Vault + VMSS</text>
-                <text x="16" y="128" class="svg-sub" style="fill: var(--success);">✔ centralindia Live</text>
+                <text x="14" y="28" class="svg-badge">STAGE 04 · ISOLATED</text>
+                <text x="14" y="50" class="svg-heading">Multi-Env Apply</text>
+                <text x="14" y="74" class="svg-sub">• hub.tfstate</text>
+                <text x="14" y="92" class="svg-sub">• spoke-dev.tfstate</text>
+                <text x="14" y="110" class="svg-sub">• spoke-prod.tfstate</text>
+                <text x="14" y="128" class="svg-sub" style="fill: var(--success);">✔ Parallel Blob Lease</text>
               </g>
             </svg>
 
-            <!-- SVG 2: Azure Hub-Spoke Network Topology -->
+            <!-- SVG 2: Azure Hub-Spoke & Zero-Secret Key Vault Topology -->
             <svg id="svg-hubspoke" class="arch-svg hidden" viewBox="0 0 740 240" xmlns="http://www.w3.org/2000/svg">
-              <!-- Animated VNet Peering & Traffic Connectors -->
-              <!-- Edge to Hub -->
               <line id="net-flow-1" class="flow-line" x1="168" y1="120" x2="212" y2="120" />
-              <!-- Hub to Spoke 1 (Upper Branch) -->
               <path id="net-flow-2" class="flow-line" d="M 412 85 C 450 85, 455 62, 496 62" />
-              <!-- Hub to Spoke 2 (Lower Branch) -->
               <path id="net-flow-3" class="flow-line" d="M 412 155 C 450 155, 455 178, 496 178" />
 
-              <!-- VNet Peering Labels -->
+              <!-- VNet Peering Pills -->
               <g transform="translate(425, 46)">
                 <rect class="peering-pill" width="56" height="18" rx="9" />
                 <text x="10" y="12" class="svg-sub" style="font-size: 8.5px; fill: var(--accent);">Peering</text>
@@ -1369,45 +1700,45 @@
                 <text x="10" y="12" class="svg-sub" style="font-size: 8.5px; fill: var(--accent);">Peering</text>
               </g>
 
-              <!-- Node 1: Ingress & Edge Security -->
+              <!-- Node 1: Cloudflare & Edge -->
               <g class="arch-node hubspoke-node" data-project="hubspoke" data-stage="1" transform="translate(12, 48)">
                 <rect class="node-box" width="156" height="144" rx="12" />
-                <text x="14" y="26" class="svg-badge">TIER 01 · INGRESS</text>
-                <text x="14" y="48" class="svg-heading">Edge &amp; Admin</text>
-                <text x="14" y="72" class="svg-sub">• Cloudflare DNS/CDN</text>
-                <text x="14" y="90" class="svg-sub">• HTTPS TLS 1.3</text>
-                <text x="14" y="108" class="svg-sub">• SSH/RDP Blocked</text>
-                <text x="14" y="128" class="svg-sub" style="fill: var(--success);">✔ Zero Public VMs</text>
+                <text x="14" y="26" class="svg-badge">TIER 01 · EDGE/CDN</text>
+                <text x="14" y="48" class="svg-heading">Cloudflare Ingress</text>
+                <text x="14" y="72" class="svg-sub">• Subdomain DNS Proxy</text>
+                <text x="14" y="90" class="svg-sub">• HTTPS TLS Termination</text>
+                <text x="14" y="108" class="svg-sub">• Scoped NSG Perimeter</text>
+                <text x="14" y="128" class="svg-sub" style="fill: var(--success);">✔ Public SSH Blocked</text>
               </g>
 
               <!-- Node 2: Central Hub VNet -->
               <g class="arch-node hubspoke-node" data-project="hubspoke" data-stage="2" transform="translate(212, 30)">
                 <rect class="node-box" width="200" height="180" rx="12" />
-                <text x="16" y="26" class="svg-badge">TIER 02 · HUB VNET (10.0.0.0/16)</text>
+                <text x="16" y="26" class="svg-badge">TIER 02 · HUB VNET (for_each)</text>
                 <text x="16" y="48" class="svg-heading">Shared Transit Hub</text>
-                <text x="16" y="72" class="svg-sub">• AzureFrontDoor / AppGW WAF</text>
-                <text x="16" y="92" class="svg-sub">• AzureBastionSubnet (/26)</text>
-                <text x="16" y="112" class="svg-sub">• Central Firewall &amp; UDRs</text>
-                <text x="16" y="132" class="svg-sub">• Log Analytics Workspace</text>
+                <text x="16" y="72" class="svg-sub">• ApplicationGatewaySubnet</text>
+                <text x="16" y="92" class="svg-sub">• AzureBastionSubnet</text>
+                <text x="16" y="112" class="svg-sub">• VPN Gateway Transit</text>
+                <text x="16" y="132" class="svg-sub">• AzureFirewallSubnet</text>
                 <text x="16" y="156" class="svg-sub" style="fill: var(--success);">✔ Provisioned in &lt;15m</text>
               </g>
 
-              <!-- Node 3: Spoke 01 (Application & Compute Tier) -->
+              <!-- Node 3: Spoke Workloads (3 Azure VMs) -->
               <g class="arch-node hubspoke-node" data-project="hubspoke" data-stage="3" transform="translate(496, 12)">
                 <rect class="node-box" width="230" height="100" rx="12" />
-                <text x="14" y="24" class="svg-badge">SPOKE 01 · COMPUTE (10.1.0.0/16)</text>
-                <text x="14" y="44" class="svg-heading">Application Workload VNet</text>
-                <text x="14" y="64" class="svg-sub">• Linux VM Scale Sets (Auto-Scale)</text>
-                <text x="14" y="82" class="svg-sub" style="fill: var(--success);">✔ Strict NSG + UDR via Hub</text>
+                <text x="14" y="24" class="svg-badge">SPOKE · DEV/PROD WORKLOADS</text>
+                <text x="14" y="44" class="svg-heading">3x Load-Balanced Azure VMs</text>
+                <text x="14" y="64" class="svg-sub">• System Managed Identity (IMDS)</text>
+                <text x="14" y="82" class="svg-sub" style="fill: var(--success);">✔ Bi-Directional Gateway Transit</text>
               </g>
 
-              <!-- Node 4: Spoke 02 (Data & Key Vault Tier) -->
+              <!-- Node 4: Zero-Secret Key Vault -->
               <g class="arch-node hubspoke-node" data-project="hubspoke" data-stage="4" transform="translate(496, 128)">
                 <rect class="node-box" width="230" height="100" rx="12" />
-                <text x="14" y="24" class="svg-badge">SPOKE 02 · DATA/SEC (10.2.0.0/16)</text>
-                <text x="14" y="44" class="svg-heading">Isolated Data &amp; Key Vault</text>
-                <text x="14" y="64" class="svg-sub">• Azure Key Vault (Private Link)</text>
-                <text x="14" y="82" class="svg-sub" style="fill: var(--success);">✔ Public Network Access: Deny</text>
+                <text x="14" y="24" class="svg-badge">SECRET ZERO · KEY VAULT</text>
+                <text x="14" y="44" class="svg-heading">Private Endpoint Key Vault</text>
+                <text x="14" y="64" class="svg-sub">• privatelink.vaultcore.azure.net</text>
+                <text x="14" y="82" class="svg-sub" style="fill: var(--success);">✔ Entra RBAC + Purge Protection</text>
               </g>
             </svg>
 
@@ -1416,22 +1747,17 @@
           <!-- Node Details Inspector -->
           <div class="arch-inspector" id="arch-inspector" style="margin-top: 14px;">
             <div class="inspector-header">
-              <span class="inspector-title" id="inspector-title">
-                <i class="fa-solid fa-shield-halved" style="color: var(--accent);"></i>
-                Stage 01: Developer Pre-Commit &amp; Shift-Left Gate
-              </span>
-              <span class="inspector-status" id="inspector-status">Gate: Active</span>
+              <span class="inspector-title" id="inspector-title"></span>
+              <span class="inspector-status" id="inspector-status"></span>
             </div>
-            <p class="inspector-desc" id="inspector-desc">
-              Enforces code quality and secret hygiene before code ever leaves the workstation. Automated pre-commit hooks run <code>terraform fmt</code>, <code>terraform validate</code>, <code>TFLint</code>, and secret scanning via <code>Gitleaks</code> and <code>Trufflehog</code> across modular repositories.
-            </p>
+            <p class="inspector-desc" id="inspector-desc"></p>
           </div>
         </div>
 
         <!-- Mermaid Source View -->
         <div class="mermaid-view" id="arch-mermaid-view">
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 12px; color: var(--text-muted);" id="mermaid-caption">Mermaid.js Architecture Definition (Compatible with GitHub &amp; Obsidian)</span>
+            <span style="font-size: 12px; color: var(--text-muted);">Mermaid.js Architecture Definition</span>
             <button class="arch-tab-btn" id="copy-mermaid-btn"><i class="fa-regular fa-copy"></i> Copy Mermaid</button>
           </div>
           <pre class="mermaid-pre" id="mermaid-code"></pre>
@@ -1439,7 +1765,7 @@
       </div>
 
       <div class="arch-footer">
-        <span><i class="fa-regular fa-hand-pointer"></i> Click any node in the diagram above to inspect its configuration</span>
+        <span><i class="fa-regular fa-hand-pointer"></i> Click any stage node above to inspect its engineering controls</span>
         <a href="https://github.com/MihirMaurya-dev?tab=repositories" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 6px 12px; font-size: 12px;">
           <i class="fa-brands fa-github"></i>
           <span>Open Repositories on GitHub</span>
@@ -1448,7 +1774,7 @@
     </div>
   </div>
 
-  <!-- Interactive DevOps Terminal Modal -->
+  <!-- 3. Interactive DevOps Terminal Modal -->
   <div class="modal-overlay" id="terminal-modal" aria-hidden="true">
     <div class="terminal-window" role="dialog" aria-label="Interactive DevOps Terminal">
       <div class="terminal-topbar">
@@ -1463,19 +1789,20 @@
       <div class="terminal-chips">
         <span class="chip-label">Quick run:</span>
         <button class="cmd-chip" data-cmd="terraform plan">terraform plan</button>
+        <button class="cmd-chip" data-cmd="keyvault --status">keyvault --status</button>
+        <button class="cmd-chip" data-cmd="agents --status">agents --status</button>
         <button class="cmd-chip" data-cmd="security --audit">security --audit</button>
-        <button class="cmd-chip" data-cmd="arch">arch (CI/CD)</button>
-        <button class="cmd-chip" data-cmd="net">net (Hub-Spoke)</button>
-        <button class="cmd-chip" data-cmd="whoami">whoami</button>
-        <button class="cmd-chip" data-cmd="contact">contact</button>
+        <button class="cmd-chip" data-cmd="resume">resume</button>
+        <button class="cmd-chip" data-cmd="arch">arch</button>
+        <button class="cmd-chip" data-cmd="net">net</button>
         <button class="cmd-chip" data-cmd="clear">clear</button>
       </div>
       <div class="terminal-body" id="terminal-output">
-        <div class="term-line term-muted">Welcome to MihirOS v2.6 (Cloud &amp; DevOps Shell). Type <span class="term-info">help</span> or click a command above.</div>
+        <div class="term-line term-muted">Welcome to MihirOS v2.8 (Cloud &amp; DevOps Shell). Type <span class="term-info">help</span> or click a command chip above.</div>
       </div>
       <form class="terminal-input-row" id="terminal-form">
         <span class="term-prompt">mihir@devops</span>:<span class="term-path">~</span>$
-        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type a command (e.g., terraform plan, arch, net, help)..." autocomplete="off" spellcheck="false">
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type a command (e.g., keyvault --status, agents --status, resume)..." autocomplete="off" spellcheck="false">
       </form>
     </div>
   </div>
@@ -1483,7 +1810,7 @@
   <!-- Toast Notification -->
   <div class="toast" id="toast">
     <i class="fa-solid fa-circle-check" style="color: var(--success);"></i>
-    <span id="toast-msg">Email copied to clipboard!</span>
+    <span id="toast-msg">Copied to clipboard!</span>
   </div>
 
   <script>
@@ -1500,6 +1827,7 @@
     const toast = document.getElementById('toast');
     const toastMsg = document.getElementById('toast-msg');
     let toastTimeout;
+
     function showToast(message) {
       toastMsg.textContent = message;
       toast.classList.add('show');
@@ -1507,12 +1835,23 @@
       toastTimeout = setTimeout(() => toast.classList.remove('show'), 2600);
     }
 
-    // 3. One-Click Copy Email
+    // 3. One-Click Copy Email & HR Meta Pills
     const copyEmailBtn = document.getElementById('copy-email-btn');
-    copyEmailBtn.addEventListener('click', () => {
-      const email = copyEmailBtn.getAttribute('data-email');
-      navigator.clipboard.writeText(email).then(() => {
-        showToast('Copied chhotuverma2238@gmail.com to clipboard!');
+    if (copyEmailBtn) {
+      copyEmailBtn.addEventListener('click', () => {
+        const email = copyEmailBtn.getAttribute('data-email');
+        navigator.clipboard.writeText(email).then(() => {
+          showToast(`Copied ${email} to clipboard!`);
+        });
+      });
+    }
+
+    document.querySelectorAll('.hr-meta-pill[data-copy]').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const val = pill.getAttribute('data-copy');
+        navigator.clipboard.writeText(val).then(() => {
+          showToast(`Copied ${val} to clipboard!`);
+        });
       });
     });
 
@@ -1523,17 +1862,20 @@
     const soundIcon = document.getElementById('sound-icon');
 
     function updateSoundIcon() {
+      if (!soundIcon) return;
       soundIcon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
     }
     updateSoundIcon();
 
-    soundToggleBtn.addEventListener('click', () => {
-      soundEnabled = !soundEnabled;
-      localStorage.setItem('sound', soundEnabled ? 'enabled' : 'muted');
-      updateSoundIcon();
-      if (soundEnabled) playClickSound(4200);
-      showToast(soundEnabled ? 'Mechanical key sounds enabled' : 'Audio muted');
-    });
+    if (soundToggleBtn) {
+      soundToggleBtn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        localStorage.setItem('sound', soundEnabled ? 'enabled' : 'muted');
+        updateSoundIcon();
+        if (soundEnabled) playClickSound(4200);
+        showToast(soundEnabled ? 'Mechanical key sounds enabled' : 'Audio muted');
+      });
+    }
 
     function playClickSound(freq = 3800) {
       if (!soundEnabled) return;
@@ -1543,33 +1885,32 @@
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
-      
+
       const bufferSize = audioCtx.sampleRate * 0.014;
       const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) {
         data[i] = Math.random() * 2 - 1;
       }
-      
+
       const noise = audioCtx.createBufferSource();
       noise.buffer = buffer;
-      
+
       const filter = audioCtx.createBiquadFilter();
       filter.type = 'bandpass';
       filter.frequency.value = freq + (Math.random() * 400 - 200);
-      
+
       const gain = audioCtx.createGain();
       gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.014);
-      
+
       noise.connect(filter);
       filter.connect(gain);
       gain.connect(audioCtx.destination);
       noise.start();
     }
 
-    // Attach click sound to interactive controls
-    document.querySelectorAll('a, button, .marquee-tag, .cmd-chip, .arch-node').forEach(el => {
+    document.querySelectorAll('a, button, .marquee-tag, .cmd-chip, .arch-node, .hr-chip').forEach(el => {
       el.addEventListener('mousedown', () => playClickSound());
     });
 
@@ -1595,24 +1936,26 @@
       }
     }
 
-    themeToggleBtn.addEventListener('click', () => {
-      if (!document.startViewTransition) {
-        toggleTheme();
-        return;
-      }
-      const rect = themeToggleBtn.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-      const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        if (!document.startViewTransition) {
+          toggleTheme();
+          return;
+        }
+        const rect = themeToggleBtn.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
-      const transition = document.startViewTransition(() => toggleTheme());
-      transition.ready.then(() => {
-        document.documentElement.animate(
-          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
-          { duration: 550, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
-        );
+        const transition = document.startViewTransition(() => toggleTheme());
+        transition.ready.then(() => {
+          document.documentElement.animate(
+            { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
+            { duration: 550, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+          );
+        });
       });
-    });
+    }
 
     // 6. Skill-to-Project Interactive Filter
     let activeSkill = null;
@@ -1642,17 +1985,23 @@
         }
       });
 
-      clearFilterBtn.classList.toggle('visible', Boolean(activeSkill));
+      if (clearFilterBtn) {
+        clearFilterBtn.classList.toggle('visible', Boolean(activeSkill));
+      }
     }
 
     skillTags.forEach(tag => {
       tag.addEventListener('click', () => applySkillFilter(tag.getAttribute('data-skill')));
     });
-    clearFilterBtn.addEventListener('click', () => applySkillFilter(null));
+
+    if (clearFilterBtn) {
+      clearFilterBtn.addEventListener('click', () => applySkillFilter(null));
+    }
 
     // 7. Live IST Clock in Telemetry Footer
     const clockEl = document.getElementById('live-clock');
     function updateClock() {
+      if (!clockEl) return;
       const now = new Date();
       const timeStr = now.toLocaleTimeString('en-IN', {
         timeZone: 'Asia/Kolkata',
@@ -1666,7 +2015,160 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    // 8. Dual-Project Interactive Architecture & Hub-Spoke Topology Explorer
+    // 8. In-Tab HR & Recruiter Resume Modal Logic
+    const resumeModal = document.getElementById('resume-modal');
+    const openResumeBtn = document.getElementById('open-resume-btn');
+    const expOpenResumeBtn = document.getElementById('exp-open-resume');
+    const closeResumeBtn = document.getElementById('close-resume-btn');
+    const closeResumeDot = document.getElementById('close-resume-dot');
+    const resumeTabAts = document.getElementById('resume-tab-ats');
+    const resumeTabPdf = document.getElementById('resume-tab-pdf');
+    const resumeAtsContent = document.getElementById('resume-ats-content');
+    const resumePdfContainer = document.getElementById('resume-pdf-container');
+    const zoomInBtn = document.getElementById('zoom-in-btn');
+    const zoomOutBtn = document.getElementById('zoom-out-btn');
+    const printResumeBtn = document.getElementById('print-resume-btn');
+    const copyHrSummaryBtn = document.getElementById('copy-hr-summary-btn');
+    const hrKeywordInput = document.getElementById('hr-keyword-input');
+    const hrMatchCount = document.getElementById('hr-match-count');
+    const hrChips = document.querySelectorAll('.hr-chip');
+
+    let resumeZoom = 13.5;
+    const originalAtsHtml = resumeAtsContent ? resumeAtsContent.innerHTML : '';
+
+    function openResumeModal() {
+      resumeModal.classList.add('open');
+      resumeModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeResumeModal() {
+      resumeModal.classList.remove('open');
+      resumeModal.setAttribute('aria-hidden', 'true');
+    }
+
+    if (openResumeBtn) openResumeBtn.addEventListener('click', openResumeModal);
+    if (expOpenResumeBtn) expOpenResumeBtn.addEventListener('click', openResumeModal);
+    if (closeResumeBtn) closeResumeBtn.addEventListener('click', closeResumeModal);
+    if (closeResumeDot) closeResumeDot.addEventListener('click', closeResumeModal);
+
+    if (resumeModal) {
+      resumeModal.addEventListener('click', (e) => {
+        if (e.target === resumeModal) closeResumeModal();
+      });
+    }
+
+    if (resumeTabAts && resumeTabPdf) {
+      resumeTabAts.addEventListener('click', () => {
+        resumeTabAts.classList.add('active');
+        resumeTabPdf.classList.remove('active');
+        resumeAtsContent.classList.remove('hidden');
+        resumePdfContainer.classList.remove('active');
+      });
+
+      resumeTabPdf.addEventListener('click', () => {
+        resumeTabPdf.classList.add('active');
+        resumeTabAts.classList.remove('active');
+        resumeAtsContent.classList.add('hidden');
+        resumePdfContainer.classList.add('active');
+      });
+    }
+
+    if (zoomInBtn) {
+      zoomInBtn.addEventListener('click', () => {
+        resumeZoom = Math.min(17, resumeZoom + 1);
+        resumeAtsContent.style.fontSize = `${resumeZoom}px`;
+      });
+    }
+
+    if (zoomOutBtn) {
+      zoomOutBtn.addEventListener('click', () => {
+        resumeZoom = Math.max(11, resumeZoom - 1);
+        resumeAtsContent.style.fontSize = `${resumeZoom}px`;
+      });
+    }
+
+    if (printResumeBtn) {
+      printResumeBtn.addEventListener('click', () => {
+        const pdfWindow = window.open('Mihir_Maurya_Resume.pdf', '_blank');
+        if (pdfWindow) pdfWindow.focus();
+      });
+    }
+
+    if (copyHrSummaryBtn) {
+      copyHrSummaryBtn.addEventListener('click', () => {
+        const hrSummary = [
+          'CANDIDATE EVALUATION SUMMARY — MIHIR MAURYA',
+          '• Role: Cloud & DevOps Engineer (Fresher / Intern / Full-Time)',
+          '• Location: Prayagraj, India | Phone: +91-9415909254 | Email: chhotuverma2238@gmail.com',
+          '• Education: M.Sc. Computer Science, University of Allahabad (2026–2028) | B.Sc. Math & Computer Apps (2023–2026)',
+          '• Core Stack: Microsoft Azure, Modular Terraform (for_each), Azure Key Vault (Secret Zero / Private Link / RBAC), GitHub Actions (OIDC), Azure DevOps (YAML Pipelines & Self-Hosted Agents), tfsec, Checkov, Gitleaks, TruffleHog, Linux, Python, Bash, PowerShell.',
+          '• Key Highlights:',
+          '  1. Cut Azure Hub-Spoke provisioning time from days to <15 mins via reusable Terraform modules & isolated state files.',
+          '  2. Built 100% secretless CI/CD pipelines using Entra ID OIDC Federation & Managed Identities over Private Endpoints.',
+          '  3. Configured self-hosted Windows/Linux build agent pools with JIT binary bootstrapping & agentless pool: server gates.',
+          '• Portfolio: https://mihirmaurya-dev.github.io/'
+        ].join('\n');
+
+        navigator.clipboard.writeText(hrSummary).then(() => {
+          showToast('Copied formatted HR Evaluation Summary to clipboard!');
+        });
+      });
+    }
+
+    function highlightResumeKeyword(keyword) {
+      if (!resumeAtsContent) return;
+      resumeAtsContent.innerHTML = originalAtsHtml;
+      const cleanKw = keyword.trim();
+
+      hrChips.forEach(c => {
+        const chipKw = c.getAttribute('data-kw') || '';
+        c.classList.toggle('active', chipKw.toLowerCase() === cleanKw.toLowerCase() && cleanKw !== '');
+      });
+
+      if (!cleanKw) {
+        hrMatchCount.classList.remove('visible');
+        return;
+      }
+
+      const escaped = cleanKw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${escaped})`, 'gi');
+      let count = 0;
+
+      const walker = document.createTreeWalker(resumeAtsContent, NodeFilter.SHOW_TEXT, null, false);
+      const textNodes = [];
+      while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+      textNodes.forEach(node => {
+        const matches = node.nodeValue.match(regex);
+        if (matches) {
+          count += matches.length;
+          const span = document.createElement('span');
+          span.innerHTML = node.nodeValue.replace(regex, '<mark class="hr-highlight">$1</mark>');
+          node.parentNode.replaceChild(span, node);
+        }
+      });
+
+      hrMatchCount.textContent = `${count} match${count === 1 ? '' : 'es'}`;
+      hrMatchCount.classList.add('visible');
+    }
+
+    if (hrKeywordInput) {
+      hrKeywordInput.addEventListener('input', (e) => {
+        resumeTabAts.click();
+        highlightResumeKeyword(e.target.value);
+      });
+    }
+
+    hrChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const kw = chip.getAttribute('data-kw') || '';
+        hrKeywordInput.value = kw;
+        resumeTabAts.click();
+        highlightResumeKeyword(kw);
+      });
+    });
+
+    // 9. Dual-Project Interactive Architecture & Hub-Spoke Topology Explorer
     const archModal = document.getElementById('arch-modal');
     const openArchDevopsBtn = document.getElementById('open-arch-devops');
     const openArchHubspokeBtn = document.getElementById('open-arch-hubspoke');
@@ -1690,102 +2192,104 @@
     const inspectorStatus = document.getElementById('inspector-status');
     const inspectorDesc = document.getElementById('inspector-desc');
 
-    let currentArchProject = 'devops'; // 'devops' or 'hubspoke'
+    let currentArchProject = 'devops';
 
     const projectConfigs = {
       devops: {
-        heading: 'Enterprise DevOps & CI/CD Ecosystem — Architecture',
-        meta: '4-Stage Automated Pipeline',
+        heading: 'Enterprise DevOps & Dual CI/CD Ecosystem — Architecture',
+        meta: 'OIDC Federation · Self-Hosted JIT Agents · pool: server Gates',
         simLabel: 'Simulate Pipeline',
         mermaid: `graph LR
-  subgraph S1["1. Pre-Commit & Shift-Left"]
-    A[Git Push / PR] --> B[terraform fmt & validate]
-    B --> C[TFLint & Gitleaks]
+  subgraph S1["1. Monorepo Diff & Secret Gate"]
+    A[Git PR / Push] --> B[Changed-Files Matrix]
+    B --> C[Gitleaks & TruffleHog]
+    C --> D[terraform fmt & TFLint]
   end
 
-  subgraph S2["2. Master CI/CD Pipeline (GitHub Actions)"]
-    C --> D[tfsec & Checkov SAST]
-    D --> E[Infracost FinOps Gate]
-    E --> F[Terratest Modules]
+  subgraph S2["2. Self-Hosted JIT Agents (Velociraptor / T-Rex)"]
+    D --> E[JIT PowerShell Binary Bootstrap]
+    E --> F[tfsec & Checkov SARIF/JUnit]
+    F --> G[Infracost & Azure Retail Prices API]
   end
 
-  subgraph S3["3. Identity & State Governance"]
-    F --> G[Entra ID OIDC Federation]
-    G --> H[Azure Blob Remote State]
+  subgraph S3["3. OIDC & Agentless Approval Gate"]
+    G --> H[Entra ID OIDC / Velociraptor-Auth]
+    H --> I[pool: server ManualValidation@1]
+    I --> J[Locked terraform plan -out Artifact]
   end
 
-  subgraph S4["4. Azure Infrastructure (centralindia)"]
-    H --> I[Hub-Spoke VNet & Bastion]
-    I --> J[App Gateway & NSGs]
-    J --> K[Azure Key Vault & Linux VMSS]
+  subgraph S4["4. Isolated Multi-Env Remote State Apply"]
+    J --> K[hub.tfstate]
+    J --> L[spoke-dev.tfstate]
+    J --> M[spoke-prod.tfstate]
   end`,
         stages: {
           1: {
-            title: 'Stage 01: Developer Pre-Commit & Shift-Left Gate',
-            status: 'Pre-Commit: Verified',
-            desc: 'Enforces code quality and secret hygiene before code ever leaves the workstation. Automated pre-commit hooks run <code>terraform fmt</code>, <code>terraform validate</code>, <code>TFLint</code>, and secret scanning via <code>Gitleaks</code> and <code>Trufflehog</code> across modular repositories.'
+            title: 'Stage 01: Dynamic Monorepo Diff & Multi-Layered Secret Gate',
+            status: 'Secret Scan: 0 Leaks',
+            desc: 'Uses <code>tj-actions/changed-files</code> and PowerShell diff scripts to dynamically spawn parallel matrix jobs only for modified directories. Runs <code>Gitleaks</code> (custom <code>.gitleaks.toml</code>) and <code>TruffleHog</code> (<code>--only-verified --fail</code>) with <code>fetch-depth: 0</code> alongside <code>TFLint</code> and <code>terraform fmt -check</code>.'
           },
           2: {
-            title: 'Stage 02: Centralized Master CI/CD Pipeline (GitHub Actions)',
-            status: 'Policy & FinOps: Passed',
-            desc: 'Reusable GitHub Actions workflows orchestrate static code analysis (<code>tfsec</code> & <code>Checkov</code>), automated infrastructure testing (<code>Terratest</code>), and pull-request cloud cost breakdowns via <code>Infracost</code> before any plan is approved.'
+            title: 'Stage 02: Self-Hosted Agent JIT Bootstrapping, SAST & FinOps',
+            status: 'Agents: Velociraptor & T-Rex',
+            desc: 'Executes on private Windows/Linux self-hosted build agents with resilient PowerShell JIT bootstrapping that downloads and verifies pinned binaries at runtime. Uploads <code>tfsec</code> and <code>Checkov</code> findings to GitHub Security (SARIF) and Azure DevOps Test Dashboards (JUnit XML), and queries the <strong>Azure Retail Prices API</strong> &amp; <code>Infracost</code> for PR cost deltas.'
           },
           3: {
-            title: 'Stage 03: Passwordless OIDC Auth & Remote State Locking',
-            status: 'Entra OIDC: Authenticated',
-            desc: 'Eliminates long-lived static credentials by using <strong>Microsoft Entra ID Workload Identity Federation (OIDC)</strong> with scoped RBAC roles. Terraform state is encrypted at rest in Azure Blob Storage with native lease locking.'
+            title: 'Stage 03: Secretless OIDC & Agentless Approval Gate (pool: server)',
+            status: 'OIDC & Gate: Verified',
+            desc: 'Authenticates via <strong>Microsoft Entra ID OIDC Workload Identity Federation</strong> (<code>ARM_USE_OIDC: true</code>) and dedicated Azure DevOps service connections (<code>Velociraptor-Auth</code>)—eliminating 100% of stored client secrets. Uses agentless <code>pool: server</code> (<code>ManualValidation@1</code>) so self-hosted runner threads are never locked while waiting for approval.'
           },
           4: {
-            title: 'Stage 04: Modular Azure Cloud Deployment',
-            status: 'Region: centralindia (Live)',
-            desc: 'Automated <code>terraform apply</code> provisions the Hub-Spoke network, Bastion host, Application Gateway, Key Vault, and Linux VM Scale Sets with zero manual portal intervention.'
+            title: 'Stage 04: Locked Plan Artifact Promotion & Isolated Remote States',
+            status: 'State Lock: Active',
+            desc: 'Applies strictly from locked <code>terraform plan -out</code> binary artifacts (with cross-platform path slugging). Segregates state files across <code>hub</code>, <code>spoke-dev</code>, and <code>spoke-prod</code> in Azure Blob Storage to allow concurrent pipeline execution without state-lock conflicts.'
           }
         }
       },
       hubspoke: {
-        heading: 'Azure Hub-Spoke Network — Multi-Tier Cloud Topology',
-        meta: 'VNet Peering · Zero-Trust Segmentation · <15m Provisioning',
+        heading: 'Azure Hub-Spoke & Zero-Secret Key Vault — Cloud Topology',
+        meta: 'for_each Subnets · VNet Peering · Private Link Key Vault',
         simLabel: 'Simulate Packet Flow',
         mermaid: `graph LR
-  subgraph Edge["1. Edge & Admin Ingress"]
-    U[HTTPS Client Traffic] --> CF[Cloudflare CDN / WAF]
-    ADM[DevOps Engineer] --> BAS[Azure Bastion TLS]
+  subgraph Edge["1. Cloudflare Edge & WAF Ingress"]
+    U[Public HTTPS Traffic] --> CF[Cloudflare Subdomain CDN]
+    ADM[DevOps Admin] --> BAS[Azure Bastion TLS]
   end
 
-  subgraph Hub["2. Hub VNet (10.0.0.0/16)"]
-    CF --> AGW[Application Gateway WAF v2]
-    BAS --> BSUB[AzureBastionSubnet /26]
-    AGW --> FW[Central Firewall & UDR Routing]
+  subgraph Hub["2. Hub VNet (for_each Dynamic Subnets)"]
+    CF --> AGW[Application Gateway WAF]
+    BAS --> BSUB[AzureBastionSubnet]
+    AGW --> VPN[VPN Gateway Transit & Firewall]
   end
 
-  subgraph Spoke1["3. Spoke 01: Compute VNet (10.1.0.0/16)"]
-    FW == VNet Peering ==> VMSS[Linux VM Scale Sets]
-    BSUB -. Private SSH .-> VMSS
+  subgraph Spokes["3. Spoke-Dev & Spoke-Prod VNets"]
+    VPN == Bi-Directional Peering ==> VMS[3x Load-Balanced Azure VMs]
+    BSUB -. Private Admin .-> VMS
   end
 
-  subgraph Spoke2["4. Spoke 02: Isolated Data & Security (10.2.0.0/16)"]
-    VMSS == Private Endpoint ==> KV[Azure Key Vault RBAC]
+  subgraph SecretZero["4. Zero-Secret Azure Key Vault"]
+    VMS == System Managed Identity / Private Link ==> KV[Key Vault: RBAC + Purge Protection]
   end`,
         stages: {
           1: {
-            title: 'Tier 01: Edge Ingress & Zero-Public-IP Admin Access',
-            status: 'Ingress: TLS 1.3 / WAF',
-            desc: 'Public user traffic enters exclusively via <strong>Cloudflare CDN</strong> and HTTPS TLS 1.3 termination. Direct public SSH (port 22) and RDP (port 3389) are completely denied at the perimeter—all administrative access routes through <strong>Azure Bastion</strong> over TLS.'
+            title: 'Tier 01: Cloudflare Edge Proxy & Scoped NSG Perimeter',
+            status: 'Edge: Cloudflare + NSG',
+            desc: 'Exposes the web application securely via a <strong>Cloudflare-managed subdomain</strong> (~30% faster CDN delivery) routing strictly to the Azure Application Gateway. Subnet Network Security Groups (NSGs) block all unauthorized ports and deny direct public SSH/RDP access.'
           },
           2: {
-            title: 'Tier 02: Shared Transit Hub VNet (10.0.0.0/16)',
-            status: 'Hub VNet: Active',
-            desc: 'Acts as the central security and transit boundary in <code>centralindia</code>. Hosts the <code>AzureBastionSubnet (/26)</code>, <strong>Application Gateway WAF v2</strong>, centralized User-Defined Routes (UDRs), and Azure Monitor Log Analytics.'
+            title: 'Tier 02: Modular Hub VNet with Dynamic for_each Subnetting',
+            status: 'Provisioned: <15 Mins',
+            desc: 'Custom reusable Terraform <code>network</code> and <code>vpn</code> modules iterate over maps of objects using <code>for_each</code> to dynamically provision <code>ApplicationGatewaySubnet</code>, <code>AzureBastionSubnet</code>, <code>AzureFirewallSubnet</code>, and <code>GatewaySubnet</code> with automated dependency ordering.'
           },
           3: {
-            title: 'Spoke 01: Application & Compute VNet (10.1.0.0/16)',
-            status: 'VNet Peering: Connected',
-            desc: 'Connected to the Hub via non-transitive, low-latency <strong>VNet Peering</strong>. Runs auto-scaling <strong>Linux Virtual Machine Scale Sets (VMSS)</strong> locked down by strict Subnet Network Security Groups (NSGs) that only accept traffic from the Hub Application Gateway.'
+            title: 'Tier 03: Multi-Environment Spokes & 3x Load-Balanced Azure VMs',
+            status: 'Peering: Gateway Transit',
+            desc: 'Wires up automated bi-directional VNet Peering (<code>for_each = local.spokes</code>) across isolated <code>spoke-dev</code> and <code>spoke-prod</code> environments with <code>allow_gateway_transit = true</code>. Load-balances traffic across <strong>3 Azure VMs</strong> equipped with System-Assigned Managed Identities.'
           },
           4: {
-            title: 'Spoke 02: Isolated Data & Key Vault Tier (10.2.0.0/16)',
-            status: 'Private Link: Enforced',
-            desc: 'Houses <strong>Azure Key Vault</strong> with public network access disabled (<code>public_network_access_enabled = false</code>). Spoke 01 compute nodes retrieve secrets and certificates privately over <strong>Azure Private Endpoint</strong> and Private DNS Zones using Managed Identities.'
+            title: 'Tier 04: Zero-Secret Azure Key Vault & Private Endpoint',
+            status: 'Secret Zero: Enforced',
+            desc: 'Generates dynamic credentials in Terraform (<code>random_password</code> → <code>azurerm_key_vault_secret</code>) stored inside an RBAC-hardened <strong>Azure Key Vault</strong> (<code>Key Vault Secrets Officer/User</code>) with Soft Delete, Purge Protection, and Private DNS resolution (<code>privatelink.vaultcore.azure.net</code>). VMs retrieve secrets in-memory at runtime via IMDS.'
           }
         }
       }
@@ -1809,7 +2313,6 @@
       currentArchProject = projectKey;
       const cfg = projectConfigs[projectKey];
 
-      // Update headings & buttons
       archModalHeading.textContent = cfg.heading;
       archSubMeta.textContent = cfg.meta;
       simBtnLabel.textContent = cfg.simLabel;
@@ -1821,7 +2324,6 @@
       svgDevops.classList.toggle('hidden', projectKey !== 'devops');
       svgHubspoke.classList.toggle('hidden', projectKey !== 'hubspoke');
 
-      // Reset simulation highlights and select Stage 1
       document.querySelectorAll('.arch-node').forEach(n => n.classList.remove('sim-passed'));
       document.querySelectorAll('.flow-line').forEach(f => f.classList.remove('active-flow'));
       selectArchStage(1);
@@ -1848,78 +2350,85 @@
       archModal.setAttribute('aria-hidden', 'true');
     }
 
-    openArchDevopsBtn.addEventListener('click', () => openArchModal('devops'));
-    openArchHubspokeBtn.addEventListener('click', () => openArchModal('hubspoke'));
-    switchDevopsBtn.addEventListener('click', () => switchArchProject('devops'));
-    switchHubspokeBtn.addEventListener('click', () => switchArchProject('hubspoke'));
+    if (openArchDevopsBtn) openArchDevopsBtn.addEventListener('click', () => openArchModal('devops'));
+    if (openArchHubspokeBtn) openArchHubspokeBtn.addEventListener('click', () => openArchModal('hubspoke'));
+    if (switchDevopsBtn) switchDevopsBtn.addEventListener('click', () => switchArchProject('devops'));
+    if (switchHubspokeBtn) switchHubspokeBtn.addEventListener('click', () => switchArchProject('hubspoke'));
+    if (closeArchBtn) closeArchBtn.addEventListener('click', closeArchModal);
+    if (closeArchDot) closeArchDot.addEventListener('click', closeArchModal);
 
-    closeArchBtn.addEventListener('click', closeArchModal);
-    closeArchDot.addEventListener('click', closeArchModal);
-    archModal.addEventListener('click', (e) => {
-      if (e.target === archModal) closeArchModal();
-    });
-
-    tabSvgBtn.addEventListener('click', () => {
-      tabSvgBtn.classList.add('active');
-      tabMermaidBtn.classList.remove('active');
-      archSvgView.classList.remove('hidden');
-      archMermaidView.classList.remove('active');
-    });
-
-    tabMermaidBtn.addEventListener('click', () => {
-      tabMermaidBtn.classList.add('active');
-      tabSvgBtn.classList.remove('active');
-      archSvgView.classList.add('hidden');
-      archMermaidView.classList.add('active');
-    });
-
-    copyMermaidBtn.addEventListener('click', () => {
-      const code = mermaidCodeEl.textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        showToast('Mermaid.js diagram code copied!');
+    if (archModal) {
+      archModal.addEventListener('click', (e) => {
+        if (e.target === archModal) closeArchModal();
       });
-    });
+    }
 
-    // Simulate End-to-End Pipeline or Packet Flow
+    if (tabSvgBtn && tabMermaidBtn) {
+      tabSvgBtn.addEventListener('click', () => {
+        tabSvgBtn.classList.add('active');
+        tabMermaidBtn.classList.remove('active');
+        archSvgView.classList.remove('hidden');
+        archMermaidView.classList.remove('active');
+      });
+
+      tabMermaidBtn.addEventListener('click', () => {
+        tabMermaidBtn.classList.add('active');
+        tabSvgBtn.classList.remove('active');
+        archSvgView.classList.add('hidden');
+        archMermaidView.classList.add('active');
+      });
+    }
+
+    if (copyMermaidBtn) {
+      copyMermaidBtn.addEventListener('click', () => {
+        const code = mermaidCodeEl.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          showToast('Mermaid.js diagram code copied!');
+        });
+      });
+    }
+
     let simRunning = false;
-    simulatePipelineBtn.addEventListener('click', () => {
-      if (simRunning) return;
-      simRunning = true;
-      tabSvgBtn.click();
+    if (simulatePipelineBtn) {
+      simulatePipelineBtn.addEventListener('click', () => {
+        if (simRunning) return;
+        simRunning = true;
+        tabSvgBtn.click();
 
-      const flowPrefix = currentArchProject === 'devops' ? 'devops-flow-' : 'net-flow-';
-      const flows = [
-        document.getElementById(`${flowPrefix}1`),
-        document.getElementById(`${flowPrefix}2`),
-        document.getElementById(`${flowPrefix}3`)
-      ];
-      const activeNodes = document.querySelectorAll(`.${currentArchProject}-node`);
+        const flowPrefix = currentArchProject === 'devops' ? 'devops-flow-' : 'net-flow-';
+        const flows = [
+          document.getElementById(`${flowPrefix}1`),
+          document.getElementById(`${flowPrefix}2`),
+          document.getElementById(`${flowPrefix}3`)
+        ];
+        const activeNodes = document.querySelectorAll(`.${currentArchProject}-node`);
 
-      activeNodes.forEach(n => n.classList.remove('sim-passed'));
-      flows.forEach(f => f && f.classList.remove('active-flow'));
+        activeNodes.forEach(n => n.classList.remove('sim-passed'));
+        flows.forEach(f => f && f.classList.remove('active-flow'));
 
-      const steps = [1, 2, 3, 4];
-      steps.forEach((stage, idx) => {
-        setTimeout(() => {
-          playClickSound(4300 + idx * 180);
-          selectArchStage(stage);
-          const currentNode = document.querySelector(`.${currentArchProject}-node[data-stage="${stage}"]`);
-          if (currentNode) currentNode.classList.add('sim-passed');
-          if (idx > 0 && flows[idx - 1]) {
-            flows[idx - 1].classList.add('active-flow');
-          }
-          if (idx === steps.length - 1) {
-            const msg = currentArchProject === 'devops'
-              ? 'Pipeline simulation complete: All 4 stages healthy!'
-              : 'Packet trace complete: Hub-Spoke peering & Private Link verified!';
-            showToast(msg);
-            simRunning = false;
-          }
-        }, idx * 650);
+        const steps = [1, 2, 3, 4];
+        steps.forEach((stage, idx) => {
+          setTimeout(() => {
+            playClickSound(4300 + idx * 180);
+            selectArchStage(stage);
+            const currentNode = document.querySelector(`.${currentArchProject}-node[data-stage="${stage}"]`);
+            if (currentNode) currentNode.classList.add('sim-passed');
+            if (idx > 0 && flows[idx - 1]) {
+              flows[idx - 1].classList.add('active-flow');
+            }
+            if (idx === steps.length - 1) {
+              const msg = currentArchProject === 'devops'
+                ? 'Pipeline simulation complete: All 4 stages healthy!'
+                : 'Packet trace complete: Hub-Spoke peering & Key Vault Private Link verified!';
+              showToast(msg);
+              simRunning = false;
+            }
+          }, idx * 650);
+        });
       });
-    });
+    }
 
-    // 9. Interactive DevOps Terminal
+    // 10. Interactive DevOps Terminal
     const terminalModal = document.getElementById('terminal-modal');
     const openTerminalBtn = document.getElementById('open-terminal-btn');
     const closeTerminalBtn = document.getElementById('close-terminal-btn');
@@ -1939,25 +2448,32 @@
       terminalModal.setAttribute('aria-hidden', 'true');
     }
 
-    openTerminalBtn.addEventListener('click', openTerminal);
-    closeTerminalBtn.addEventListener('click', closeTerminal);
-    closeTerminalDot.addEventListener('click', closeTerminal);
-    terminalModal.addEventListener('click', (e) => {
-      if (e.target === terminalModal) closeTerminal();
-    });
+    if (openTerminalBtn) openTerminalBtn.addEventListener('click', openTerminal);
+    if (closeTerminalBtn) closeTerminalBtn.addEventListener('click', closeTerminal);
+    if (closeTerminalDot) closeTerminalDot.addEventListener('click', closeTerminal);
+
+    if (terminalModal) {
+      terminalModal.addEventListener('click', (e) => {
+        if (e.target === terminalModal) closeTerminal();
+      });
+    }
 
     document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         closeArchModal();
+        closeResumeModal();
         terminalModal.classList.contains('open') ? closeTerminal() : openTerminal();
       } else if (e.key === 'Escape') {
+        if (resumeModal.classList.contains('open')) closeResumeModal();
         if (archModal.classList.contains('open')) closeArchModal();
         if (terminalModal.classList.contains('open')) closeTerminal();
       }
     });
 
-    terminalInput.addEventListener('keydown', () => playClickSound(4400));
+    if (terminalInput) {
+      terminalInput.addEventListener('keydown', () => playClickSound(4400));
+    }
 
     function appendLine(htmlContent) {
       const div = document.createElement('div');
@@ -1976,77 +2492,102 @@
       if (cmd === 'help') {
         appendLine(
 `<span class="term-info">Available Commands:</span>
-  <span class="term-add">terraform plan</span>    Simulate Azure Hub-Spoke & CI/CD infrastructure plan
+  <span class="term-add">terraform plan</span>    Simulate modular Hub-Spoke & Key Vault plan
+  <span class="term-add">keyvault --status</span> Inspect Zero-Secret Key Vault & Private Link config
+  <span class="term-add">agents --status</span>   Check Self-Hosted Build Agents & pool: server gates
   <span class="term-add">security --audit</span>  Run shift-left policy checks (tfsec, Checkov, Gitleaks)
-  <span class="term-add">arch</span>              Open Enterprise DevOps CI/CD Pipeline Diagram
-  <span class="term-add">net</span>               Open Azure Hub-Spoke Network Topology View
-  <span class="term-add">whoami</span>            Display engineer profile & current academic status
+  <span class="term-add">resume</span>            Open Interactive HR & Recruiter Resume Viewer
+  <span class="term-add">arch</span>              Open Dual CI/CD Pipeline Architecture Diagram
+  <span class="term-add">net</span>               Open Azure Hub-Spoke & Key Vault Topology View
   <span class="term-add">skills</span>            List core Cloud, IaC, and DevSecOps stack
   <span class="term-add">projects</span>          Show featured infrastructure repositories
+  <span class="term-add">whoami</span>            Display engineer profile & contact details
   <span class="term-add">contact</span>           Copy email address & show social endpoints
   <span class="term-add">theme</span>             Toggle light/dark mode
   <span class="term-add">clear</span>             Clear terminal output`
         );
+      } else if (cmd === 'resume' || cmd === 'cv') {
+        appendLine(`<span class="term-add">✔ Opening In-Tab HR & Recruiter Resume Viewer...</span>`);
+        setTimeout(() => {
+          closeTerminal();
+          openResumeModal();
+        }, 220);
       } else if (cmd === 'arch' || cmd === 'diagram') {
-        appendLine(`<span class="term-add">✔ Launching Enterprise DevOps CI/CD Architecture Explorer...</span>`);
+        appendLine(`<span class="term-add">✔ Launching Dual CI/CD Architecture Explorer...</span>`);
         setTimeout(() => {
           closeTerminal();
           openArchModal('devops');
         }, 220);
       } else if (cmd === 'net' || cmd === 'topology' || cmd === 'hubspoke') {
-        appendLine(`<span class="term-add">✔ Launching Azure Hub-Spoke Network Topology Explorer...</span>`);
+        appendLine(`<span class="term-add">✔ Launching Azure Hub-Spoke & Key Vault Topology Explorer...</span>`);
         setTimeout(() => {
           closeTerminal();
           openArchModal('hubspoke');
         }, 220);
-      } else if (cmd === 'whoami') {
+      } else if (cmd === 'keyvault --status' || cmd === 'keyvault') {
         appendLine(
-`<strong>Mihir Maurya</strong> — Cloud & DevOps Engineer (India)
-• Role: Cloud & DevOps Engineer Intern @ DevOps Insiders
-• Education: M.Sc. Computer Science @ University of Allahabad (2026–2028)
-• Focus: Modular Terraform, Azure Architecture, GitHub Actions, Shift-Left Security`
+`<span class="term-info">[Azure Key Vault — Zero-Secret Architecture]</span>
+• Vault URI:         https://kv-hub-shared.vault.azure.net/
+• DNS Resolution:    privatelink.vaultcore.azure.net (Public Access: Disabled)
+• Auth Model:        Microsoft Entra ID RBAC (Secrets Officer / Secrets User)
+• Runtime Retrieval: System-Assigned Managed Identity via IMDS
+• Protection:        Soft Delete (90d) + Purge Protection Enabled`
+        );
+      } else if (cmd === 'agents --status' || cmd === 'agents') {
+        appendLine(
+`<span class="term-info">[Azure DevOps Self-Hosted Agent Pools & Serverless Gates]</span>
+✔ <span class="term-add">Velociraptor-Agent (Windows)</span> : Online · JIT PowerShell (tflint, gitleaks, tfsec)
+✔ <span class="term-add">T-Rex-Agent (Linux Ubuntu)</span>   : Online · Native Checkov & Terraform Runner
+✔ <span class="term-add">ManualValidation@1 Gate</span>      : pool: server (0 worker threads locked during approval)`
         );
       } else if (cmd === 'skills') {
         appendLine(
-`<span class="term-info">[Cloud & IaC]</span>     Microsoft Azure, Terraform (Modular), Docker, Linux
-<span class="term-info">[CI/CD & DevSec]</span>  GitHub Actions, tfsec, Checkov, TFLint, Terratest, Gitleaks
-<span class="term-info">[FinOps & IAM]</span>    Infracost, Microsoft Entra ID (RBAC), OIDC Federation
-<span class="term-info">[Scripting]</span>       Bash, PowerShell, Python, PHP & MySQL`
+`<span class="term-info">[Cloud & IaC]</span>     Microsoft Azure, Modular Terraform (for_each), Azure Key Vault, Cloudflare
+<span class="term-info">[CI/CD & Agents]</span>  GitHub Actions (OIDC), Azure DevOps (YAML), Self-Hosted Agents (JIT)
+<span class="term-info">[DevSec & FinOps]</span> tfsec, Checkov, Gitleaks, TruffleHog, TFLint, Terratest, Infracost
+<span class="term-info">[OS & Scripting]</span>  Linux (Ubuntu), Bash, PowerShell, Python, C++, PHP 8.x & MySQL`
         );
       } else if (cmd === 'projects') {
         appendLine(
-`1. <span class="term-add">Enterprise DevOps & CI/CD Ecosystem</span> (Type <span class="term-info">arch</span> for pipeline diagram)
-2. <span class="term-add">Azure Hub-Spoke Network</span> (Type <span class="term-info">net</span> for VNet peering topology)
-3. <span class="term-add">FlexZone</span> (PHP 8 REST API on Azure VM + Cloudflare CDN)
-→ View all at: <a href="https://github.com/MihirMaurya-dev" target="_blank" style="text-decoration:underline;color:#38bdf8;">github.com/MihirMaurya-dev</a>`
+`1. <span class="term-add">Enterprise DevOps & Dual CI/CD Ecosystem</span> (Type <span class="term-info">arch</span> for pipeline diagram)
+2. <span class="term-add">Azure Hub-Spoke & Zero-Secret Key Vault</span>  (Type <span class="term-info">net</span> for topology diagram)
+3. <span class="term-add">FlexZone — Fitness Tracking API on Azure</span> (PHP 8.x & MySQL <200ms, Cloudflare CDN)`
+        );
+      } else if (cmd === 'whoami') {
+        appendLine(
+`<strong>Mihir Maurya</strong> — Cloud & DevOps Engineer (Prayagraj, India)
+• Role:      Cloud & DevOps Engineer Intern @ DevOps Insiders (Jan 2026 – Present)
+• Education: M.Sc. Computer Science @ University of Allahabad (2026–2028)
+• Phone:     +91-9415909254 | Email: chhotuverma2238@gmail.com`
         );
       } else if (cmd === 'security --audit') {
         appendLine(
-`<span class="term-muted">Running pre-commit & CI security gates...</span>
-✔ <span class="term-add">[gitleaks]</span>   0 hardcoded secrets detected across commits
-✔ <span class="term-add">[tflint]</span>     0 syntax or provider warnings in ./modules
-✔ <span class="term-add">[tfsec]</span>      Passed 48/48 Azure NSG, KeyVault & Storage checks
-✔ <span class="term-add">[checkov]</span>    CIS Azure Benchmark compliance verified
-✔ <span class="term-add">[infracost]</span>  Estimated monthly delta: +$42.10/mo (within budget threshold)`
+`<span class="term-muted">Running pre-merge DevSecOps gates (fetch-depth: 0)...</span>
+✔ <span class="term-add">[gitleaks]</span>   0 secrets detected (.gitleaks.toml rules applied)
+✔ <span class="term-add">[trufflehog]</span> 0 verified credentials in git history (--only-verified --fail)
+✔ <span class="term-add">[tfsec]</span>      Passed Azure NSG & Key Vault Purge Protection checks (SARIF uploaded)
+✔ <span class="term-add">[checkov]</span>    Passed CIS Azure Benchmark (JUnit XML published to ADO Test Dashboard)
+✔ <span class="term-add">[finops]</span>     plan.json parsed via Azure Retail Prices API & Infracost`
         );
       } else if (cmd === 'terraform plan') {
-        appendLine(`<span class="term-muted">Initializing provider plugins (hashicorp/azurerm v3.116.0)...</span>`);
+        appendLine(`<span class="term-muted">Acquiring state lease in Azure Blob Storage (hub.tfstate)...</span>`);
         setTimeout(() => {
           appendLine(
-`<span class="term-add">+ module.hub_network.azurerm_virtual_network.hub</span>       (centralindia)
-<span class="term-add">+ module.spoke_workload.azurerm_subnet.app_tier</span>        (10.1.1.0/24)
-<span class="term-add">+ module.security.azurerm_key_vault.kv_prod</span>            (RBAC enabled)
-<span class="term-add">+ module.compute.azurerm_linux_virtual_machine_scale_set.vmss</span>
-<span class="term-add">+ module.oidc.azuread_application_federated_identity_credential.github</span>
+`<span class="term-add">+ module.network.azurerm_virtual_network.hub</span>                    (for_each: 4 subnets)
+<span class="term-add">+ module.spoke_networks["spoke-prod"].azurerm_virtual_network</span>   (peering + gateway transit)
+<span class="term-add">+ module.key_vault.azurerm_key_vault.kv_hub_shared</span>              (RBAC + Purge Protection)
+<span class="term-add">+ module.key_vault.azurerm_private_endpoint.kv_pe</span>               (privatelink.vaultcore.azure.net)
+<span class="term-add">+ azurerm_application_gateway.appgw_waf</span>                         (3x Azure VM Backend Pool)
 
 <span class="term-info">Plan:</span> <span class="term-add">5 to add</span>, 0 to change, 0 to destroy.
-<span class="term-muted">✔ OIDC Workload Identity verified. Ready for automated GitHub Actions apply.</span>`
+<span class="term-muted">✔ Saved binary plan to: $(TF_WORKING_DIR)-plan.tfplan</span>`
           );
         }, 280);
       } else if (cmd === 'contact') {
         navigator.clipboard.writeText('chhotuverma2238@gmail.com');
         appendLine(
 `<span class="term-add">✔ Copied chhotuverma2238@gmail.com to your clipboard!</span>
+• Phone:    +91-9415909254
 • GitHub:   https://github.com/MihirMaurya-dev
 • LinkedIn: https://linkedin.com/in/mihirmauryaa1`
         );
@@ -2061,12 +2602,14 @@
       }
     }
 
-    terminalForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const val = terminalInput.value;
-      terminalInput.value = '';
-      runCommand(val);
-    });
+    if (terminalForm) {
+      terminalForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const val = terminalInput.value;
+        terminalInput.value = '';
+        runCommand(val);
+      });
+    }
 
     document.querySelectorAll('.cmd-chip').forEach(chip => {
       chip.addEventListener('click', () => {
@@ -2074,7 +2617,7 @@
       });
     });
 
-    // Initialize default Mermaid code on load
+    // Initialize default architecture view on load
     switchArchProject('devops');
   </script>
 </body>
