@@ -15,6 +15,21 @@
 
 ---
 
+
+## 🧰 Technology Stack & Tooling
+
+<div align="center">
+
+<a href="https://skillicons.dev">
+  <img src="https://skillicons.dev/icons?i=html,css,js,git,githubactions,vscode&theme=dark&perline=8" alt="Technology Stack" />
+</a>
+
+</div>
+
+<br/>
+
+---
+
 ## 🧭 About This Portfolio
 
 This repository hosts the personal engineering portfolio website for **Mihir Maurya**, designed to showcase enterprise-grade **Azure Cloud Infrastructure**, **DevSecOps Pipelines**, **Model Context Protocol (MCP) AI Systems**, and real-world system architecture blueprints.
