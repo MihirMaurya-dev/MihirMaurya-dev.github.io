@@ -638,6 +638,44 @@
       to { stroke-dashoffset: -1000; }
     }
 
+    /* Blueprint Tabs & Panels */
+    .blueprint-panel {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .blueprint-panel.active {
+      display: flex;
+    }
+
+    .blueprint-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .blueprint-meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Filter Pill Bar */
     .filter-bar {
       display: flex;
@@ -1132,6 +1170,7 @@
       <ul class="nav-links">
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#architecture" class="nav-link">Architecture</a></li>
+        <li><a href="#activity" class="nav-link">Activity</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#repositories" class="nav-link">Repositories</a></li>
         <li><a href="#experience" class="nav-link">Experience</a></li>
@@ -1266,113 +1305,636 @@
       </div>
     </section>
 
-    <!-- Interactive Architecture Topology SVG -->
+    <!-- Interactive Architecture Topology Console -->
     <section class="card arch-card" id="architecture">
       <div class="section-header">
-        <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i> Cloud & Pipeline Architecture Blueprint</h2>
-        <p class="section-subtitle">Zero-Trust Azure CAF Hub-and-Spoke Topology & 4-Stage Shift-Left Security Pipeline Gate</p>
+        <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i> Cloud & Pipeline Architecture Blueprints</h2>
+        <p class="section-subtitle">Multi-tier Azure infrastructure topologies, low-level VM designs, and automated DevSecOps pipelines</p>
       </div>
 
-      <div class="svg-wrapper">
-        <svg class="arch-svg" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="hubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1E1B4B" />
-              <stop offset="100%" stop-color="#0F172A" />
-            </linearGradient>
-            <linearGradient id="spokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#064E3B" />
-              <stop offset="100%" stop-color="#0B132B" />
-            </linearGradient>
-            <linearGradient id="gateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#311042" />
-              <stop offset="100%" stop-color="#0F172A" />
-            </linearGradient>
-            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 10 5 L 0 9 z" fill="#00E5FF" />
-            </marker>
-          </defs>
+      <!-- Blueprint Tab Switcher -->
+      <div class="filter-bar" id="blueprint-tabs">
+        <button class="pill-btn active blueprint-tab-btn" data-blueprint="hubspoke">
+          <i class="fa-solid fa-sitemap"></i> 01. Azure CAF Hub-Spoke & CI/CD
+        </button>
+        <button class="pill-btn blueprint-tab-btn" data-blueprint="axion-infra">
+          <i class="fa-solid fa-cubes"></i> 02. Axion 3-Tier VM Infrastructure (LLD)
+        </button>
+        <button class="pill-btn blueprint-tab-btn" data-blueprint="axion-telemetry">
+          <i class="fa-solid fa-server"></i> 03. Axion Telemetry Query Deployment
+        </button>
+        <button class="pill-btn blueprint-tab-btn" data-blueprint="matrix-finops">
+          <i class="fa-solid fa-table-cells"></i> 04. Dynamic Matrix FinOps CI/CD
+        </button>
+      </div>
 
-          <!-- Group 1: Azure CAF Hub-Spoke Network -->
-          <g>
-            <rect x="20" y="20" width="410" height="280" rx="14" fill="#090E17" stroke="#1E293B" stroke-width="1.5" />
-            <text x="35" y="44" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">AZURE CAF NETWORK TOPOLOGY</text>
+      <!-- ==================== BLUEPRINT 1: Azure CAF Hub-Spoke & CI/CD ==================== -->
+      <div class="blueprint-panel active" id="blueprint-hubspoke">
+        <div class="blueprint-meta-bar">
+          <span class="blueprint-meta-tag"><i class="fa-brands fa-microsoft"></i> Architecture: Azure CAF Hub-and-Spoke Landing Zone</span>
+          <span>Security Gate: 4-Stage CI/CD · Checkov CIS Azure Passed 🟢</span>
+          <a href="#azure-hub-spoke-architecture" class="btn btn-sm btn-outline" style="padding: 3px 10px; font-size: 11px;">Inspect Repo ↗</a>
+        </div>
+        <div class="svg-wrapper">
+          <svg class="arch-svg" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1E1B4B" />
+                <stop offset="100%" stop-color="#0F172A" />
+              </linearGradient>
+              <linearGradient id="spokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#064E3B" />
+                <stop offset="100%" stop-color="#0B132B" />
+              </linearGradient>
+              <linearGradient id="gateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#311042" />
+                <stop offset="100%" stop-color="#0F172A" />
+              </linearGradient>
+              <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#00E5FF" />
+              </marker>
+            </defs>
 
-            <!-- Hub VNet Node -->
-            <a href="#azure-hub-spoke-architecture" class="arch-node">
-              <rect x="40" y="60" width="370" height="90" rx="10" fill="url(#hubGrad)" stroke="#7C3AED" stroke-width="1.5" />
-              <text x="60" y="88" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="14" font-weight="700">Central Hub VNet (10.0.0.0/16)</text>
-              <text x="60" y="108" fill="#A78BFA" font-family="'JetBrains Mono', monospace" font-size="11">Azure Bastion · NAT Gateway · Azure Key Vault</text>
-              <text x="60" y="130" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="10">Inspect: azure-hub-spoke-architecture ↗</text>
-            </a>
+            <!-- Group 1: Azure CAF Hub-Spoke Network -->
+            <g>
+              <rect x="20" y="20" width="410" height="280" rx="14" fill="#090E17" stroke="#1E293B" stroke-width="1.5" />
+              <text x="35" y="44" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">AZURE CAF NETWORK TOPOLOGY</text>
 
-            <!-- Spoke Dev Node -->
-            <g class="arch-node">
-              <rect x="40" y="180" width="175" height="95" rx="10" fill="url(#spokeGrad)" stroke="#10B981" stroke-width="1.5" />
-              <text x="55" y="206" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="13" font-weight="600">spoke-dev VNet</text>
-              <text x="55" y="226" fill="#6EE7B7" font-family="'JetBrains Mono', monospace" font-size="10">10.1.0.0/16 · Subnets</text>
-              <text x="55" y="246" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="10">Peered to Central Hub</text>
+              <!-- Hub VNet Node -->
+              <a href="#azure-hub-spoke-architecture" class="arch-node">
+                <rect x="40" y="60" width="370" height="90" rx="10" fill="url(#hubGrad)" stroke="#7C3AED" stroke-width="1.5" />
+                <text x="60" y="88" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="14" font-weight="700">Central Hub VNet (10.0.0.0/16)</text>
+                <text x="60" y="108" fill="#A78BFA" font-family="'JetBrains Mono', monospace" font-size="11">Azure Bastion · NAT Gateway · Azure Key Vault</text>
+                <text x="60" y="130" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="10">Inspect: azure-hub-spoke-architecture ↗</text>
+              </a>
+
+              <!-- Spoke Dev Node -->
+              <g class="arch-node">
+                <rect x="40" y="180" width="175" height="95" rx="10" fill="url(#spokeGrad)" stroke="#10B981" stroke-width="1.5" />
+                <text x="55" y="206" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="13" font-weight="600">spoke-dev VNet</text>
+                <text x="55" y="226" fill="#6EE7B7" font-family="'JetBrains Mono', monospace" font-size="10">10.1.0.0/16 · Subnets</text>
+                <text x="55" y="246" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="10">Peered to Central Hub</text>
+              </g>
+
+              <!-- Spoke Prod Node -->
+              <g class="arch-node">
+                <rect x="235" y="180" width="175" height="95" rx="10" fill="url(#spokeGrad)" stroke="#10B981" stroke-width="1.5" />
+                <text x="250" y="206" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="13" font-weight="600">spoke-prod VNet</text>
+                <text x="250" y="226" fill="#6EE7B7" font-family="'JetBrains Mono', monospace" font-size="10">10.2.0.0/16 · Isolated</text>
+                <text x="250" y="246" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="10">Peered to Central Hub</text>
+              </g>
+
+              <!-- Hub to Spoke Peering Connectors -->
+              <line x1="125" y1="150" x2="125" y2="180" stroke="#00E5FF" stroke-width="2" class="telemetry-pulse" />
+              <line x1="320" y1="150" x2="320" y2="180" stroke="#00E5FF" stroke-width="2" class="telemetry-pulse" />
             </g>
 
-            <!-- Spoke Prod Node -->
+            <!-- Network to CI/CD Bridge -->
+            <line x1="430" y1="160" x2="470" y2="160" stroke="#00FF66" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow)" />
+
+            <!-- Group 2: 4-Stage DevSecOps Pipeline Gate -->
+            <g>
+              <rect x="470" y="20" width="410" height="280" rx="14" fill="#090E17" stroke="#1E293B" stroke-width="1.5" />
+              <text x="485" y="44" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">4-STAGE DEVSECOPS PIPELINE GATE</text>
+
+              <!-- Stage 1 -->
+              <g class="arch-node">
+                <rect x="490" y="60" width="180" height="90" rx="10" fill="url(#gateGrad)" stroke="#A855F7" stroke-width="1.5" />
+                <text x="505" y="85" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="12" font-weight="700">Stage 1: Plan & FinOps</text>
+                <text x="505" y="105" fill="#C084FC" font-family="'JetBrains Mono', monospace" font-size="10">Terraform fmt & validate</text>
+                <text x="505" y="125" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">Azure Retail Prices API</text>
+              </g>
+
+              <!-- Stage 2 -->
+              <a href="#master-devsecops-pipeline" class="arch-node">
+                <rect x="685" y="60" width="180" height="90" rx="10" fill="url(#gateGrad)" stroke="#00E5FF" stroke-width="1.5" />
+                <text x="700" y="85" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="12" font-weight="700">Stage 2: Security Gate</text>
+                <text x="700" y="105" fill="#67E8F9" font-family="'JetBrains Mono', monospace" font-size="10">Checkov CIS · tfsec</text>
+                <text x="700" y="125" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="9">Gitleaks & TruffleHog ↗</text>
+              </a>
+
+              <!-- Stage 3 -->
+              <g class="arch-node">
+                <rect x="490" y="180" width="180" height="95" rx="10" fill="url(#gateGrad)" stroke="#F59E0B" stroke-width="1.5" />
+                <text x="505" y="206" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="12" font-weight="700">Stage 3: Approval Gate</text>
+                <text x="505" y="226" fill="#FCD34D" font-family="'JetBrains Mono', monospace" font-size="10">Production Environment</text>
+                <text x="505" y="246" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="9">Architectural Signoff</text>
+              </g>
+
+              <!-- Stage 4 -->
+              <g class="arch-node">
+                <rect x="685" y="180" width="180" height="95" rx="10" fill="url(#gateGrad)" stroke="#00FF66" stroke-width="1.5" />
+                <text x="700" y="206" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="12" font-weight="700">Stage 4: Immutable Apply</text>
+                <text x="700" y="226" fill="#86EFAC" font-family="'JetBrains Mono', monospace" font-size="10">Verified tfplan drop</text>
+                <text x="700" y="246" fill="#00FF66" font-family="'JetBrains Mono', monospace" font-size="9">Zero Configuration Drift</text>
+              </g>
+
+              <!-- Pipeline stage connectors -->
+              <line x1="670" y1="105" x2="685" y2="105" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrow)" />
+              <path d="M 775 150 L 775 165 L 580 165 L 580 180" fill="none" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrow)" />
+              <line x1="670" y1="227" x2="685" y2="227" stroke="#00FF66" stroke-width="2" marker-end="url(#arrow)" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ==================== BLUEPRINT 2: Axion 3-Tier VM Infrastructure (LLD) ==================== -->
+      <div class="blueprint-panel" id="blueprint-axion-infra">
+        <div class="blueprint-meta-bar">
+          <span class="blueprint-meta-tag"><i class="fa-solid fa-layer-group"></i> Architecture: Axion 3-Tier Monolithic Infrastructure (LLD)</span>
+          <span>Terraform Modules: rg-dev-001 · vnet-dev-001 (10.0.0.0/16) · 4x VMs</span>
+          <a href="https://github.com/devopsinsiders/axion-monolithic-infra.git" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="padding: 3px 10px; font-size: 11px;">axion-monolithic-infra ↗</a>
+        </div>
+        <div class="svg-wrapper">
+          <svg class="arch-svg" viewBox="0 0 920 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="axionVnetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0B132B" />
+                <stop offset="100%" stop-color="#050B14" />
+              </linearGradient>
+              <linearGradient id="feSubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1E1B4B" />
+                <stop offset="100%" stop-color="#0D1527" />
+              </linearGradient>
+              <linearGradient id="beSubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#022C22" />
+                <stop offset="100%" stop-color="#0D1527" />
+              </linearGradient>
+              <linearGradient id="dbSubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#311042" />
+                <stop offset="100%" stop-color="#0D1527" />
+              </linearGradient>
+            </defs>
+
+            <!-- Resource Group Boundary: rg-dev-001 -->
+            <rect x="15" y="15" width="890" height="290" rx="14" fill="#060A12" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="4,4" />
+            <text x="30" y="38" fill="#00E5FF" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" letter-spacing="1">AZURE RESOURCE GROUP: rg-dev-001 (Location: eastus)</text>
+
+            <!-- VNet Container: vnet-dev-001 (10.0.0.0/16) -->
+            <rect x="30" y="50" width="860" height="240" rx="12" fill="url(#axionVnetGrad)" stroke="#1E293B" stroke-width="1.5" />
+            <text x="45" y="72" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">VIRTUAL NETWORK: vnet-dev-001 (Address Space: 10.0.0.0/16)</text>
+
+            <!-- Subnet 1: Frontend-Subnet -->
             <g class="arch-node">
-              <rect x="235" y="180" width="175" height="95" rx="10" fill="url(#spokeGrad)" stroke="#10B981" stroke-width="1.5" />
-              <text x="250" y="206" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="13" font-weight="600">spoke-prod VNet</text>
-              <text x="250" y="226" fill="#6EE7B7" font-family="'JetBrains Mono', monospace" font-size="10">10.2.0.0/16 · Isolated</text>
-              <text x="250" y="246" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="10">Peered to Central Hub</text>
+              <rect x="45" y="85" width="260" height="190" rx="10" fill="url(#feSubGrad)" stroke="#6366F1" stroke-width="1.5" />
+              <text x="60" y="108" fill="#C7D2FE" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Frontend-Subnet</text>
+              <text x="60" y="124" fill="#818CF8" font-family="'JetBrains Mono', monospace" font-size="10">CIDR: 10.0.1.0/24</text>
+
+              <!-- VM Node: vm-axion-ui -->
+              <rect x="58" y="140" width="234" height="120" rx="8" fill="#0A0F1D" stroke="#4F46E5" stroke-width="1.2" />
+              <text x="70" y="162" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="12" font-weight="700">🖥️ vm-axion-ui</text>
+              <text x="70" y="180" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="10">NIC: vm-axion-ui-nic</text>
+              <text x="70" y="198" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="10">PIP: pip-axion-ui (Static)</text>
+              <text x="70" y="216" fill="#A5B4FC" font-family="'JetBrains Mono', monospace" font-size="9">Size: Standard_B1s</text>
+              <text x="70" y="234" fill="#34D399" font-family="'Inter', sans-serif" font-size="9">Canonical ubuntu-24_04-lts</text>
             </g>
 
-            <!-- Hub to Spoke Peering Connectors -->
-            <line x1="125" y1="150" x2="125" y2="180" stroke="#00E5FF" stroke-width="2" class="telemetry-pulse" />
-            <line x1="320" y1="150" x2="320" y2="180" stroke="#00E5FF" stroke-width="2" class="telemetry-pulse" />
-          </g>
-
-          <!-- Network to CI/CD Bridge -->
-          <line x1="430" y1="160" x2="470" y2="160" stroke="#00FF66" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow)" />
-
-          <!-- Group 2: 4-Stage DevSecOps Pipeline Gate -->
-          <g>
-            <rect x="470" y="20" width="410" height="280" rx="14" fill="#090E17" stroke="#1E293B" stroke-width="1.5" />
-            <text x="485" y="44" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">4-STAGE DEVSECOPS PIPELINE GATE</text>
-
-            <!-- Stage 1 -->
+            <!-- Subnet 2: Backend-Subnet -->
             <g class="arch-node">
-              <rect x="490" y="60" width="180" height="90" rx="10" fill="url(#gateGrad)" stroke="#A855F7" stroke-width="1.5" />
-              <text x="505" y="85" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="12" font-weight="700">Stage 1: Plan & FinOps</text>
-              <text x="505" y="105" fill="#C084FC" font-family="'JetBrains Mono', monospace" font-size="10">Terraform fmt & validate</text>
-              <text x="505" y="125" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">Azure Retail Prices API</text>
+              <rect x="330" y="85" width="310" height="190" rx="10" fill="url(#beSubGrad)" stroke="#10B981" stroke-width="1.5" />
+              <text x="345" y="108" fill="#A7F3D0" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Backend-Subnet</text>
+              <text x="345" y="124" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="10">CIDR: 10.0.2.0/24</text>
+
+              <!-- VM Node: vm-telemetry-query -->
+              <rect x="342" y="140" width="136" height="120" rx="8" fill="#0A0F1D" stroke="#059669" stroke-width="1.2" />
+              <text x="350" y="160" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="11" font-weight="700">⚙️ vm-telemetry</text>
+              <text x="350" y="178" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">FastAPI Microservice</text>
+              <text x="350" y="196" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">pip-telemetry-query</text>
+              <text x="350" y="214" fill="#A7F3D0" font-family="'JetBrains Mono', monospace" font-size="9">Port: 8000</text>
+              <text x="350" y="232" fill="#34D399" font-family="'Inter', sans-serif" font-size="9">Standard_B1s</text>
+
+              <!-- VM Node: vm-ingestion -->
+              <rect x="490" y="140" width="136" height="120" rx="8" fill="#0A0F1D" stroke="#059669" stroke-width="1.2" />
+              <text x="498" y="160" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="11" font-weight="700">📥 vm-ingestion</text>
+              <text x="498" y="178" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">Telemetry Consumer</text>
+              <text x="498" y="196" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">pip-ingestion</text>
+              <text x="498" y="214" fill="#A7F3D0" font-family="'JetBrains Mono', monospace" font-size="9">High Throughput</text>
+              <text x="498" y="232" fill="#34D399" font-family="'Inter', sans-serif" font-size="9">Standard_B1s</text>
             </g>
 
-            <!-- Stage 2 -->
-            <a href="#master-devsecops-pipeline" class="arch-node">
-              <rect x="685" y="60" width="180" height="90" rx="10" fill="url(#gateGrad)" stroke="#00E5FF" stroke-width="1.5" />
-              <text x="700" y="85" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="12" font-weight="700">Stage 2: Security Gate</text>
-              <text x="700" y="105" fill="#67E8F9" font-family="'JetBrains Mono', monospace" font-size="10">Checkov CIS · tfsec</text>
-              <text x="700" y="125" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="9">Gitleaks & TruffleHog ↗</text>
-            </a>
-
-            <!-- Stage 3 -->
+            <!-- Subnet 3: Database-Subnet -->
             <g class="arch-node">
-              <rect x="490" y="180" width="180" height="95" rx="10" fill="url(#gateGrad)" stroke="#F59E0B" stroke-width="1.5" />
-              <text x="505" y="206" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="12" font-weight="700">Stage 3: Approval Gate</text>
-              <text x="505" y="226" fill="#FCD34D" font-family="'JetBrains Mono', monospace" font-size="10">Production Environment</text>
-              <text x="505" y="246" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="9">Architectural Signoff</text>
+              <rect x="665" y="85" width="210" height="190" rx="10" fill="url(#dbSubGrad)" stroke="#D946EF" stroke-width="1.5" />
+              <text x="680" y="108" fill="#F5D0FE" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Database-Subnet</text>
+              <text x="680" y="124" fill="#E879F9" font-family="'JetBrains Mono', monospace" font-size="10">CIDR: 10.0.3.0/24</text>
+
+              <!-- VM Node: vm-database -->
+              <rect x="677" y="140" width="186" height="120" rx="8" fill="#0A0F1D" stroke="#C026D3" stroke-width="1.2" />
+              <text x="688" y="162" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="12" font-weight="700">🗄️ vm-database</text>
+              <text x="688" y="180" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="10">TimescaleDB / Postgres</text>
+              <text x="688" y="198" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="10">pip-database (Port 5432)</text>
+              <text x="688" y="216" fill="#F0ABFC" font-family="'JetBrains Mono', monospace" font-size="9">NIC: vm-database-nic</text>
+              <text x="688" y="234" fill="#34D399" font-family="'Inter', sans-serif" font-size="9">Standard_B1s Ubuntu</text>
             </g>
 
-            <!-- Stage 4 -->
+            <!-- Inter-Subnet VNet Traffic Arrows -->
+            <line x1="305" y1="180" x2="330" y2="180" stroke="#00E5FF" stroke-width="2" class="telemetry-pulse" />
+            <line x1="640" y1="180" x2="665" y2="180" stroke="#00FF66" stroke-width="2" class="telemetry-pulse" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- ==================== BLUEPRINT 3: Axion Telemetry Query Deployment ==================== -->
+      <div class="blueprint-panel" id="blueprint-axion-telemetry">
+        <div class="blueprint-meta-bar">
+          <span class="blueprint-meta-tag"><i class="fa-brands fa-docker"></i> CI/CD & Runtime: Axion Telemetry Query Microservice</span>
+          <span>FastAPI · Docker Hub · Uvicorn 0.0.0.0:8000 · TimescaleDB Port 5432</span>
+          <a href="https://github.com/devopsinsiders/axion-telemetry-query-service.git" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="padding: 3px 10px; font-size: 11px;">axion-telemetry-query-service ↗</a>
+        </div>
+        <div class="svg-wrapper">
+          <svg class="arch-svg" viewBox="0 0 920 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ciGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1E293B" />
+                <stop offset="100%" stop-color="#0F172A" />
+              </linearGradient>
+            </defs>
+
+            <!-- Box 1: Git & GitHub Actions -->
             <g class="arch-node">
-              <rect x="685" y="180" width="180" height="95" rx="10" fill="url(#gateGrad)" stroke="#00FF66" stroke-width="1.5" />
-              <text x="700" y="206" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="12" font-weight="700">Stage 4: Immutable Apply</text>
-              <text x="700" y="226" fill="#86EFAC" font-family="'JetBrains Mono', monospace" font-size="10">Verified tfplan drop</text>
-              <text x="700" y="246" fill="#00FF66" font-family="'JetBrains Mono', monospace" font-size="9">Zero Configuration Drift</text>
+              <rect x="20" y="30" width="190" height="260" rx="12" fill="url(#ciGrad)" stroke="#38BDF8" stroke-width="1.5" />
+              <text x="35" y="58" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">1. SOURCE & BUILD</text>
+              <rect x="35" y="75" width="160" height="60" rx="8" fill="#060A12" stroke="#1E293B" />
+              <text x="45" y="100" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="11" font-weight="600">FastAPI Source</text>
+              <text x="45" y="118" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">main.py, Dockerfile</text>
+
+              <rect x="35" y="150" width="160" height="70" rx="8" fill="#060A12" stroke="#1E293B" />
+              <text x="45" y="174" fill="#F8FAFC" font-family="'Inter', sans-serif" font-size="11" font-weight="600">GitHub Actions CI</text>
+              <text x="45" y="192" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="9">docker-build-push.yml</text>
+              <text x="45" y="206" fill="#A78BFA" font-family="'JetBrains Mono', monospace" font-size="9">Docker Buildx (sha / latest)</text>
             </g>
 
-            <!-- Pipeline stage connectors -->
-            <line x1="670" y1="105" x2="685" y2="105" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrow)" />
-            <path d="M 775 150 L 775 165 L 580 165 L 580 180" fill="none" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrow)" />
-            <line x1="670" y1="227" x2="685" y2="227" stroke="#00FF66" stroke-width="2" marker-end="url(#arrow)" />
-          </g>
-        </svg>
+            <!-- Connector to Registry -->
+            <line x1="210" y1="160" x2="250" y2="160" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Box 2: Docker Hub Registry -->
+            <g class="arch-node">
+              <rect x="250" y="80" width="170" height="160" rx="12" fill="url(#ciGrad)" stroke="#00A6FF" stroke-width="1.5" />
+              <text x="265" y="110" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">2. CONTAINER REGISTRY</text>
+              <rect x="265" y="125" width="140" height="95" rx="8" fill="#060A12" stroke="#1E293B" />
+              <text x="275" y="152" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="11" font-weight="700">Docker Hub</text>
+              <text x="275" y="170" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">devopsinsiders/</text>
+              <text x="275" y="186" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="8">axion-telemetry-query</text>
+              <text x="275" y="204" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="9">:latest (OCI Image)</text>
+            </g>
+
+            <!-- Connector to VM -->
+            <line x1="420" y1="160" x2="460" y2="160" stroke="#00FF66" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Box 3: Runtime Azure VM (vm-telemetry-query) -->
+            <g class="arch-node">
+              <rect x="460" y="30" width="230" height="260" rx="12" fill="url(#ciGrad)" stroke="#10B981" stroke-width="1.5" />
+              <text x="475" y="58" fill="#10B981" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">3. AZURE VM RUNTIME</text>
+              
+              <rect x="475" y="75" width="200" height="200" rx="8" fill="#060A12" stroke="#1E293B" />
+              <text x="488" y="100" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="12" font-weight="700">vm-telemetry-query</text>
+              <text x="488" y="118" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">OS: Ubuntu 24.04 LTS (B1s)</text>
+              <text x="488" y="136" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">IP: pip-telemetry-query</text>
+              
+              <rect x="488" y="148" width="174" height="60" rx="6" fill="#0F172A" stroke="#059669" />
+              <text x="498" y="170" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">Uvicorn 0.0.0.0:8000</text>
+              <text x="498" y="186" fill="#E2E8F0" font-family="'Inter', sans-serif" font-size="9">FastAPI Inbound TCP 8000</text>
+              <text x="498" y="200" fill="#A7F3D0" font-family="'JetBrains Mono', monospace" font-size="9">docker run -p 8000:8000</text>
+
+              <text x="488" y="235" fill="#FCD34D" font-family="'Inter', sans-serif" font-size="9">NSG Inbound Rule: Allow 8000</text>
+              <text x="488" y="252" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="9">NSG Inbound Rule: Allow 22 (SSH)</text>
+            </g>
+
+            <!-- Connector to TimescaleDB -->
+            <line x1="690" y1="160" x2="730" y2="160" stroke="#D946EF" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Box 4: Database & Consumers -->
+            <g class="arch-node">
+              <rect x="730" y="30" width="170" height="260" rx="12" fill="url(#ciGrad)" stroke="#D946EF" stroke-width="1.5" />
+              <text x="745" y="58" fill="#E879F9" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">4. DATA & CONSUMERS</text>
+              
+              <rect x="745" y="75" width="140" height="85" rx="8" fill="#060A12" stroke="#1E293B" />
+              <text x="755" y="98" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="11" font-weight="700">vm-database</text>
+              <text x="755" y="116" fill="#E879F9" font-family="'JetBrains Mono', monospace" font-size="9">TimescaleDB</text>
+              <text x="755" y="132" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">Port: 5432 (Postgres)</text>
+              <text x="755" y="148" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="8">VNet Private Route</text>
+
+              <rect x="745" y="175" width="140" height="100" rx="8" fill="#060A12" stroke="#1E293B" />
+              <text x="755" y="198" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="11" font-weight="700">API Consumers</text>
+              <text x="755" y="218" fill="#34D399" font-family="'Inter', sans-serif" font-size="9">🖥️ Axion Web UI</text>
+              <text x="755" y="236" fill="#F59E0B" font-family="'Inter', sans-serif" font-size="9">🤖 LangGraph AI SRE</text>
+              <text x="755" y="254" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="8">/metrics & /alarms</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ==================== BLUEPRINT 4: Dynamic Matrix FinOps CI/CD ==================== -->
+      <div class="blueprint-panel" id="blueprint-matrix-finops">
+        <div class="blueprint-meta-bar">
+          <span class="blueprint-meta-tag"><i class="fa-solid fa-robot"></i> Automation Engine: Monorepo Dynamic Matrix CI/CD Bot</span>
+          <span>tj-actions/changed-files · Infracost PR Delta · Pre-Commit Gitleaks Gate</span>
+          <a href="#Master_PipeLine" class="btn btn-sm btn-outline" style="padding: 3px 10px; font-size: 11px;">Master_PipeLine ↗</a>
+        </div>
+        <div class="svg-wrapper">
+          <svg class="arch-svg" viewBox="0 0 920 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="matrixGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#022C22" />
+                <stop offset="100%" stop-color="#06120D" />
+              </linearGradient>
+            </defs>
+
+            <!-- Stage 1: Pull Request Event -->
+            <g class="arch-node">
+              <rect x="20" y="50" width="150" height="220" rx="12" fill="#060A12" stroke="#38BDF8" stroke-width="1.5" />
+              <text x="35" y="78" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">1. MONOREPO PR</text>
+              <rect x="35" y="95" width="120" height="50" rx="6" fill="#0A111E" stroke="#1E293B" />
+              <text x="45" y="118" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="10" font-weight="600">Git Commit / PR</text>
+              <text x="45" y="134" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">Modifies *.tf</text>
+
+              <rect x="35" y="160" width="120" height="90" rx="6" fill="#0A111E" stroke="#1E293B" />
+              <text x="45" y="184" fill="#F59E0B" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600">Pre-Commit</text>
+              <text x="45" y="202" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="9">Gitleaks Secrets</text>
+              <text x="45" y="218" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="9">Terraform fmt</text>
+              <text x="45" y="234" fill="#34D399" font-family="'Inter', sans-serif" font-size="9">Private Key Scan</text>
+            </g>
+
+            <line x1="170" y1="160" x2="210" y2="160" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Stage 2: Path Detection -->
+            <g class="arch-node">
+              <rect x="210" y="50" width="190" height="220" rx="12" fill="#060A12" stroke="#A855F7" stroke-width="1.5" />
+              <text x="225" y="78" fill="#C084FC" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">2. PATH DETECTION</text>
+              <rect x="225" y="95" width="160" height="155" rx="8" fill="#0D0714" stroke="#581C87" />
+              <text x="235" y="122" fill="#E9D5FF" font-family="'Inter', sans-serif" font-size="11" font-weight="700">detect-changes</text>
+              <text x="235" y="142" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">tj-actions/changed-files</text>
+              <text x="235" y="160" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">files: '**/*.tf'</text>
+              <text x="235" y="178" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">dir_names: true</text>
+              <text x="235" y="204" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="9">Matrix Output Array:</text>
+              <text x="235" y="222" fill="#A7F3D0" font-family="'JetBrains Mono', monospace" font-size="9">["hub", "spoke-dev"]</text>
+            </g>
+
+            <line x1="400" y1="160" x2="440" y2="160" stroke="#00FF66" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Stage 3: Parallel Matrix Runners -->
+            <g class="arch-node">
+              <rect x="440" y="50" width="220" height="220" rx="12" fill="#060A12" stroke="#10B981" stroke-width="1.5" />
+              <text x="455" y="78" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">3. PARALLEL RUNNERS</text>
+              
+              <rect x="455" y="95" width="190" height="70" rx="6" fill="#031A12" stroke="#064E3B" />
+              <text x="465" y="118" fill="#A7F3D0" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">Runner 1: env/hub</text>
+              <text x="465" y="136" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">terraform init -backend=false</text>
+              <text x="465" y="152" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">terraform validate & tflint</text>
+
+              <rect x="455" y="175" width="190" height="75" rx="6" fill="#031A12" stroke="#064E3B" />
+              <text x="465" y="198" fill="#A7F3D0" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">Runner 2: env/spoke-dev</text>
+              <text x="465" y="216" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="9">Infracost breakdown JSON</text>
+              <text x="465" y="232" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="9">Checkov CIS Azure SAST</text>
+            </g>
+
+            <line x1="660" y1="160" x2="700" y2="160" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Stage 4: FinOps PR Comments & Merge Gate -->
+            <g class="arch-node">
+              <rect x="700" y="50" width="200" height="220" rx="12" fill="#060A12" stroke="#F59E0B" stroke-width="1.5" />
+              <text x="715" y="78" fill="#FCD34D" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">4. FINOPS PR BOT</text>
+              
+              <rect x="715" y="95" width="170" height="155" rx="8" fill="#1C1005" stroke="#78350F" />
+              <text x="725" y="122" fill="#FEF3C7" font-family="'Inter', sans-serif" font-size="11" font-weight="700">Automated PR Comment</text>
+              <text x="725" y="142" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="9">💰 Infracost Estimate:</text>
+              <text x="725" y="158" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="9">+$42.10/mo (+12%)</text>
+              <text x="725" y="180" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="9">Reviewer approval required</text>
+              <text x="725" y="196" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="9">if cost diff > $100</text>
+              <text x="725" y="224" fill="#10B981" font-family="'JetBrains Mono', monospace" font-size="9">Checkov Gate: PASS 🟢</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ==================== LOW LEVEL DESIGN (LLD) SPECIFICATION DRAWER ==================== -->
+      <div class="card lld-container" id="lld-spec" style="margin-top: 24px; padding: 24px; border: 1px solid rgba(0, 229, 255, 0.25); background: rgba(10, 16, 30, 0.85);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--border-card); padding-bottom: 16px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="status-badge status-blue" style="font-size: 11px;"><i class="fa-solid fa-microchip"></i> LOW-LEVEL DESIGN (LLD)</span>
+              <span class="status-badge status-green" style="font-size: 11px;"><i class="fa-solid fa-circle-check"></i> PROVISIONED VIA TERRAFORM</span>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-top: 8px;">
+              Axion 3-Tier Monolithic VM Infrastructure & Telemetry Query Service Runbook
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+              Canonical Reference Architecture: <a href="https://github.com/devopsinsiders/axion-monolithic-infra.git" target="_blank" rel="noopener noreferrer" style="color: var(--color-cyan); text-decoration: underline;">devopsinsiders/axion-monolithic-infra</a> & <a href="https://github.com/devopsinsiders/axion-telemetry-query-service.git" target="_blank" rel="noopener noreferrer" style="color: var(--color-cyan); text-decoration: underline;">devopsinsiders/axion-telemetry-query-service</a>
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="https://github.com/devopsinsiders/axion-monolithic-infra.git" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline"><i class="fa-brands fa-github"></i> Infra Repo ↗</a>
+            <a href="https://github.com/devopsinsiders/axion-telemetry-query-service.git" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline"><i class="fa-brands fa-github"></i> Telemetry Service ↗</a>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+          
+          <!-- LLD Column 1: Azure Resource Breakdown & VM Creation Graph -->
+          <div style="background: rgba(6, 11, 20, 0.7); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 18px;">
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--color-cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-server"></i> 1. Azure Resource Hierarchy & VM Specs
+            </h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.82rem;">
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid var(--color-cyan);">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #38BDF8;">Resource Group (azurerm_resource_group)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Name: <code style="color: #F8FAFC;">rg-dev-001</code> · Region: <code style="color: #F8FAFC;">eastus</code> · Tags: <code style="color: #94A3B8;">Project=AXION, Env=Development</code></div>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #818CF8;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #818CF8;">Virtual Network (azurerm_virtual_network)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Name: <code style="color: #F8FAFC;">vnet-dev-001</code> · Address Space: <code style="color: #34D399;">10.0.0.0/16</code></div>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #34D399;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #34D399;">Subnet Topology (azurerm_subnet)</div>
+                <ul style="list-style: none; padding: 0; margin: 4px 0 0 0; display: flex; flex-direction: column; gap: 3px; color: var(--text-muted);">
+                  <li>• <strong style="color: #F8FAFC;">Frontend-Subnet:</strong> <code style="color: #38BDF8;">10.0.1.0/24</code> (Hosts <code style="color: #F8FAFC;">vm-axion-ui</code>)</li>
+                  <li>• <strong style="color: #F8FAFC;">Backend-Subnet:</strong> <code style="color: #38BDF8;">10.0.2.0/24</code> (Hosts <code style="color: #F8FAFC;">vm-telemetry-query</code> & <code style="color: #F8FAFC;">vm-ingestion</code>)</li>
+                  <li>• <strong style="color: #F8FAFC;">Database-Subnet:</strong> <code style="color: #38BDF8;">10.0.3.0/24</code> (Hosts <code style="color: #F8FAFC;">vm-database</code>)</li>
+                </ul>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #F59E0B;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #F59E0B;">Public IPs & NICs (azurerm_public_ip & azurerm_network_interface)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Static SKUs: <code style="color: #F8FAFC;">pip-axion-ui</code>, <code style="color: #F8FAFC;">pip-telemetry-query</code>, <code style="color: #F8FAFC;">pip-ingestion</code>, <code style="color: #F8FAFC;">pip-database</code></div>
+                <div style="color: var(--text-muted); margin-top: 2px;">NICs attach dynamic private subnets + static PIP bindings.</div>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #EC4899;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #F472B6;">Compute Virtual Machines (azurerm_linux_virtual_machine)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Instances: <code style="color: #F8FAFC;">vm-axion-ui</code>, <code style="color: #F8FAFC;">vm-telemetry-query</code>, <code style="color: #F8FAFC;">vm-ingestion</code>, <code style="color: #F8FAFC;">vm-database</code></div>
+                <div style="color: var(--text-muted); margin-top: 2px;">SKU: <code style="color: #38BDF8;">Standard_B1s</code> (1 vCPU, 1.0 GiB RAM) · Disks: <code style="color: #F8FAFC;">Standard_LRS</code> (ReadWrite cache)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Image: <code style="color: #F8FAFC;">Canonical:ubuntu-24_04-lts:server:latest</code> · Auth: SSH Public Key</div>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #10B981;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10B981;">IaC Provisioning Dependency DAG</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #94A3B8; margin-top: 4px; line-height: 1.5;">
+                  azurerm_resource_group <br>
+                  └── azurerm_virtual_network <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;├── azurerm_subnet (Frontend/Backend/Database) <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;├── azurerm_public_ip (Static Standard) <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;└── azurerm_network_interface (Subnet + PIP binding) <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── azurerm_linux_virtual_machine (Standard_B1s)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LLD Column 2: Axion Telemetry Query Deployment Runbook -->
+          <div style="background: rgba(6, 11, 20, 0.7); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 18px;">
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--color-cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-terminal"></i> 2. Axion Telemetry Query Deployment Runbook
+            </h4>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.82rem;">
+              
+              <!-- Ingress & Security -->
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">A. Ingress & NSG Firewall Rules</div>
+                <div style="background: #040810; padding: 10px; border-radius: 6px; border: 1px solid var(--border-card); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #94A3B8;">
+                  <span style="color: #34D399;">Allow-SSH-Inbound:</span> TCP 22 &rarr; 0.0.0.0/0 (Admin Management)<br>
+                  <span style="color: #38BDF8;">Allow-FastAPI-Inbound:</span> TCP 8000 &rarr; 0.0.0.0/0 (Telemetry API)<br>
+                  <span style="color: #F59E0B;">Allow-DB-Private:</span> TCP 5432 &rarr; 10.0.2.0/24 &rarr; 10.0.3.0/24 (TimescaleDB)
+                </div>
+              </div>
+
+              <!-- Option 1: Docker Runtime -->
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">B. Option 1: Docker Containerized Run (Production)</div>
+                <div style="background: #040810; padding: 10px; border-radius: 6px; border: 1px solid var(--border-card); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #38BDF8; line-height: 1.5;">
+                  # Pull image from Docker Hub and run as background daemon<br>
+                  <span style="color: #F8FAFC;">docker pull devopsinsiders/axion-telemetry-query-service:latest</span><br>
+                  <span style="color: #F8FAFC;">docker run -d --name axion-telemetry -p 8000:8000 \</span><br>
+                  <span style="color: #F8FAFC;">&nbsp;&nbsp;-e DATABASE_URL="postgresql://axion:secret@10.0.3.x:5432/axion" \</span><br>
+                  <span style="color: #F8FAFC;">&nbsp;&nbsp;devopsinsiders/axion-telemetry-query-service:latest</span>
+                </div>
+              </div>
+
+              <!-- Option 2: Native Python / Uvicorn Service -->
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">C. Option 2: Bare-Metal / Systemd Uvicorn Run (Dev)</div>
+                <div style="background: #040810; padding: 10px; border-radius: 6px; border: 1px solid var(--border-card); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #34D399; line-height: 1.5;">
+                  # Install Python 3.12, venv, and spin up Uvicorn ASGI server<br>
+                  <span style="color: #F8FAFC;">sudo apt update && sudo apt install -y python3-pip python3-venv git</span><br>
+                  <span style="color: #F8FAFC;">git clone https://github.com/devopsinsiders/axion-telemetry-query-service.git</span><br>
+                  <span style="color: #F8FAFC;">cd axion-telemetry-query-service</span><br>
+                  <span style="color: #F8FAFC;">python3 -m venv venv && source venv/bin/activate</span><br>
+                  <span style="color: #F8FAFC;">pip install -r requirements.txt</span><br>
+                  <span style="color: #00E5FF; font-weight: 700;">uvicorn main:app --host 0.0.0.0 --port 8000</span>
+                </div>
+              </div>
+
+              <!-- Verification Probes -->
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">D. Healthcheck & Telemetry Verification Probes</div>
+                <div style="background: #040810; padding: 10px; border-radius: 6px; border: 1px solid var(--border-card); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #E2E8F0; line-height: 1.5;">
+                  <span style="color: #94A3B8;"># Verify API health endpoint</span><br>
+                  curl -f http://&lt;pip-telemetry-query&gt;:8000/health || exit 1<br>
+                  <span style="color: #94A3B8;"># Query real-time time-series metrics</span><br>
+                  curl -s -X GET "http://&lt;pip-telemetry-query&gt;:8000/api/v1/telemetry/query?limit=10"
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Engineering Activity Stream -->
+    <section class="card" id="activity">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fa-solid fa-clock-rotate-left"></i> Live Engineering Activity</h2>
+        <p class="section-subtitle">Real-time changelog of verified cloud infrastructure, CI/CD pipeline automation, and codebase commits (yesterday & today)</p>
+      </div>
+
+      <div class="terminal-card" style="border: 1px solid var(--border-card); border-radius: var(--radius-md); overflow: hidden; background: #040810;">
+        <!-- Terminal Header -->
+        <div style="background: rgba(15, 23, 42, 0.9); padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-card);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #10B981;"></div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); margin-left: 8px;">
+              LIVE_ACTIVITY_STREAM.log — RECENT ENGINEERING WORK (YESTERDAY & TODAY)
+            </span>
+          </div>
+          <span class="status-badge status-green" style="font-size: 10px; padding: 2px 8px;">
+            <span class="beacon" style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10B981; margin-right: 4px; box-shadow: 0 0 8px #10B981;"></span>
+            LIVE SYNCED
+          </span>
+        </div>
+
+        <!-- Terminal Body -->
+        <div style="padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+          
+          <!-- Activity Item 1: Today (Nov 7, 2026) -->
+          <div style="border-left: 2px solid var(--color-cyan); padding-left: 18px; position: relative;">
+            <div style="position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--color-cyan); box-shadow: 0 0 8px var(--color-cyan);"></div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span class="status-badge status-blue" style="font-size: 10px; font-family: 'JetBrains Mono', monospace;">TODAY · NOV 07, 2026</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #38BDF8;">commit e3b9a14 &rarr; pipeline runs #27-35</span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 6px;">
+              Azure DevOps Multi-Stage Pipeline Automation & Terraform Policy Hardening
+            </h3>
+            <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin-top: 6px;">
+              Orchestrated and validated automated multi-stage Azure DevOps YAML pipeline execution (Runs 27–35 in <code style="color: #F8FAFC;">NOV AD/ServiceEndPoint</code>), incorporating TFLint static rule checks, Terraform formatting verification, and PaaS Storage Account default-deny firewall rule validations. Completed low-level design (LLD) reverse-engineering and deployment specs for Axion Monolithic 3-tier VM infrastructure and FastAPI Telemetry Query Service. Overhauled portfolio console with interactive 4-blueprint switcher and comprehensive repository matrix.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+              <span class="verified-gate-pill">Azure DevOps Runs #27-35 🟢</span>
+              <span class="verified-gate-pill">PaaS Storage Firewall 🟢</span>
+              <span class="verified-gate-pill">Axion VM LLD 🟢</span>
+              <span class="verified-gate-pill">TFLint Strict 🟢</span>
+              <span class="verified-gate-pill">Checkov CIS Passed 🟢</span>
+            </div>
+          </div>
+
+          <!-- Activity Item 2: Yesterday (Nov 6, 2026) -->
+          <div style="border-left: 2px solid #818CF8; padding-left: 18px; position: relative;">
+            <div style="position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: #818CF8; box-shadow: 0 0 8px #818CF8;"></div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span class="status-badge status-amber" style="font-size: 10px; font-family: 'JetBrains Mono', monospace;">YESTERDAY · NOV 06, 2026</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #818CF8;">commit 4cf81d2 &rarr; vnet lab & security guards</span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 6px;">
+              Azure VNet Service Endpoints & PaaS Storage Firewall Lockdown
+            </h3>
+            <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin-top: 6px;">
+              Provisioned and tested private Azure backbone routing via <code style="color: #F8FAFC;">Microsoft.Storage</code> Service Endpoints on subnet <code style="color: #38BDF8;">10.0.1.0/24</code>. Validated that direct private traffic traversed the Azure backbone while external public internet requests were rejected with <code style="color: #EF4444;">HTTP 403 Forbidden</code>. Configured client-side pre-commit git hooks with custom <code style="color: #F8FAFC;">.gitleaks.toml</code> rules to detect secrets before staging, and integrated Infracost baseline guards to forecast cloud budget impact.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+              <span class="verified-gate-pill">Service Endpoint: Microsoft.Storage 🟢</span>
+              <span class="verified-gate-pill">Default-Deny 403 Verified 🟢</span>
+              <span class="verified-gate-pill">Gitleaks Pre-Commit 🟢</span>
+              <span class="verified-gate-pill">Infracost Budget Guard 🟢</span>
+            </div>
+          </div>
+
+          <!-- Activity Item 3: Previous (Nov 5, 2026) -->
+          <div style="border-left: 2px solid #34D399; padding-left: 18px; position: relative;">
+            <div style="position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399;"></div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span class="status-badge status-green" style="font-size: 10px; font-family: 'JetBrains Mono', monospace;">PREVIOUS · NOV 05, 2026</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #34D399;">commit 18e97f0 &rarr; github profile ecosystem</span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 6px;">
+              GitHub Profile README & DevSecOps Portfolio Overhaul
+            </h3>
+            <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin-top: 6px;">
+              Architected comprehensive GitHub Profile README ecosystem, featuring enterprise landing zone ASCII diagrams, CI/CD shift-left security matrices, and automated metric badges representing all 13 production and educational repositories.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+              <span class="verified-gate-pill">Profile Automation 🟢</span>
+              <span class="verified-gate-pill">Static Edge Deploy 🟢</span>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -2028,6 +2590,7 @@
           <ul class="footer-nav">
             <li><a href="#about">About</a></li>
             <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#activity">Activity</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#repositories">Repositories</a></li>
             <li><a href="#experience">Experience</a></li>
@@ -2198,6 +2761,26 @@
             card.style.display = '';
           } else {
             card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // --- 4b. Blueprint Console Tab Switcher ---
+    const blueprintTabs = document.querySelectorAll('.blueprint-tab-btn');
+    const blueprintPanels = document.querySelectorAll('.blueprint-panel');
+
+    blueprintTabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        blueprintTabs.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const targetId = `blueprint-${btn.dataset.blueprint}`;
+
+        blueprintPanels.forEach(panel => {
+          if (panel.id === targetId) {
+            panel.classList.add('active');
+          } else {
+            panel.classList.remove('active');
           }
         });
       });
