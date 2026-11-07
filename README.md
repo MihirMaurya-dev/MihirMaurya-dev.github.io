@@ -44,11 +44,11 @@ This repository hosts the personal engineering portfolio website for **Mihir Mau
 
 ## 🚀 Quick Navigation
 
-- 🕸️ **Azure Hub-and-Spoke Architecture:** [zure-hub-spoke-architecture](https://github.com/MihirMaurya-dev/azure-hub-spoke-architecture)
+- 🕸️ **Azure Hub-and-Spoke Architecture:** [azure-hub-spoke-architecture](https://github.com/MihirMaurya-dev/azure-hub-spoke-architecture)
 - 🛡️ **Master DevSecOps 4-Stage CI/CD:** [master-devsecops-pipeline](https://github.com/MihirMaurya-dev/master-devsecops-pipeline)
-- 🤖 **Agentic AI for DevOps & SRE:** [gentic-ai-devops](https://github.com/MihirMaurya-dev/agentic-ai-devops)
+- 🤖 **Agentic AI for DevOps & SRE:** [agentic-ai-devops](https://github.com/MihirMaurya-dev/agentic-ai-devops)
 - 🧠 **DevOps Knowledge Vault (174+ Notes):** [DevOps-Notes](https://github.com/MihirMaurya-dev/DevOps-Notes)
-- 🏛️ **Modular Azure CAF Framework:** [zure-caf-modular-iac](https://github.com/MihirMaurya-dev/azure-caf-modular-iac)
+- 🏛️ **Modular Azure CAF Framework:** [azure-caf-modular-iac](https://github.com/MihirMaurya-dev/azure-caf-modular-iac)
 - 🏥 **MediKiosk SIH 2026 Platform:** [medikiosk-sih26047](https://github.com/MihirMaurya-dev/medikiosk-sih26047)
 
 ---
