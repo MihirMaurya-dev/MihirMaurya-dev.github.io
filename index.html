@@ -2016,5 +2016,241 @@
     </div>
   </footer>
 
+  <script>
+    // --- 1. Cursor Spotlight Hover Effect ---
+    document.querySelectorAll('.card, .flagship-card, .secondary-card, .skill-domain-card, .timeline-card, .terminal-card').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        el.style.setProperty('--mouse-x', `${x}px`);
+        el.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // --- 2. Theme Toggle with View Transitions API ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const htmlElement = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      htmlElement.classList.add('light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+
+    function toggleTheme() {
+      if (htmlElement.classList.contains('light')) {
+        htmlElement.classList.remove('light');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        htmlElement.classList.add('light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', (e) => {
+      if (!document.startViewTransition) {
+        toggleTheme();
+        return;
+      }
+
+      const rect = themeToggleBtn.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const endRadius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y)
+      );
+
+      const transition = document.startViewTransition(() => {
+        toggleTheme();
+      });
+
+      transition.ready.then(() => {
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`
+            ]
+          },
+          {
+            duration: 550,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            pseudoElement: '::view-transition-new(root)'
+          }
+        );
+      });
+    });
+
+    // --- 3. Web Audio Mechanical Keyboard Click Synthesizer ---
+    let audioCtx = null;
+    let audioMuted = localStorage.getItem('audio-mute') === 'true';
+    const audioToggleBtn = document.getElementById('audio-toggle');
+    const audioIcon = document.getElementById('audio-icon');
+
+    function updateAudioIcon() {
+      if (audioMuted) {
+        audioIcon.classList.replace('fa-volume-high', 'fa-volume-xmark');
+        audioToggleBtn.title = 'Sound Muted (Click to Unmute)';
+      } else {
+        audioIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+        audioToggleBtn.title = 'Sound Active (Click to Mute)';
+      }
+    }
+    updateAudioIcon();
+
+    audioToggleBtn.addEventListener('click', () => {
+      audioMuted = !audioMuted;
+      localStorage.setItem('audio-mute', audioMuted ? 'true' : 'false');
+      updateAudioIcon();
+    });
+
+    function playClickSound() {
+      if (audioMuted) return;
+
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const bufferSize = audioCtx.sampleRate * 0.012; // 12ms burst
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.value = 4200;
+        filter.Q.value = 3.5;
+
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.28, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.012);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        noise.start();
+      } catch (err) {
+        // Fallback gracefully on audio policy block
+      }
+    }
+
+    document.querySelectorAll('a, button, .pill-btn, .repo-card, .skill-tag, .icon-btn').forEach(el => {
+      el.addEventListener('mousedown', playClickSound);
+    });
+
+    // --- 4. Skills Domain Filter ---
+    const domainFilterBtns = document.querySelectorAll('[data-domain-filter]');
+    const skillDomainCards = document.querySelectorAll('.skill-domain-card');
+
+    domainFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        domainFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.domainFilter;
+
+        skillDomainCards.forEach(card => {
+          if (filter === 'all' || card.dataset.domain === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // --- 5. Repository Search & Category Filter Engine ---
+    const repoSearchInput = document.getElementById('repo-search');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const repoCards = document.querySelectorAll('.repo-card');
+    const emptyState = document.getElementById('repo-empty-state');
+    const flagshipContainer = document.getElementById('flagship-container');
+    const secondaryContainer = document.getElementById('secondary-container');
+
+    let currentCategory = 'all';
+
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.filter;
+        filterRepositories();
+      });
+    });
+
+    repoSearchInput.addEventListener('input', () => {
+      filterRepositories();
+    });
+
+    function filterRepositories() {
+      const query = (repoSearchInput.value || '').toLowerCase().trim();
+      let totalVisible = 0;
+      let visibleFlagships = 0;
+      let visibleSecondary = 0;
+
+      // Category count buckets for active search query
+      const counts = { all: 0, flagship: 0, cicd: 0, iac: 0, ai: 0, web: 0 };
+
+      repoCards.forEach(card => {
+        const cat = card.dataset.category;
+        const title = (card.dataset.title || '').toLowerCase();
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const text = card.textContent.toLowerCase();
+
+        const matchesQuery = !query || title.includes(query) || tags.includes(query) || text.includes(query);
+        const matchesCategory = currentCategory === 'all' || cat === currentCategory;
+
+        if (matchesQuery) {
+          counts.all++;
+          if (counts[cat] !== undefined) counts[cat]++;
+        }
+
+        if (matchesQuery && matchesCategory) {
+          card.style.display = '';
+          totalVisible++;
+          if (cat === 'flagship') visibleFlagships++;
+          else visibleSecondary++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Update counter badges
+      for (const [key, val] of Object.entries(counts)) {
+        const el = document.getElementById(`count-${key}`);
+        if (el) el.textContent = val;
+      }
+
+      // Manage container visibility and empty state
+      flagshipContainer.style.display = visibleFlagships > 0 ? 'grid' : 'none';
+      secondaryContainer.style.display = visibleSecondary > 0 ? 'grid' : 'none';
+      emptyState.style.display = totalVisible === 0 ? 'block' : 'none';
+    }
+
+    function resetRepoFilter() {
+      repoSearchInput.value = '';
+      currentCategory = 'all';
+      categoryBtns.forEach(b => {
+        if (b.dataset.filter === 'all') b.classList.add('active');
+        else b.classList.remove('active');
+      });
+      filterRepositories();
+    }
+  </script>
+
 </body>
 </html>
