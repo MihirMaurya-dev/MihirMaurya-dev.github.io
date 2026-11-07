@@ -1705,6 +1705,143 @@
           </svg>
         </div>
       </div>
+
+      <!-- ==================== LOW LEVEL DESIGN (LLD) SPECIFICATION DRAWER ==================== -->
+      <div class="card lld-container" id="lld-spec" style="margin-top: 24px; padding: 24px; border: 1px solid rgba(0, 229, 255, 0.25); background: rgba(10, 16, 30, 0.85);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--border-card); padding-bottom: 16px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="status-badge status-blue" style="font-size: 11px;"><i class="fa-solid fa-microchip"></i> LOW-LEVEL DESIGN (LLD)</span>
+              <span class="status-badge status-green" style="font-size: 11px;"><i class="fa-solid fa-circle-check"></i> PROVISIONED VIA TERRAFORM</span>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-top: 8px;">
+              Axion 3-Tier Monolithic VM Infrastructure & Telemetry Query Service Runbook
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+              Canonical Reference Architecture: <a href="https://github.com/devopsinsiders/axion-monolithic-infra.git" target="_blank" rel="noopener noreferrer" style="color: var(--color-cyan); text-decoration: underline;">devopsinsiders/axion-monolithic-infra</a> & <a href="https://github.com/devopsinsiders/axion-telemetry-query-service.git" target="_blank" rel="noopener noreferrer" style="color: var(--color-cyan); text-decoration: underline;">devopsinsiders/axion-telemetry-query-service</a>
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="https://github.com/devopsinsiders/axion-monolithic-infra.git" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline"><i class="fa-brands fa-github"></i> Infra Repo ↗</a>
+            <a href="https://github.com/devopsinsiders/axion-telemetry-query-service.git" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline"><i class="fa-brands fa-github"></i> Telemetry Service ↗</a>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+          
+          <!-- LLD Column 1: Azure Resource Breakdown & VM Creation Graph -->
+          <div style="background: rgba(6, 11, 20, 0.7); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 18px;">
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--color-cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-server"></i> 1. Azure Resource Hierarchy & VM Specs
+            </h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.82rem;">
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid var(--color-cyan);">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #38BDF8;">Resource Group (azurerm_resource_group)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Name: <code style="color: #F8FAFC;">rg-dev-001</code> · Region: <code style="color: #F8FAFC;">eastus</code> · Tags: <code style="color: #94A3B8;">Project=AXION, Env=Development</code></div>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #818CF8;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #818CF8;">Virtual Network (azurerm_virtual_network)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Name: <code style="color: #F8FAFC;">vnet-dev-001</code> · Address Space: <code style="color: #34D399;">10.0.0.0/16</code></div>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #34D399;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #34D399;">Subnet Topology (azurerm_subnet)</div>
+                <ul style="list-style: none; padding: 0; margin: 4px 0 0 0; display: flex; flex-direction: column; gap: 3px; color: var(--text-muted);">
+                  <li>• <strong style="color: #F8FAFC;">Frontend-Subnet:</strong> <code style="color: #38BDF8;">10.0.1.0/24</code> (Hosts <code style="color: #F8FAFC;">vm-axion-ui</code>)</li>
+                  <li>• <strong style="color: #F8FAFC;">Backend-Subnet:</strong> <code style="color: #38BDF8;">10.0.2.0/24</code> (Hosts <code style="color: #F8FAFC;">vm-telemetry-query</code> & <code style="color: #F8FAFC;">vm-ingestion</code>)</li>
+                  <li>• <strong style="color: #F8FAFC;">Database-Subnet:</strong> <code style="color: #38BDF8;">10.0.3.0/24</code> (Hosts <code style="color: #F8FAFC;">vm-database</code>)</li>
+                </ul>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #F59E0B;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #F59E0B;">Public IPs & NICs (azurerm_public_ip & azurerm_network_interface)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Static SKUs: <code style="color: #F8FAFC;">pip-axion-ui</code>, <code style="color: #F8FAFC;">pip-telemetry-query</code>, <code style="color: #F8FAFC;">pip-ingestion</code>, <code style="color: #F8FAFC;">pip-database</code></div>
+                <div style="color: var(--text-muted); margin-top: 2px;">NICs attach dynamic private subnets + static PIP bindings.</div>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #EC4899;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #F472B6;">Compute Virtual Machines (azurerm_linux_virtual_machine)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Instances: <code style="color: #F8FAFC;">vm-axion-ui</code>, <code style="color: #F8FAFC;">vm-telemetry-query</code>, <code style="color: #F8FAFC;">vm-ingestion</code>, <code style="color: #F8FAFC;">vm-database</code></div>
+                <div style="color: var(--text-muted); margin-top: 2px;">SKU: <code style="color: #38BDF8;">Standard_B1s</code> (1 vCPU, 1.0 GiB RAM) · Disks: <code style="color: #F8FAFC;">Standard_LRS</code> (ReadWrite cache)</div>
+                <div style="color: var(--text-muted); margin-top: 2px;">Image: <code style="color: #F8FAFC;">Canonical:ubuntu-24_04-lts:server:latest</code> · Auth: SSH Public Key</div>
+              </div>
+
+              <div style="padding: 10px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; border-left: 3px solid #10B981;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10B981;">IaC Provisioning Dependency DAG</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #94A3B8; margin-top: 4px; line-height: 1.5;">
+                  azurerm_resource_group <br>
+                  └── azurerm_virtual_network <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;├── azurerm_subnet (Frontend/Backend/Database) <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;├── azurerm_public_ip (Static Standard) <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;└── azurerm_network_interface (Subnet + PIP binding) <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── azurerm_linux_virtual_machine (Standard_B1s)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LLD Column 2: Axion Telemetry Query Deployment Runbook -->
+          <div style="background: rgba(6, 11, 20, 0.7); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 18px;">
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--color-cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-terminal"></i> 2. Axion Telemetry Query Deployment Runbook
+            </h4>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.82rem;">
+              
+              <!-- Ingress & Security -->
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">A. Ingress & NSG Firewall Rules</div>
+                <div style="background: #040810; padding: 10px; border-radius: 6px; border: 1px solid var(--border-card); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #94A3B8;">
+                  <span style="color: #34D399;">Allow-SSH-Inbound:</span> TCP 22 &rarr; 0.0.0.0/0 (Admin Management)<br>
+                  <span style="color: #38BDF8;">Allow-FastAPI-Inbound:</span> TCP 8000 &rarr; 0.0.0.0/0 (Telemetry API)<br>
+                  <span style="color: #F59E0B;">Allow-DB-Private:</span> TCP 5432 &rarr; 10.0.2.0/24 &rarr; 10.0.3.0/24 (TimescaleDB)
+                </div>
+              </div>
+
+              <!-- Option 1: Docker Runtime -->
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">B. Option 1: Docker Containerized Run (Production)</div>
+                <div style="background: #040810; padding: 10px; border-radius: 6px; border: 1px solid var(--border-card); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #38BDF8; line-height: 1.5;">
+                  # Pull image from Docker Hub and run as background daemon<br>
+                  <span style="color: #F8FAFC;">docker pull devopsinsiders/axion-telemetry-query-service:latest</span><br>
+                  <span style="color: #F8FAFC;">docker run -d --name axion-telemetry -p 8000:8000 \</span><br>
+                  <span style="color: #F8FAFC;">&nbsp;&nbsp;-e DATABASE_URL="postgresql://axion:secret@10.0.3.x:5432/axion" \</span><br>
+                  <span style="color: #F8FAFC;">&nbsp;&nbsp;devopsinsiders/axion-telemetry-query-service:latest</span>
+                </div>
+              </div>
+
+              <!-- Option 2: Native Python / Uvicorn Service -->
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">C. Option 2: Bare-Metal / Systemd Uvicorn Run (Dev)</div>
+                <div style="background: #040810; padding: 10px; border-radius: 6px; border: 1px solid var(--border-card); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #34D399; line-height: 1.5;">
+                  # Install Python 3.12, venv, and spin up Uvicorn ASGI server<br>
+                  <span style="color: #F8FAFC;">sudo apt update && sudo apt install -y python3-pip python3-venv git</span><br>
+                  <span style="color: #F8FAFC;">git clone https://github.com/devopsinsiders/axion-telemetry-query-service.git</span><br>
+                  <span style="color: #F8FAFC;">cd axion-telemetry-query-service</span><br>
+                  <span style="color: #F8FAFC;">python3 -m venv venv && source venv/bin/activate</span><br>
+                  <span style="color: #F8FAFC;">pip install -r requirements.txt</span><br>
+                  <span style="color: #00E5FF; font-weight: 700;">uvicorn main:app --host 0.0.0.0 --port 8000</span>
+                </div>
+              </div>
+
+              <!-- Verification Probes -->
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">D. Healthcheck & Telemetry Verification Probes</div>
+                <div style="background: #040810; padding: 10px; border-radius: 6px; border: 1px solid var(--border-card); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #E2E8F0; line-height: 1.5;">
+                  <span style="color: #94A3B8;"># Verify API health endpoint</span><br>
+                  curl -f http://&lt;pip-telemetry-query&gt;:8000/health || exit 1<br>
+                  <span style="color: #94A3B8;"># Query real-time time-series metrics</span><br>
+                  curl -s -X GET "http://&lt;pip-telemetry-query&gt;:8000/api/v1/telemetry/query?limit=10"
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
     <!-- Technology & Tooling Matrix -->
