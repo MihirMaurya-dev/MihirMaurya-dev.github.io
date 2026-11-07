@@ -612,6 +612,127 @@
     @keyframes dash {
       to { stroke-dashoffset: -1000; }
     }
+
+    /* Filter Pill Bar */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-card);
+      color: var(--text-muted);
+      padding: 7px 16px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+      font-family: var(--font-sans);
+    }
+    .pill-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border-color: var(--border-card-hover);
+    }
+    .pill-btn.active {
+      background: var(--text-main);
+      color: var(--bg-primary);
+      border-color: var(--text-main);
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-domain-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: var(--transition-smooth);
+    }
+    .skill-domain-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .domain-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-card);
+      padding-bottom: 12px;
+    }
+
+    .domain-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .icon-azure { background: rgba(0, 120, 212, 0.15); color: #0078D4; }
+    .icon-iac { background: rgba(157, 78, 221, 0.15); color: var(--accent-purple); }
+    .icon-cicd { background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan); }
+    .icon-sec { background: rgba(0, 255, 102, 0.15); color: var(--accent-emerald); }
+    .icon-ai { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+    .icon-sys { background: rgba(59, 130, 246, 0.15); color: #3B82F6; }
+
+    .domain-title-group h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .domain-title-group p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-card);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+    .skill-tag:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(255, 255, 255, 0.07);
+    }
+    .skill-tag i {
+      font-size: 13px;
+      opacity: 0.85;
+    }
   </style>
 </head>
 <body>
@@ -865,6 +986,147 @@
             <line x1="670" y1="227" x2="685" y2="227" stroke="#00FF66" stroke-width="2" marker-end="url(#arrow)" />
           </g>
         </svg>
+      </div>
+    </section>
+
+    <!-- Technology & Tooling Matrix -->
+    <section class="card" id="skills">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fa-solid fa-microchip"></i> Technology & Tooling Matrix</h2>
+        <p class="section-subtitle">Categorized enterprise tools, frameworks, and security standards</p>
+      </div>
+
+      <div class="filter-bar" id="skills-filter-bar">
+        <button class="pill-btn active" data-domain-filter="all"><i class="fa-solid fa-layer-group"></i> All [6]</button>
+        <button class="pill-btn" data-domain-filter="cloud"><i class="fa-brands fa-microsoft"></i> Cloud Architecture</button>
+        <button class="pill-btn" data-domain-filter="iac"><i class="fa-solid fa-cube"></i> Infrastructure as Code</button>
+        <button class="pill-btn" data-domain-filter="cicd"><i class="fa-solid fa-bolt"></i> CI/CD & Automation</button>
+        <button class="pill-btn" data-domain-filter="security"><i class="fa-solid fa-shield-halved"></i> DevSecOps & Security</button>
+        <button class="pill-btn" data-domain-filter="ai"><i class="fa-solid fa-robot"></i> Autonomous AI & SRE</button>
+        <button class="pill-btn" data-domain-filter="systems"><i class="fa-solid fa-terminal"></i> Systems & Scripting</button>
+      </div>
+
+      <div class="skills-grid" id="skills-grid">
+        
+        <!-- Domain 1: Cloud Architecture -->
+        <div class="skill-domain-card" data-domain="cloud">
+          <div class="domain-header">
+            <div class="domain-icon icon-azure"><i class="fa-brands fa-microsoft"></i></div>
+            <div class="domain-title-group">
+              <h3>Cloud Architecture</h3>
+              <p>Microsoft Azure & Governance</p>
+            </div>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-brands fa-microsoft" style="color: #0078D4;"></i> Microsoft Azure</span>
+            <span class="skill-tag"><i class="fa-solid fa-sitemap" style="color: var(--accent-cyan);"></i> Hub-and-Spoke VNets</span>
+            <span class="skill-tag"><i class="fa-solid fa-cloud" style="color: #00A6FF;"></i> Azure CAF Landing Zones</span>
+            <span class="skill-tag"><i class="fa-solid fa-lock" style="color: #F59E0B;"></i> Azure Bastion Host</span>
+            <span class="skill-tag"><i class="fa-solid fa-route" style="color: #10B981;"></i> NAT Gateways & UDRs</span>
+            <span class="skill-tag"><i class="fa-solid fa-key" style="color: #A855F7;"></i> Key Vault Private Endpoints</span>
+            <span class="skill-tag"><i class="fa-solid fa-scale-balanced" style="color: var(--accent-emerald);"></i> Azure Policy & RBAC</span>
+          </div>
+        </div>
+
+        <!-- Domain 2: Infrastructure as Code -->
+        <div class="skill-domain-card" data-domain="iac">
+          <div class="domain-header">
+            <div class="domain-icon icon-iac"><i class="fa-solid fa-cube"></i></div>
+            <div class="domain-title-group">
+              <h3>Infrastructure as Code</h3>
+              <p>Declarative & Modular Automation</p>
+            </div>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-cubes" style="color: var(--accent-purple);"></i> HashiCorp Terraform</span>
+            <span class="skill-tag"><i class="fa-solid fa-box" style="color: #E2E8F0;"></i> OpenTofu</span>
+            <span class="skill-tag"><i class="fa-solid fa-diagram-nested" style="color: var(--accent-cyan);"></i> Modular Architecture</span>
+            <span class="skill-tag"><i class="fa-solid fa-database" style="color: #10B981;"></i> Remote State Lease Locking</span>
+            <span class="skill-tag"><i class="fa-solid fa-repeat" style="color: #F59E0B;"></i> Dynamic for_each Subnets</span>
+            <span class="skill-tag"><i class="fa-solid fa-arrows-split-up-and-left" style="color: #EC4899;"></i> State Decoupling</span>
+            <span class="skill-tag"><i class="fa-solid fa-magnifying-glass-chart" style="color: #38BDF8;"></i> Drift Detection</span>
+          </div>
+        </div>
+
+        <!-- Domain 3: CI/CD & Automation -->
+        <div class="skill-domain-card" data-domain="cicd">
+          <div class="domain-header">
+            <div class="domain-icon icon-cicd"><i class="fa-solid fa-bolt"></i></div>
+            <div class="domain-title-group">
+              <h3>CI/CD & Automation</h3>
+              <p>Pipelines & GitOps Workflows</p>
+            </div>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-brands fa-github" style="color: #FFF;"></i> GitHub Actions Workflows</span>
+            <span class="skill-tag"><i class="fa-brands fa-windows" style="color: #0078D7;"></i> Azure DevOps Pipelines</span>
+            <span class="skill-tag"><i class="fa-solid fa-id-badge" style="color: var(--accent-emerald);"></i> Secretless OIDC Federation</span>
+            <span class="skill-tag"><i class="fa-solid fa-table-cells" style="color: var(--accent-cyan);"></i> Dynamic Matrix Runners</span>
+            <span class="skill-tag"><i class="fa-solid fa-coins" style="color: #F59E0B;"></i> Infracost PR Delta Gates</span>
+            <span class="skill-tag"><i class="fa-solid fa-chart-line" style="color: #38BDF8;"></i> Azure Retail Prices API</span>
+            <span class="skill-tag"><i class="fa-solid fa-user-check" style="color: #A855F7;"></i> Environment Approvals</span>
+          </div>
+        </div>
+
+        <!-- Domain 4: DevSecOps & Security -->
+        <div class="skill-domain-card" data-domain="security">
+          <div class="domain-header">
+            <div class="domain-icon icon-sec"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="domain-title-group">
+              <h3>DevSecOps & Security</h3>
+              <p>Shift-Left Governance & Compliance</p>
+            </div>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-shield-virus" style="color: var(--accent-emerald);"></i> Checkov CIS Benchmarks</span>
+            <span class="skill-tag"><i class="fa-solid fa-user-shield" style="color: var(--accent-cyan);"></i> tfsec IaC Static Analysis</span>
+            <span class="skill-tag"><i class="fa-solid fa-key" style="color: #EF4444;"></i> Gitleaks Secret Detection</span>
+            <span class="skill-tag"><i class="fa-solid fa-lock-open" style="color: #F59E0B;"></i> TruffleHog Token Verification</span>
+            <span class="skill-tag"><i class="fa-solid fa-bug-slash" style="color: #A855F7;"></i> Trivy Vulnerability Scanner</span>
+            <span class="skill-tag"><i class="fa-solid fa-spell-check" style="color: #38BDF8;"></i> TFLint Policy Rules</span>
+            <span class="skill-tag"><i class="fa-solid fa-code-pull-request" style="color: #10B981;"></i> Pre-Commit Hooks</span>
+          </div>
+        </div>
+
+        <!-- Domain 5: Autonomous AI & SRE -->
+        <div class="skill-domain-card" data-domain="ai">
+          <div class="domain-header">
+            <div class="domain-icon icon-ai"><i class="fa-solid fa-robot"></i></div>
+            <div class="domain-title-group">
+              <h3>Autonomous AI & SRE</h3>
+              <p>Model Context Protocol & Self-Healing</p>
+            </div>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-solid fa-plug" style="color: var(--accent-cyan);"></i> Model Context Protocol (MCP)</span>
+            <span class="skill-tag"><i class="fa-solid fa-network-wired" style="color: var(--accent-purple);"></i> LangGraph Cyclical Agents</span>
+            <span class="skill-tag"><i class="fa-solid fa-bell" style="color: #EF4444;"></i> Prometheus Alert Ingestion</span>
+            <span class="skill-tag"><i class="fa-solid fa-code-branch" style="color: var(--accent-emerald);"></i> Automated Remediation PRs</span>
+            <span class="skill-tag"><i class="fa-solid fa-book-medical" style="color: #F59E0B;"></i> AI Runbook Lookup</span>
+            <span class="skill-tag"><i class="fa-solid fa-heart-pulse" style="color: #38BDF8;"></i> Autonomous Health Triage</span>
+          </div>
+        </div>
+
+        <!-- Domain 6: Systems & Scripting -->
+        <div class="skill-domain-card" data-domain="systems">
+          <div class="domain-header">
+            <div class="domain-icon icon-sys"><i class="fa-solid fa-terminal"></i></div>
+            <div class="domain-title-group">
+              <h3>Systems & Scripting</h3>
+              <p>Runtimes, OS & Automation Scripting</p>
+            </div>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-brands fa-docker" style="color: #38BDF8;"></i> Docker Containers</span>
+            <span class="skill-tag"><i class="fa-brands fa-linux" style="color: #E2E8F0;"></i> Ubuntu Linux Server</span>
+            <span class="skill-tag"><i class="fa-solid fa-terminal" style="color: var(--accent-emerald);"></i> Bash Automation</span>
+            <span class="skill-tag"><i class="fa-brands fa-windows" style="color: #0078D7;"></i> PowerShell Core</span>
+            <span class="skill-tag"><i class="fa-brands fa-python" style="color: #F59E0B;"></i> Python Scripting</span>
+            <span class="skill-tag"><i class="fa-solid fa-globe" style="color: var(--accent-purple);"></i> REST APIs</span>
+            <span class="skill-tag"><i class="fa-brands fa-git-alt" style="color: #F05032;"></i> Git Branching & Workflows</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
