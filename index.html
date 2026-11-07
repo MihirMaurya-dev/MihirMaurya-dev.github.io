@@ -956,6 +956,142 @@
       .flagship-grid { grid-template-columns: 1fr; }
       .secondary-grid { grid-template-columns: 1fr; }
     }
+
+    /* Timeline & Experience */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .timeline-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: var(--transition-smooth);
+    }
+    .timeline-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .timeline-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .timeline-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .timeline-role {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .timeline-company {
+      font-size: 13px;
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .timeline-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .timeline-bullets li {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .timeline-bullets li i {
+      color: var(--accent-emerald);
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-card);
+      padding: 40px 0 20px;
+      margin-top: 40px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    .footer-nav a:hover { color: var(--accent-cyan); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 16px;
+      flex-wrap: wrap;
+    }
   </style>
 </head>
 <body>
@@ -1791,7 +1927,94 @@
       </div>
     </section>
 
+    <!-- Experience & Academic Foundation -->
+    <section class="card" id="experience">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Experience & Academic Background</h2>
+        <p class="section-subtitle">Professional engineering internships and computer science analytical foundations</p>
+      </div>
+
+      <div class="timeline-grid">
+
+        <!-- Experience Card -->
+        <div class="timeline-card">
+          <div class="timeline-item">
+            <div class="timeline-header-row">
+              <div>
+                <h3 class="timeline-role">Cloud & DevOps Engineer Intern</h3>
+                <span class="timeline-company"><i class="fa-solid fa-building-shield"></i> DevOps Insiders</span>
+              </div>
+              <span class="timeline-date">Jan 2026 – Present</span>
+            </div>
+            <p class="timeline-desc">Hands-on engineering focused on Microsoft Azure infrastructure automation, modular Terraform IaC, and CI/CD security scanning.</p>
+            <ul class="timeline-bullets">
+              <li><i class="fa-solid fa-check"></i> Provisioned secure Azure Hub-and-Spoke networks, Bastion jumpboxes, and NAT Gateways using modular Terraform.</li>
+              <li><i class="fa-solid fa-check"></i> Built shift-left CI/CD pipelines in Azure DevOps and GitHub Actions enforcing Checkov, tfsec, and Gitleaks security gates.</li>
+              <li><i class="fa-solid fa-check"></i> Integrated Infracost to generate real-time PR cost projections before merge.</li>
+              <li><i class="fa-solid fa-check"></i> Configured self-hosted build agents and automated multi-environment application releases.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Education Card -->
+        <div class="timeline-card">
+          
+          <div class="timeline-item">
+            <div class="timeline-header-row">
+              <div>
+                <h3 class="timeline-role">M.Sc, Computer Science</h3>
+                <span class="timeline-company"><i class="fa-solid fa-graduation-cap"></i> University of Allahabad</span>
+              </div>
+              <span class="timeline-date">2026 – 2028</span>
+            </div>
+            <p class="timeline-desc">Advanced postgraduate studies in computer applications, distributed cloud systems, algorithmic analysis, and software security.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header-row">
+              <div>
+                <h3 class="timeline-role">B.Sc, Mathematics & Computer Apps</h3>
+                <span class="timeline-company"><i class="fa-solid fa-graduation-cap"></i> Ewing Christian College</span>
+              </div>
+              <span class="timeline-date">2023 – 2026</span>
+            </div>
+            <p class="timeline-desc">Strong analytical foundation in discrete mathematics, numerical analysis, object-oriented programming, and computational logic.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
   </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="brand">
+          <div class="brand-logo">MM</div>
+          <span>Mihir Maurya · Cloud & DevSecOps Engineer</span>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#repositories">Repositories</a></li>
+          <li><a href="#experience">Experience</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Mihir Maurya. Built with modern, zero-dependency vanilla web standards.</div>
+        <div style="display: flex; gap: 14px; align-items: center;">
+          <a href="https://github.com/MihirMaurya-dev" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i> GitHub</a>
+          <a href="https://linkedin.com/in/mihirmauryaa1" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <span><i class="fa-solid fa-bolt" style="color: var(--accent-cyan);"></i> Hosted on GitHub Pages</span>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
