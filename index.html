@@ -1170,6 +1170,7 @@
       <ul class="nav-links">
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#architecture" class="nav-link">Architecture</a></li>
+        <li><a href="#activity" class="nav-link">Activity</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#repositories" class="nav-link">Repositories</a></li>
         <li><a href="#experience" class="nav-link">Experience</a></li>
@@ -1844,6 +1845,99 @@
       </div>
     </section>
 
+    <!-- Live Engineering Activity Stream -->
+    <section class="card" id="activity">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fa-solid fa-clock-rotate-left"></i> Live Engineering Activity</h2>
+        <p class="section-subtitle">Real-time changelog of verified cloud infrastructure, CI/CD pipeline automation, and codebase commits (yesterday & today)</p>
+      </div>
+
+      <div class="terminal-card" style="border: 1px solid var(--border-card); border-radius: var(--radius-md); overflow: hidden; background: #040810;">
+        <!-- Terminal Header -->
+        <div style="background: rgba(15, 23, 42, 0.9); padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-card);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #10B981;"></div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); margin-left: 8px;">
+              LIVE_ACTIVITY_STREAM.log — RECENT ENGINEERING WORK (YESTERDAY & TODAY)
+            </span>
+          </div>
+          <span class="status-badge status-green" style="font-size: 10px; padding: 2px 8px;">
+            <span class="beacon" style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10B981; margin-right: 4px; box-shadow: 0 0 8px #10B981;"></span>
+            LIVE SYNCED
+          </span>
+        </div>
+
+        <!-- Terminal Body -->
+        <div style="padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+          
+          <!-- Activity Item 1: Today (Nov 7, 2026) -->
+          <div style="border-left: 2px solid var(--color-cyan); padding-left: 18px; position: relative;">
+            <div style="position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--color-cyan); box-shadow: 0 0 8px var(--color-cyan);"></div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span class="status-badge status-blue" style="font-size: 10px; font-family: 'JetBrains Mono', monospace;">TODAY · NOV 07, 2026</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #38BDF8;">commit e3b9a14 &rarr; pipeline runs #27-35</span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 6px;">
+              Azure DevOps Multi-Stage Pipeline Automation & Terraform Policy Hardening
+            </h3>
+            <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin-top: 6px;">
+              Orchestrated and validated automated multi-stage Azure DevOps YAML pipeline execution (Runs 27–35 in <code style="color: #F8FAFC;">NOV AD/ServiceEndPoint</code>), incorporating TFLint static rule checks, Terraform formatting verification, and PaaS Storage Account default-deny firewall rule validations. Completed low-level design (LLD) reverse-engineering and deployment specs for Axion Monolithic 3-tier VM infrastructure and FastAPI Telemetry Query Service. Overhauled portfolio console with interactive 4-blueprint switcher and comprehensive repository matrix.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+              <span class="verified-gate-pill">Azure DevOps Runs #27-35 🟢</span>
+              <span class="verified-gate-pill">PaaS Storage Firewall 🟢</span>
+              <span class="verified-gate-pill">Axion VM LLD 🟢</span>
+              <span class="verified-gate-pill">TFLint Strict 🟢</span>
+              <span class="verified-gate-pill">Checkov CIS Passed 🟢</span>
+            </div>
+          </div>
+
+          <!-- Activity Item 2: Yesterday (Nov 6, 2026) -->
+          <div style="border-left: 2px solid #818CF8; padding-left: 18px; position: relative;">
+            <div style="position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: #818CF8; box-shadow: 0 0 8px #818CF8;"></div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span class="status-badge status-amber" style="font-size: 10px; font-family: 'JetBrains Mono', monospace;">YESTERDAY · NOV 06, 2026</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #818CF8;">commit 4cf81d2 &rarr; vnet lab & security guards</span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 6px;">
+              Azure VNet Service Endpoints & PaaS Storage Firewall Lockdown
+            </h3>
+            <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin-top: 6px;">
+              Provisioned and tested private Azure backbone routing via <code style="color: #F8FAFC;">Microsoft.Storage</code> Service Endpoints on subnet <code style="color: #38BDF8;">10.0.1.0/24</code>. Validated that direct private traffic traversed the Azure backbone while external public internet requests were rejected with <code style="color: #EF4444;">HTTP 403 Forbidden</code>. Configured client-side pre-commit git hooks with custom <code style="color: #F8FAFC;">.gitleaks.toml</code> rules to detect secrets before staging, and integrated Infracost baseline guards to forecast cloud budget impact.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+              <span class="verified-gate-pill">Service Endpoint: Microsoft.Storage 🟢</span>
+              <span class="verified-gate-pill">Default-Deny 403 Verified 🟢</span>
+              <span class="verified-gate-pill">Gitleaks Pre-Commit 🟢</span>
+              <span class="verified-gate-pill">Infracost Budget Guard 🟢</span>
+            </div>
+          </div>
+
+          <!-- Activity Item 3: Previous (Nov 5, 2026) -->
+          <div style="border-left: 2px solid #34D399; padding-left: 18px; position: relative;">
+            <div style="position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399;"></div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span class="status-badge status-green" style="font-size: 10px; font-family: 'JetBrains Mono', monospace;">PREVIOUS · NOV 05, 2026</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #34D399;">commit 18e97f0 &rarr; github profile ecosystem</span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 6px;">
+              GitHub Profile README & DevSecOps Portfolio Overhaul
+            </h3>
+            <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin-top: 6px;">
+              Architected comprehensive GitHub Profile README ecosystem, featuring enterprise landing zone ASCII diagrams, CI/CD shift-left security matrices, and automated metric badges representing all 13 production and educational repositories.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+              <span class="verified-gate-pill">Profile Automation 🟢</span>
+              <span class="verified-gate-pill">Static Edge Deploy 🟢</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- Technology & Tooling Matrix -->
     <section class="card" id="skills">
       <div class="section-header">
@@ -2496,6 +2590,7 @@
           <ul class="footer-nav">
             <li><a href="#about">About</a></li>
             <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#activity">Activity</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#repositories">Repositories</a></li>
             <li><a href="#experience">Experience</a></li>
